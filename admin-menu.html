@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#334155">
+    <title>القائمة | Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Tajawal', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .pb-safe {
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+    </style>
+</head>
+
+<body class="bg-slate-800 text-white h-screen flex flex-col overflow-hidden">
+
+    <div class="flex-1 overflow-y-auto pb-24 px-6 pt-10">
+
+        <div class="flex items-center gap-4 mb-8">
+            <div class="relative">
+                <img src="https://ui-avatars.com/api/?name=Admin&background=3b82f6&color=fff"
+                    class="w-16 h-16 rounded-full border-4 border-slate-600 shadow-xl">
+                <div class="absolute bottom-0 right-0 bg-green-500 w-4 h-4 rounded-full border-2 border-slate-800">
+                </div>
+            </div>
+            <div>
+                <h2 class="text-xl font-bold">المشرف خالد</h2>
+                <p class="text-slate-400 text-xs">مدير عمليات</p>
+            </div>
+        </div>
+
+        <div class="space-y-3">
+            <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1">الإدارة</p>
+
+            <a href="admin-requests.html"
+                class="flex items-center gap-4 p-4 rounded-2xl bg-slate-700/50 border border-slate-600 hover:bg-slate-700 transition">
+                <div class="w-10 h-10 rounded-full bg-yellow-500/20 text-yellow-400 flex items-center justify-center"><i
+                        class="fa-solid fa-user-clock"></i></div>
+                <span class="font-bold text-sm">طلبات السائقين</span>
+            </a>
+
+            <a href="#"
+                class="flex items-center gap-4 p-4 rounded-2xl bg-slate-700/50 border border-slate-600 hover:bg-slate-700 transition">
+                <div class="w-10 h-10 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center"><i
+                        class="fa-solid fa-warehouse"></i></div>
+                <span class="font-bold text-sm">إعدادات المخزون</span>
+            </a>
+
+            <a href="#"
+                class="flex items-center gap-4 p-4 rounded-2xl bg-slate-700/50 border border-slate-600 hover:bg-slate-700 transition">
+                <div class="w-10 h-10 rounded-full bg-orange-500/20 text-orange-400 flex items-center justify-center"><i
+                        class="fa-solid fa-users"></i></div>
+                <span class="font-bold text-sm">قائمة العملاء (CRM)</span>
+            </a>
+
+            <button onclick="window.location.href='login.html?logout=true'"
+                class="w-full flex items-center gap-4 p-4 rounded-2xl bg-red-500/10 border border-red-500/20 hover:bg-red-500/20 transition text-red-400 mt-6">
+                <div class="w-10 h-10 rounded-full bg-red-500/20 flex items-center justify-center"><i
+                        class="fa-solid fa-power-off"></i></div>
+                <span class="font-bold text-sm">تسجيل الخروج</span>
+            </button>
+        </div>
+
+    </div>
+
+    <nav
+        class="fixed bottom-6 left-4 right-4 bg-slate-800/95 backdrop-blur-xl border border-white/10 shadow-2xl rounded-2xl flex justify-around items-center py-3 z-50">
+        <a href="admin-panel.html"
+            class="flex flex-col items-center gap-1 text-slate-400 hover:text-white transition group"><i
+                class="fa-solid fa-gauge-high text-xl group-active:scale-90 transition"></i></a>
+        <a href="admin-shipments.html"
+            class="flex flex-col items-center gap-1 text-slate-400 hover:text-white transition group"><i
+                class="fa-solid fa-boxes-stacked text-xl group-active:scale-90 transition"></i></a>
+        <div class="relative -top-8"><button
+                class="bg-blue-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg shadow-blue-500/40 border-4 border-gray-100 transform active:scale-90 transition"><i
+                    class="fa-solid fa-plus text-2xl"></i></button></div>
+        <a href="admin-drivers.html"
+            class="flex flex-col items-center gap-1 text-slate-400 hover:text-white transition group"><i
+                class="fa-solid fa-motorcycle text-xl group-active:scale-90 transition"></i></a>
+        <a href="#" class="flex flex-col items-center gap-1 text-white transition group relative">
+            <i class="fa-solid fa-bars text-xl"></i>
+            <span class="absolute -bottom-2 w-1 h-1 bg-white rounded-full"></span>
+        </a>
+    </nav>
+
+</body>
+
+</html>

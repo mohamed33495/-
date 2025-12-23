@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+    <title>تسجيل الدخول | شحنتي</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Tajawal', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        ::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+        }
+
+        /* منع ظهور ستايل الحقول الافتراضي في الآيفون */
+        input {
+            -webkit-appearance: none;
+            appearance: none;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 h-screen flex overflow-hidden">
+
+    <div class="w-full md:w-1/2 flex flex-col justify-center items-center bg-white p-6 md:p-12 overflow-y-auto">
+
+        <div class="w-full max-w-sm">
+            <a href="index.html" class="inline-flex items-center text-gray-400 hover:text-blue-600 mb-8 transition">
+                <i class="fa-solid fa-arrow-right ml-2"></i> العودة للرئيسية
+            </a>
+
+            <div class="flex items-center gap-2 mb-6">
+                <i class="fa-solid fa-paper-plane text-blue-600 text-3xl"></i>
+                <span class="text-2xl font-bold text-gray-800">شحنتي <span class="text-blue-600">App</span></span>
+            </div>
+
+            <h1 class="text-2xl md:text-3xl font-bold text-gray-900 mb-2">مرحباً بعودتك! 👋</h1>
+            <p class="text-gray-500 mb-8 text-sm md:text-base">سجل دخولك لمتابعة شحناتك وإدارة محفظتك.</p>
+
+            <form id="loginForm" action="dashboard.html" class="space-y-5">
+
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-1.5">البريد الإلكتروني</label>
+                    <div class="relative">
+                        <span class="absolute top-3.5 right-4 text-gray-400"><i class="fa-solid fa-envelope"></i></span>
+                        <input id="email" type="email" placeholder="name@example.com"
+                            class="w-full pr-11 pl-4 py-3.5 border border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-50 transition bg-gray-50 text-sm font-medium"
+                            required>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="flex justify-between items-center mb-1.5">
+                        <label class="block text-sm font-bold text-gray-700">كلمة المرور</label>
+                        <a href="forgot-password.html" class="text-xs font-bold text-blue-600 hover:underline">نسيت؟</a>
+                    </div>
+                    <div class="relative">
+                        <span class="absolute top-3.5 right-4 text-gray-400"><i class="fa-solid fa-lock"></i></span>
+                        <input id="password" type="password" placeholder="••••••••"
+                            class="w-full pr-11 pl-12 py-3.5 border border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-50 transition bg-gray-50 text-sm font-medium"
+                            required>
+                        <button type="button" onclick="togglePassword()"
+                            class="absolute top-3.5 left-4 text-gray-400 hover:text-blue-600 transition focus:outline-none">
+                            <i id="eyeIcon" class="fa-solid fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div id="errorMessage"
+                    class="hidden text-red-500 text-sm text-center font-bold bg-red-50 p-3 rounded-lg border border-red-100">
+                    <i class="fa-solid fa-circle-exclamation ml-1"></i> البريد الإلكتروني أو كلمة المرور غير صحيحة
+                </div>
+
+                <button type="submit"
+                    class="w-full bg-blue-600 text-white font-bold py-3.5 rounded-xl hover:bg-blue-700 transition shadow-lg shadow-blue-200 flex justify-center items-center gap-2 active:scale-95 transform">
+                    تسجيل الدخول <i class="fa-solid fa-arrow-left-long"></i>
+                </button>
+
+                <div class="relative my-6">
+                    <div class="absolute inset-0 flex items-center">
+                        <div class="w-full border-t border-gray-200"></div>
+                    </div>
+                    <div class="relative flex justify-center text-xs text-gray-400 uppercase"><span
+                            class="px-2 bg-white">أو المتابعة عبر</span></div>
+                </div>
+
+                <button type="button" onclick="googleLogin()"
+                    class="w-full border border-gray-200 text-gray-700 font-bold py-3.5 rounded-xl hover:bg-gray-50 transition flex justify-center items-center gap-2 active:scale-95 transform bg-white">
+                    <img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-5 h-5">
+                    Google
+                </button>
+
+            </form>
+
+            <p class="mt-8 text-center text-sm text-gray-600">
+                ليس لديك حساب؟ <a href="register.html" class="text-blue-600 font-bold hover:underline">سجل الآن
+                    مجاناً</a>
+            </p>
+        </div>
+    </div>
+
+    <div class="hidden md:block w-1/2 bg-blue-900 relative overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+            class="absolute inset-0 w-full h-full object-cover opacity-30 mix-blend-overlay hover:scale-105 transition duration-1000">
+        <div class="absolute bottom-0 right-0 p-16 text-white z-10">
+            <h2 class="text-5xl font-black mb-6 leading-tight">شحن آمن.<br>سريع.<br>موثوق.</h2>
+            <p class="text-blue-200 text-xl max-w-md">انضم لأكثر من 10,000 عميل يشحنون بضائعهم حول العالم معنا.</p>
+        </div>
+    </div>
+
+    <script>
+        // Check for logout parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('logout') === 'true') {
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('userEmail');
+            localStorage.removeItem('userRole');
+
+            // Clean URL
+            window.history.replaceState({}, document.title, window.location.pathname);
+        }
+
+        document.getElementById('loginForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const email = document.getElementById('email').value.toLowerCase().trim();
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('errorMessage');
+
+            // Global Password bypass for testing (Optional: Remove if not needed)
+            const GLOBAL_PASS = '123123';
+            if (password === GLOBAL_PASS) {
+                // Keep the mock logic as a fallback or for special testing if you want, 
+                // but typically we replace it. Let's rely on the API primarily.
+            }
+
+            try {
+                const response = await fetch('http://localhost:3000/api/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    // Login Success
+                    localStorage.setItem('isLoggedIn', 'true');
+                    localStorage.setItem('userEmail', data.user.email);
+                    localStorage.setItem('userRole', data.user.role);
+
+                    // Determine destination based on role
+                    const usersDestinations = {
+                        'client': 'dashboard.html',
+                        'driver': 'driver-app.html',
+                        'admin': 'admin-panel.html',
+                        'warehouse': 'warehouse.html',
+                        'super_admin': 'super-admin.html'
+                    };
+
+                    const destination = usersDestinations[data.user.role] || 'dashboard.html';
+                    window.location.href = destination;
+                } else {
+                    throw new Error(data.message);
+                }
+            } catch (error) {
+                // Login Failed
+                console.error('Login Error:', error);
+                errorMessage.classList.remove('hidden');
+                errorMessage.innerHTML = `<i class="fa-solid fa-circle-exclamation ml-1"></i> ${error.message || 'فشل الاتصال بالخادم. تأكد من تشغيل server.js'}`;
+
+                // Shake animation
+                const form = document.querySelector('form');
+                form.classList.add('animate-pulse');
+                setTimeout(() => form.classList.remove('animate-pulse'), 500);
+            }
+        });
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const eyeIcon = document.getElementById('eyeIcon');
+
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                eyeIcon.classList.replace('fa-eye', 'fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                eyeIcon.classList.replace('fa-eye-slash', 'fa-eye');
+            }
+        }
+
+        function googleLogin() {
+            // Mock Google Login
+            const email = prompt("Simulating Google Login...\nEnter an email address to login:", "client@app.com");
+
+            if (email) {
+                // Determine destination based on email (reusing the 'users' map logic conceptually or just defaulting)
+                // For simplicity, we'll check against our known users map or default to dashboard
+                const users = {
+                    'client@app.com': 'dashboard.html',
+                    'driver@app.com': 'driver-app.html',
+                    'admin@app.com': 'admin-panel.html',
+                    'stock@app.com': 'warehouse.html',
+                    'root@app.com': 'super-admin.html'
+                };
+
+                const destination = users[email] || 'dashboard.html';
+
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('userEmail', email);
+                localStorage.setItem('userRole', email.split('@')[0]);
+
+                window.location.href = destination;
+            }
+        }
+    </script>
+</body>
+
+</html>

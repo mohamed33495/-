@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>طلبات الانضمام | لوحة الإدارة</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Tajawal', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+
+    <div class="max-w-7xl mx-auto p-8">
+        <div class="flex justify-between items-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-900">طلبات السائقين الجدد <span id="count"
+                    class="bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full ms-2">0</span></h1>
+            <a href="admin-menu.html" class="text-gray-500 hover:text-gray-700 font-bold"><i
+                    class="fa-solid fa-arrow-right ml-2"></i> العودة</a>
+        </div>
+
+        <div id="requests-container" class="grid gap-4">
+            <!-- Loading -->
+            <p class="text-center text-gray-500">جاري تحميل الطلبات...</p>
+        </div>
+    </div>
+
+    <script>
+        async function fetchRequests() {
+            try {
+                const response = await fetch('http://localhost:3000/api/admin/pending-drivers');
+                const data = await response.json();
+
+                if (data.success) {
+                    const drivers = data.drivers;
+                    document.getElementById('count').textContent = drivers.length;
+                    const container = document.getElementById('requests-container');
+
+                    if (drivers.length === 0) {
+                        container.innerHTML = '<div class="text-center p-12 bg-white rounded-xl shadow-sm text-gray-400">لا توجد طلبات جديدة حالياً</div>';
+                        return;
+                    }
+
+                    container.innerHTML = drivers.map(d => `
+                        <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition flex justify-between items-center border border-gray-100">
+                            <div class="flex items-center gap-4">
+                                <div class="bg-blue-50 w-12 h-12 rounded-full flex items-center justify-center text-blue-600 font-bold text-lg">
+                                    ${d.full_name.charAt(0)}
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-lg text-gray-900">${d.full_name}</h3>
+                                    <p class="text-sm text-gray-500">${d.email} • ${d.phone_number}</p>
+                                </div>
+                            </div>
+                            <a href="request-details.html?id=${d.user_id}" 
+                               class="bg-blue-600 text-white px-6 py-2.5 rounded-lg text-sm font-bold hover:bg-blue-700 transition">
+                                عرض التفاصيل
+                            </a>
+                        </div>
+                    `).join('');
+                }
+            } catch (error) {
+                console.error(error);
+                document.getElementById('requests-container').innerHTML = '<div class="text-red-500 text-center">فشل تحميل البيانات</div>';
+            }
+        }
+        fetchRequests();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#4f46e5">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <title>شحنة جديدة | شحنتي</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body { font-family: 'Tajawal', sans-serif; -webkit-tap-highlight-color: transparent; overscroll-behavior-y: none; }
+        ::-webkit-scrollbar { width: 0px; background: transparent; }
+        .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .fade-enter { animation: fadeIn 0.3s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 h-screen flex flex-col overflow-hidden selection:bg-indigo-200">
+
+    <div class="fixed top-0 left-0 w-full h-40 bg-indigo-600 rounded-b-[2.5rem] z-0 shadow-lg"></div>
+
+    <div class="relative z-10 flex-1 overflow-y-auto pb-28 no-scrollbar">
+        
+        <header class="px-6 pt-10 pb-4 flex justify-between items-center text-white mb-2">
+            <div>
+                <h1 class="text-2xl font-bold">طلب توصيل جديد 🚚</h1>
+                <p class="text-indigo-200 text-xs mt-1">اختر الطريقة الأنسب لشحن بضائعك</p>
+            </div>
+            <a href="dashboard.html" class="bg-white/20 p-2.5 rounded-xl backdrop-blur-md hover:bg-white/30 transition">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </a>
+        </header>
+
+        <main class="px-4 space-y-4">
+
+            <div class="bg-white p-5 rounded-3xl shadow-sm border border-gray-100">
+                <h3 class="font-bold text-gray-800 mb-4 flex items-center gap-2">
+                    <span class="w-8 h-8 bg-indigo-50 text-indigo-600 rounded-full flex items-center justify-center text-sm"><i class="fa-solid fa-route"></i></span>
+                    كيف تريد شحنها؟
+                </h3>
+                
+                <div class="grid grid-cols-3 gap-3">
+                    <label class="cursor-pointer relative group">
+                        <input type="radio" name="shipping_mode" class="peer sr-only" checked>
+                        <div class="p-3 rounded-2xl border-2 border-gray-100 bg-white peer-checked:bg-blue-50 peer-checked:border-blue-500 peer-checked:text-blue-700 transition h-24 flex flex-col items-center justify-center gap-1 relative overflow-hidden">
+                            <i class="fa-solid fa-plane-up text-xl mb-1 text-blue-500"></i>
+                            <span class="text-xs font-bold">جوي</span>
+                            <span class="text-[8px] text-gray-400">3-5 أيام</span>
+                        </div>
+                    </label>
+                    <label class="cursor-pointer relative group">
+                        <input type="radio" name="shipping_mode" class="peer sr-only">
+                        <div class="p-3 rounded-2xl border-2 border-gray-100 bg-white peer-checked:bg-teal-50 peer-checked:border-teal-500 peer-checked:text-teal-700 transition h-24 flex flex-col items-center justify-center gap-1">
+                            <i class="fa-solid fa-ship text-xl mb-1 text-teal-500"></i>
+                            <span class="text-xs font-bold">بحري</span>
+                            <span class="text-[8px] text-gray-400">شهر</span>
+                        </div>
+                    </label>
+                    <label class="cursor-pointer relative group">
+                        <input type="radio" name="shipping_mode" class="peer sr-only">
+                        <div class="p-3 rounded-2xl border-2 border-gray-100 bg-white peer-checked:bg-orange-50 peer-checked:border-orange-500 peer-checked:text-orange-700 transition h-24 flex flex-col items-center justify-center gap-1">
+                            <i class="fa-solid fa-truck-fast text-xl mb-1 text-orange-500"></i>
+                            <span class="text-xs font-bold">بري</span>
+                            <span class="text-[8px] text-gray-400">الجوار</span>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="bg-white p-5 rounded-3xl shadow-sm border border-gray-100">
+                <h3 class="font-bold text-gray-800 mb-4 flex items-center gap-2">
+                    <span class="w-8 h-8 bg-indigo-50 text-indigo-600 rounded-full flex items-center justify-center text-sm"><i class="fa-solid fa-location-dot"></i></span>
+                    لمن الشحنة؟
+                </h3>
+
+                <div class="bg-gray-100 p-1 rounded-xl flex mb-6">
+                    <button id="btn-me" onclick="toggleRecipient('me')" class="flex-1 py-2.5 rounded-lg text-sm font-bold transition shadow-sm bg-white text-indigo-600">
+                        لي (شخصي)
+                    </button>
+                    <button id="btn-others" onclick="toggleRecipient('others')" class="flex-1 py-2.5 rounded-lg text-sm font-bold text-gray-500 transition hover:text-gray-700">
+                        لشخص آخر
+                    </button>
+                </div>
+                
+                <div id="div-me" class="fade-enter">
+                    <label class="text-[10px] font-bold text-gray-500 mr-2 mb-1 block">اختر عنوان التوصيل</label>
+                    <div class="relative">
+                        <select class="w-full h-14 px-4 rounded-2xl bg-indigo-50 border-2 border-indigo-100 focus:ring-0 focus:border-indigo-500 text-sm text-gray-700 font-bold appearance-none">
+                            <option value="1">🏠 المنزل (طرابلس - حي الأندلس)</option>
+                            <option value="2">🏢 المكتب (طرابلس - برج الفاتح)</option>
+                            <option value="3">🏡 منزل العائلة (بنغازي)</option>
+                        </select>
+                        <i class="fa-solid fa-chevron-down absolute left-4 top-1/2 transform -translate-y-1/2 text-indigo-400"></i>
+                    </div>
+                    <a href="addresses.html" class="text-xs text-indigo-600 font-bold mt-2 inline-block hover:underline">+ إضافة عنوان جديد</a>
+                </div>
+
+                <div id="div-others" class="hidden fade-enter space-y-4">
+                    <div>
+                        <label class="text-[10px] font-bold text-gray-500 mr-2 mb-1 block">اسم المستلم</label>
+                        <input type="text" placeholder="الاسم الثلاثي" class="w-full h-12 px-4 rounded-2xl bg-gray-50 border-none focus:ring-2 focus:ring-indigo-500 text-sm">
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="text-[10px] font-bold text-gray-500 mr-2 mb-1 block">المدينة</label>
+                            <select class="w-full h-12 px-4 rounded-2xl bg-gray-50 border-none focus:ring-2 focus:ring-indigo-500 text-sm">
+                                <option>طرابلس</option>
+                                <option>بنغازي</option>
+                                <option>مصراتة</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="text-[10px] font-bold text-gray-500 mr-2 mb-1 block">رقم الهاتف</label>
+                            <input type="tel" placeholder="091..." class="w-full h-12 px-4 rounded-2xl bg-gray-50 border-none focus:ring-2 focus:ring-indigo-500 text-sm text-left" dir="ltr">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="text-[10px] font-bold text-gray-500 mr-2 mb-1 block">العنوان بالتفصيل</label>
+                        <input type="text" placeholder="الشارع، أقرب نقطة دالة..." class="w-full h-12 px-4 rounded-2xl bg-gray-50 border-none focus:ring-2 focus:ring-indigo-500 text-sm">
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-5 rounded-3xl shadow-sm border border-gray-100">
+                <h3 class="font-bold text-gray-800 mb-4 flex items-center gap-2">
+                    <span class="w-8 h-8 bg-orange-50 text-orange-600 rounded-full flex items-center justify-center text-sm"><i class="fa-solid fa-box-open"></i></span>
+                    محتوى الشحنة والقياسات
+                </h3>
+
+                <div class="space-y-4">
+                    <div class="grid grid-cols-2 gap-3">
+                        <label class="cursor-pointer">
+                            <input type="radio" name="type" class="peer sr-only" checked>
+                            <div class="h-10 flex items-center justify-center rounded-xl bg-gray-50 border border-transparent peer-checked:bg-purple-50 peer-checked:border-purple-500 peer-checked:text-purple-700 transition font-bold text-xs">
+                                طرد (Package)
+                            </div>
+                        </label>
+                        <label class="cursor-pointer">
+                            <input type="radio" name="type" class="peer sr-only">
+                            <div class="h-10 flex items-center justify-center rounded-xl bg-gray-50 border border-transparent peer-checked:bg-purple-50 peer-checked:border-purple-500 peer-checked:text-purple-700 transition font-bold text-xs">
+                                مستندات (Docs)
+                            </div>
+                        </label>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="text-[10px] font-bold text-gray-500 mr-2 mb-1 block">الوزن التقريبي (Kg)</label>
+                            <input type="number" step="0.1" placeholder="1.5" class="w-full h-12 px-4 rounded-2xl bg-gray-50 border-none focus:ring-2 focus:ring-indigo-500 text-sm text-center font-bold">
+                        </div>
+                        <div>
+                            <label class="text-[10px] font-bold text-gray-500 mr-2 mb-1 block">الأبعاد (سم) <small class="text-gray-400">(مثال: 10x20x30)</small></label>
+                            <input type="text" placeholder="العرضxالطولxالارتفاع" class="w-full h-12 px-4 rounded-2xl bg-gray-50 border-none focus:ring-2 focus:ring-indigo-500 text-sm text-left font-mono" dir="ltr">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="text-[10px] font-bold text-gray-500 mr-2 mb-1 block">وصف المحتوى</label>
+                        <textarea rows="2" placeholder="أوصف الشحنة باختصار..." class="w-full p-4 rounded-2xl bg-gray-50 border-none focus:ring-2 focus:ring-indigo-500 text-sm text-gray-700 resize-none"></textarea>
+                    </div>
+
+                    <div>
+                        <label class="text-[10px] font-bold text-gray-500 mr-2 mb-1 block">صورة الشحنة</label>
+                        <label class="flex items-center gap-3 w-full h-16 border border-dashed border-gray-300 rounded-2xl cursor-pointer bg-gray-50 hover:bg-gray-100 px-4 transition">
+                            <div class="w-8 h-8 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-600">
+                                <i class="fa-solid fa-camera"></i>
+                            </div>
+                            <span class="text-xs text-gray-500">اضغط لالتقاط أو رفع صورة</span>
+                            <input type="file" class="hidden" accept="image/*" capture="camera" />
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div id="paymentResponsibilityCard" class="hidden bg-white p-5 rounded-3xl shadow-sm border border-gray-100">
+                <h3 class="font-bold text-gray-800 mb-4 flex items-center gap-2">
+                    <span class="w-8 h-8 bg-green-50 text-green-600 rounded-full flex items-center justify-center text-sm"><i class="fa-solid fa-dollar-sign"></i></span>
+                    مسؤولية الدفع
+                </h3>
+
+                <div class="space-y-4">
+                    <div class="grid grid-cols-2 gap-3" onchange="toggleCodAmount()">
+                        <label class="cursor-pointer">
+                            <input type="radio" name="payment_responsibility" class="peer sr-only" value="prepaid" checked>
+                            <div class="h-10 flex items-center justify-center rounded-xl bg-gray-50 border border-transparent peer-checked:bg-green-50 peer-checked:border-green-500 peer-checked:text-green-700 transition font-bold text-xs">
+                                أنا من سيدفع (مدفوع مسبقاً)
+                            </div>
+                        </label>
+                        <label class="cursor-pointer">
+                            <input type="radio" name="payment_responsibility" class="peer sr-only" value="cod">
+                            <div class="h-10 flex items-center justify-center rounded-xl bg-gray-50 border border-transparent peer-checked:bg-red-50 peer-checked:border-red-500 peer-checked:text-red-700 transition font-bold text-xs">
+                                المستلم سيدفع (COD)
+                            </div>
+                        </label>
+                    </div>
+
+                    <div id="cod-amount-div" class="hidden fade-enter">
+                        <label class="text-[10px] font-bold text-gray-500 mr-2 mb-1 block">المبلغ المطلوب تحصيله (د.ل)</label>
+                        <input type="number" step="0.01" placeholder="150.00" class="w-full h-12 px-4 rounded-2xl bg-red-50 border-2 border-red-200 focus:ring-2 focus:ring-red-500 text-xl text-red-700 font-black text-center transition">
+                        <p class="text-[10px] text-red-500 mt-1">سيتم تحصيل هذا المبلغ وإضافته لمحفظتك بعد التسليم.</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <button onclick="window.location.href='shipments.html'" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 rounded-2xl shadow-lg shadow-indigo-200 transition transform active:scale-[0.98] flex items-center justify-center gap-2 text-base mt-2">
+                <i class="fa-solid fa-paper-plane"></i> إرسال الطلب
+            </button>
+
+        </main>
+    </div>
+
+    <nav class="fixed bottom-6 left-4 right-4 bg-white/90 backdrop-blur-xl border border-white/20 shadow-[0_8px_30px_rgb(0,0,0,0.12)] rounded-2xl flex justify-around items-center py-3 z-50">
+        
+        <a href="dashboard.html" class="flex flex-col items-center gap-1 text-gray-400 hover:text-indigo-600 transition group">
+            <i class="fa-solid fa-house text-xl group-active:scale-90 transition"></i>
+        </a>
+
+        <a href="shipments.html" class="flex flex-col items-center gap-1 text-gray-400 hover:text-indigo-600 transition group">
+            <i class="fa-solid fa-box-open text-xl group-active:scale-90 transition"></i>
+        </a>
+
+        <div class="relative -top-8">
+            <a href="#" class="bg-indigo-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg shadow-indigo-500/40 border-4 border-gray-50 transform scale-110 transition">
+                <i class="fa-solid fa-plus text-2xl"></i>
+            </a>
+        </div>
+
+        <a href="wallet.html" class="flex flex-col items-center gap-1 text-gray-400 hover:text-indigo-600 transition group">
+            <i class="fa-solid fa-wallet text-xl group-active:scale-90 transition"></i>
+        </a>
+
+        <a href="profile.html" class="flex flex-col items-center gap-1 text-gray-400 hover:text-indigo-600 transition group">
+            <i class="fa-solid fa-user-gear text-xl group-active:scale-90 transition"></i>
+        </a>
+
+    </nav>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // للتأكد من أن زر "لي" هو النشط افتراضياً عند تحميل الصفحة
+            toggleRecipient('me'); 
+            // ضبط حالة COD عند التحميل
+            toggleCodAmount();
+        });
+
+        function toggleRecipient(type) {
+            const btnMe = document.getElementById('btn-me');
+            const btnOthers = document.getElementById('btn-others');
+            const divMe = document.getElementById('div-me');
+            const divOthers = document.getElementById('div-others');
+            const paymentCard = document.getElementById('paymentResponsibilityCard'); // Target the payment card
+
+            const activeClass = "flex-1 py-2.5 rounded-lg text-sm font-bold transition shadow-sm bg-white text-indigo-600";
+            const inactiveClass = "flex-1 py-2.5 rounded-lg text-sm font-bold text-gray-500 transition hover:text-gray-700";
+
+            if (type === 'me') {
+                btnMe.className = activeClass;
+                btnOthers.className = inactiveClass;
+                
+                divMe.classList.remove('hidden');
+                divOthers.classList.add('hidden');
+                paymentCard.classList.add('hidden'); // <<< HIDE PAYMENT CARD for self-delivery
+            } else {
+                btnOthers.className = activeClass;
+                btnMe.className = inactiveClass;
+                
+                divOthers.classList.remove('hidden');
+                divMe.classList.add('hidden');
+                paymentCard.classList.remove('hidden'); // <<< SHOW PAYMENT CARD for others
+            }
+            // Ensure COD state is checked after recipient change
+            toggleCodAmount();
+        }
+        
+        function toggleCodAmount() {
+            const codRadio = document.querySelector('input[name="payment_responsibility"][value="cod"]');
+            const codDiv = document.getElementById('cod-amount-div');
+            
+            if (codRadio && codRadio.checked) {
+                codDiv.classList.remove('hidden');
+            } else {
+                codDiv.classList.add('hidden');
+            }
+        }
+    </script>
+
+</body>
+</html>

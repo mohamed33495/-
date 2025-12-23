@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تفاصيل السائق | لوحة الإدارة</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Tajawal', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+
+    <div class="max-w-4xl mx-auto p-8">
+        <div class="mb-8">
+            <a href="admin-requests.html" class="inline-flex items-center text-gray-500 hover:text-gray-700 font-bold">
+                <i class="fa-solid fa-arrow-right ml-2"></i> العودة للقائمة
+            </a>
+        </div>
+
+        <div id="details-container" class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+            <!-- Loading -->
+            <div class="p-12 text-center text-gray-500">جاري تحميل بيانات السائق...</div>
+        </div>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const id = urlParams.get('id');
+
+        async function fetchDetails() {
+            try {
+                const response = await fetch(`http://localhost:3000/api/admin/driver/${id}`);
+                const data = await response.json();
+
+                if (data.success) {
+                    const d = data.driver;
+                    const container = document.getElementById('details-container');
+
+                    container.innerHTML = `
+                        <div class="p-8 border-b border-gray-100 flex justify-between items-start">
+                            <div>
+                                <h1 class="text-3xl font-bold text-gray-900 mb-2">${d.full_name}</h1>
+                                <span class="bg-yellow-100 text-yellow-800 text-xs font-bold px-3 py-1 rounded-full border border-yellow-200">
+                                    قيد المراجعة (Pending)
+                                </span>
+                            </div>
+                            
+                            <!-- Actions -->
+                            <div class="flex gap-3">
+                                <button onclick="approveDriver(${d.user_id})" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl font-bold transition shadow-lg shadow-green-200 flex items-center gap-2">
+                                    <i class="fa-solid fa-check"></i> قبول الطلب
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="p-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <!-- Info -->
+                            <div class="space-y-6">
+                                <div>
+                                    <label class="block text-xs font-bold text-gray-500 mb-1">البريد الإلكتروني</label>
+                                    <div class="text-lg font-medium text-gray-900">${d.email}</div>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-gray-500 mb-1">رقم الهاتف</label>
+                                    <div class="text-lg font-medium text-gray-900" dir="ltr">${d.phone_number}</div>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-200">
+                                    <label class="block text-xs font-bold text-gray-500 mb-1">نوع السيارة</label>
+                                    <div class="text-lg font-bold text-gray-900">${d.truck_number || 'غير محدد'}</div>
+                                </div>
+                            </div>
+
+                            <!-- Documents (Placeholders) -->
+                            <div class="space-y-4">
+                                <h3 class="font-bold text-gray-900">المستندات المرفقة</h3>
+                                
+                                <div class="border border-gray-200 rounded-xl p-4 flex items-center gap-4">
+                                    <div class="bg-blue-50 w-12 h-12 rounded-lg flex items-center justify-center text-blue-600">
+                                        <i class="fa-solid fa-id-card text-xl"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="font-bold text-sm">رخصة القيادة</div>
+                                        <div class="text-xs text-gray-500">${d.license_number || 'ملف مرفق'}</div>
+                                    </div>
+                                    <button class="text-blue-600 text-sm font-bold hover:underline">عرض</button>
+                                </div>
+
+                                <div class="border border-gray-200 rounded-xl p-4 flex items-center gap-4">
+                                    <div class="bg-blue-50 w-12 h-12 rounded-lg flex items-center justify-center text-blue-600">
+                                        <i class="fa-solid fa-car text-xl"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="font-bold text-sm">صورة السيارة</div>
+                                        <div class="text-xs text-gray-500">ملف مرفق</div>
+                                    </div>
+                                    <button class="text-blue-600 text-sm font-bold hover:underline">عرض</button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                console.error(error);
+                alert('فشل تحميل البيانات');
+            }
+        }
+
+        async function approveDriver(id) {
+            if (!confirm('هل أنت متأكد من قبول هذا السائق؟ سيتم تفعيل حسابه فوراً.')) return;
+
+            try {
+                const response = await fetch('http://localhost:3000/api/admin/approve-driver', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ id })
+                });
+                const data = await response.json();
+                if (data.success) {
+                    alert('✅ تم قبول السائق بنجاح!');
+                    window.location.href = 'admin-requests.html';
+                }
+            } catch (error) {
+                alert('فشل العملية');
+            }
+        }
+
+        fetchDetails();
+    </script>
+</body>
+
+</html>

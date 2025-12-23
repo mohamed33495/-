@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#0f172a">
+    <title>الإعدادات | Super Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Tajawal', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .pb-safe {
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+    </style>
+</head>
+
+<body class="bg-slate-900 text-white h-screen flex flex-col overflow-hidden">
+
+    <div class="flex-1 overflow-y-auto pb-24 px-6 pt-10">
+
+        <div class="flex items-center gap-4 mb-8">
+            <div class="relative">
+                <img src="https://ui-avatars.com/api/?name=Boss&background=4f46e5&color=fff"
+                    class="w-16 h-16 rounded-full border-4 border-slate-700 shadow-xl">
+                <div class="absolute bottom-0 right-0 bg-green-500 w-4 h-4 rounded-full border-2 border-slate-900">
+                </div>
+            </div>
+            <div>
+                <h2 class="text-xl font-bold">المدير العام</h2>
+                <p class="text-slate-400 text-xs">ID: SA-001 • كامل الصلاحيات</p>
+            </div>
+        </div>
+
+        <div class="space-y-3">
+            <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1">النظام</p>
+
+            <a href="#"
+                class="flex items-center gap-4 p-4 rounded-2xl bg-slate-800 border border-slate-700 hover:bg-slate-700 transition group">
+                <div class="w-10 h-10 rounded-full bg-indigo-500/20 text-indigo-400 flex items-center justify-center"><i
+                        class="fa-solid fa-globe"></i></div>
+                <span class="font-bold text-sm">إعدادات الدول والمخازن</span>
+                <i
+                    class="fa-solid fa-chevron-left mr-auto text-slate-600 text-xs group-hover:-translate-x-1 transition"></i>
+            </a>
+
+            <a href="#"
+                class="flex items-center gap-4 p-4 rounded-2xl bg-slate-800 border border-slate-700 hover:bg-slate-700 transition group">
+                <div class="w-10 h-10 rounded-full bg-orange-500/20 text-orange-400 flex items-center justify-center"><i
+                        class="fa-solid fa-money-bill-transfer"></i></div>
+                <span class="font-bold text-sm">أسعار الصرف والشحن</span>
+                <i
+                    class="fa-solid fa-chevron-left mr-auto text-slate-600 text-xs group-hover:-translate-x-1 transition"></i>
+            </a>
+
+            <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1 mt-4">الأمان</p>
+
+            <a href="#"
+                class="flex items-center gap-4 p-4 rounded-2xl bg-slate-800 border border-slate-700 hover:bg-slate-700 transition group">
+                <div class="w-10 h-10 rounded-full bg-slate-700 text-slate-400 flex items-center justify-center"><i
+                        class="fa-solid fa-file-shield"></i></div>
+                <span class="font-bold text-sm">سجل النشاطات (Logs)</span>
+                <i
+                    class="fa-solid fa-chevron-left mr-auto text-slate-600 text-xs group-hover:-translate-x-1 transition"></i>
+            </a>
+
+            <button onclick="window.location.href='login.html?logout=true'"
+                class="w-full flex items-center gap-4 p-4 rounded-2xl bg-red-500/10 border border-red-500/20 hover:bg-red-500/20 transition text-red-400 mt-4">
+                <div class="w-10 h-10 rounded-full bg-red-500/20 flex items-center justify-center"><i
+                        class="fa-solid fa-power-off"></i></div>
+                <span class="font-bold text-sm">تسجيل الخروج الآمن</span>
+            </button>
+        </div>
+
+    </div>
+
+    <nav
+        class="md:hidden fixed bottom-0 left-0 w-full bg-slate-950 border-t border-slate-800 flex justify-around items-center py-2 px-2 z-50 pb-safe shadow-2xl h-16">
+        <a href="super-admin.html"
+            class="flex items-center justify-center w-1/5 text-slate-400 hover:text-white transition group"><i
+                class="fa-solid fa-gauge-high text-xl group-active:scale-90 transition"></i></a>
+        <a href="super-admin-employees.html"
+            class="flex items-center justify-center w-1/5 text-slate-400 hover:text-white transition group"><i
+                class="fa-solid fa-users-gear text-xl group-active:scale-90 transition"></i></a>
+        <div class="relative w-1/5 flex justify-center"><button
+                class="bg-green-600 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg border-4 border-slate-900 transform active:scale-90 transition -top-6"><i
+                    class="fa-solid fa-plus text-xl"></i></button></div>
+        <a href="super-admin-finance.html"
+            class="flex items-center justify-center w-1/5 text-slate-400 hover:text-white transition group"><i
+                class="fa-solid fa-file-invoice-dollar text-xl group-active:scale-90 transition"></i></a>
+        <a href="#" class="flex items-center justify-center w-1/5 text-white transition group relative">
+            <i class="fa-solid fa-bars text-xl"></i>
+            <span class="absolute -bottom-2 w-1 h-1 bg-white rounded-full"></span>
+        </a>
+    </nav>
+
+</body>
+
+</html>

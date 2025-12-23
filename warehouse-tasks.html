@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#0f172a">
+    <title>المهام | المستودع</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Tajawal', sans-serif; -webkit-tap-highlight-color: transparent; }
+        ::-webkit-scrollbar { width: 0px; background: transparent; }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800 h-screen flex flex-col overflow-hidden selection:bg-slate-300">
+
+    <div class="fixed top-0 left-0 w-full h-40 bg-slate-900 rounded-b-[2.5rem] z-0 shadow-lg"></div>
+
+    <div class="relative z-10 flex-1 overflow-y-auto pb-28 no-scrollbar">
+        
+        <header class="px-6 pt-10 pb-4 text-white">
+            <h1 class="text-2xl font-bold">المهام اليومية 📋</h1>
+            <div class="flex bg-slate-800/50 p-1 rounded-xl mt-4 backdrop-blur-sm border border-slate-700">
+                <button class="flex-1 py-2 rounded-lg bg-blue-600 text-white text-xs font-bold shadow-md">تجهيز (5)</button>
+                <button class="flex-1 py-2 rounded-lg text-slate-400 text-xs font-bold hover:text-white">شحن (2)</button>
+                <button class="flex-1 py-2 rounded-lg text-slate-400 text-xs font-bold hover:text-white">جرد</button>
+            </div>
+        </header>
+
+        <main class="px-4 mt-4 space-y-4">
+
+            <div class="bg-white p-5 rounded-3xl shadow-sm border border-gray-100 group active:scale-[0.98] transition">
+                <div class="flex justify-between items-start mb-3">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-orange-50 text-orange-600 rounded-xl flex items-center justify-center text-lg">
+                            <i class="fa-solid fa-box-open"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-gray-800 text-sm">تجميع شحنات</h3>
+                            <p class="text-[10px] text-gray-400 font-mono mt-0.5">العميل: LY-10234</p>
+                        </div>
+                    </div>
+                    <span class="bg-red-100 text-red-600 text-[10px] px-2 py-1 rounded-lg font-bold">عاجل</span>
+                </div>
+                
+                <div class="bg-gray-50 p-3 rounded-xl mb-3 border border-gray-100">
+                    <ul class="text-xs text-gray-600 space-y-1 list-disc list-inside">
+                        <li>حذاء رياضي (Ref: 554)</li>
+                        <li>قميص شتوي (Ref: 112)</li>
+                    </ul>
+                </div>
+
+                <button class="w-full py-3 bg-slate-900 text-white rounded-xl text-xs font-bold shadow-md">بدء التجميع</button>
+            </div>
+
+            <div class="bg-white p-5 rounded-3xl shadow-sm border border-gray-100 group active:scale-[0.98] transition">
+                <div class="flex justify-between items-start mb-3">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center text-lg">
+                            <i class="fa-solid fa-camera"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-gray-800 text-sm">طلب صور إضافية</h3>
+                            <p class="text-[10px] text-gray-400 font-mono mt-0.5">الشحنة: TRK-9988</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="w-full py-3 border border-slate-200 text-slate-600 rounded-xl text-xs font-bold hover:bg-slate-50">التقاط صور</button>
+            </div>
+
+        </main>
+    </div>
+
+    <nav class="fixed bottom-6 left-4 right-4 bg-slate-900/90 backdrop-blur-xl border border-white/10 shadow-2xl rounded-2xl flex justify-around items-center py-3 z-50">
+        <a href="warehouse.html" class="flex flex-col items-center gap-1 text-slate-400 hover:text-white transition group"><i class="fa-solid fa-dolly text-xl group-active:scale-90 transition"></i></a>
+        <a href="#" class="flex flex-col items-center gap-1 text-white transition group relative">
+            <i class="fa-solid fa-list-check text-xl"></i>
+            <span class="absolute -bottom-2 w-1 h-1 bg-white rounded-full"></span>
+        </a>
+        <div class="relative -top-8"><button class="bg-blue-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg shadow-blue-500/40 border-4 border-gray-100 transform active:scale-90 transition"><i class="fa-solid fa-barcode text-2xl"></i></button></div>
+        <a href="warehouse-stock.html" class="flex flex-col items-center gap-1 text-slate-400 hover:text-white transition group"><i class="fa-solid fa-boxes-stacked text-xl group-active:scale-90 transition"></i></a>
+        <a href="warehouse-menu.html" class="flex flex-col items-center gap-1 text-slate-400 hover:text-white transition group"><i class="fa-solid fa-bars text-xl group-active:scale-90 transition"></i></a>
+    </nav>
+
+</body>
+</html>

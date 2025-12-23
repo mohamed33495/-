@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#1e3a8a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>كيف نعمل | شحنتي Global</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Tajawal', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        ::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+        }
+
+        .mobile-menu {
+            transition: max-height 0.3s ease-in-out;
+            max-height: 0;
+            overflow: hidden;
+        }
+
+        .mobile-menu.open {
+            max-height: 400px;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+    <nav class="bg-white shadow-md fixed w-full z-50 transition-all duration-300">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <a href="index.html" class="flex items-center gap-2">
+                    <i class="fa-solid fa-paper-plane text-blue-600 text-2xl md:text-3xl"></i>
+                    <span class="text-xl md:text-2xl font-bold text-gray-800">شحنتي <span
+                            class="text-blue-600">Global</span></span>
+                </a>
+
+                <div class="hidden md:flex gap-8 text-lg font-medium">
+                    <a href="index.html" class="hover:text-blue-600 transition">الرئيسية</a>
+                    <a href="pricing.html" class="hover:text-blue-600 transition">الأسعار</a>
+                    <a href="#" class="text-blue-600 font-bold">كيف نعمل؟</a>
+                </div>
+
+                <div class="hidden md:flex gap-4">
+                    <a href="login.html"
+                        class="px-5 py-2 text-blue-600 font-bold hover:bg-blue-50 rounded-lg transition">تسجيل
+                        الدخول</a>
+                    <a href="register.html"
+                        class="px-5 py-2 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 shadow-lg transition">حساب
+                        جديد</a>
+                </div>
+
+                <button onclick="toggleMenu()"
+                    class="md:hidden text-gray-600 focus:outline-none p-2 rounded-md hover:bg-gray-100 transition">
+                    <i class="fa-solid fa-bars text-2xl"></i>
+                </button>
+            </div>
+
+            <div id="mobileMenu"
+                class="mobile-menu md:hidden flex flex-col gap-4 mt-4 border-t border-gray-100 pt-4 bg-white">
+                <a href="index.html" class="text-gray-600 hover:text-blue-600 px-2 transition font-medium">الرئيسية</a>
+                <a href="pricing.html" class="text-gray-600 hover:text-blue-600 px-2 transition font-medium">الأسعار</a>
+                <a href="#" class="text-blue-600 font-bold px-2 bg-blue-50 py-2 rounded-lg">كيف نعمل؟</a>
+
+                <div class="flex gap-3 mt-2 pb-2 border-t border-gray-100 pt-4">
+                    <a href="login.html"
+                        class="flex-1 text-center px-4 py-3 border border-blue-600 text-blue-600 font-bold rounded-xl active:bg-blue-50">دخول</a>
+                    <a href="register.html"
+                        class="flex-1 text-center px-4 py-3 bg-blue-600 text-white font-bold rounded-xl shadow active:bg-blue-700">تسجيل</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="bg-blue-900 pt-32 pb-16 md:pb-20 text-white text-center relative overflow-hidden">
+        <div
+            class="absolute inset-0 opacity-10 bg-[url('https://upload.wikimedia.org/wikipedia/commons/8/80/World_map_-_low_resolution.svg')] bg-cover bg-center">
+        </div>
+        <div class="container mx-auto px-6 relative z-10">
+            <h1 class="text-3xl md:text-5xl font-bold mb-4 md:mb-6 leading-tight">رحلة شحنتك..<br>خطوة بخطوة</h1>
+            <p class="text-base md:text-xl text-blue-200 max-w-2xl mx-auto">من المتاجر العالمية إلى باب منزلك في خطوات
+                بسيطة، آمنة، ومتابعة لحظة بلحظة.</p>
+        </div>
+    </header>
+
+    <section class="py-16 md:py-20 container mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-8 relative">
+            <div class="hidden md:block absolute top-12 left-0 right-0 h-1 bg-gray-200 z-0 mx-16"></div>
+            <div class="relative z-10 text-center group">
+                <div
+                    class="w-20 h-20 md:w-24 md:h-24 bg-white border-4 border-blue-600 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6 text-2xl md:text-3xl shadow-lg group-hover:bg-blue-600 group-hover:text-white transition duration-300">
+                    <i class="fa-solid fa-user-plus"></i>
+                </div>
+                <h3 class="font-bold text-lg md:text-xl mb-2">1. التسجيل</h3>
+                <p class="text-gray-500 text-sm px-2">أنشئ حساباً مجانياً واحصل فوراً على عناوينك الخاصة.</p>
+            </div>
+            <div class="relative z-10 text-center group">
+                <div
+                    class="w-20 h-20 md:w-24 md:h-24 bg-white border-4 border-gray-200 text-gray-400 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6 text-2xl md:text-3xl shadow-lg group-hover:border-blue-600 group-hover:text-blue-600 transition duration-300">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </div>
+                <h3 class="font-bold text-lg md:text-xl mb-2">2. التسوق</h3>
+                <p class="text-gray-500 text-sm px-2">استخدم عنوانك الجديد كعنوان الشحن عند الشراء.</p>
+            </div>
+
+            <div class="relative z-10 text-center group">
+                <div
+                    class="w-20 h-20 md:w-24 md:h-24 bg-white border-4 border-gray-200 text-gray-400 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6 text-2xl md:text-3xl shadow-lg group-hover:border-blue-600 group-hover:text-blue-600 transition duration-300">
+                    <i class="fa-solid fa-box-open"></i>
+                </div>
+                <h3 class="font-bold text-lg md:text-xl mb-2">3. الاستلام</h3>
+                <p class="text-gray-500 text-sm px-2">نستلم شحناتك في مستودعاتنا ونقوم بتصويرها لك.</p>
+            </div>
+
+            <div class="relative z-10 text-center group">
+                <div
+                    class="w-20 h-20 md:w-24 md:h-24 bg-white border-4 border-gray-200 text-gray-400 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6 text-2xl md:text-3xl shadow-lg group-hover:border-blue-600 group-hover:text-blue-600 transition duration-300">
+                    <i class="fa-solid fa-boxes-stacked"></i>
+                </div>
+                <h3 class="font-bold text-lg md:text-xl mb-2">4. التجميع</h3>
+                <p class="text-gray-500 text-sm px-2">نجمع مشترياتك في صندوق واحد لتوفير تكاليف الشحن.</p>
+            </div>
+
+            <div class="relative z-10 text-center group">
+                <div
+                    class="w-20 h-20 md:w-24 md:h-24 bg-white border-4 border-gray-200 text-gray-400 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6 text-2xl md:text-3xl shadow-lg group-hover:border-blue-600 group-hover:text-blue-600 transition duration-300">
+                    <i class="fa-solid fa-plane-departure"></i>
+                </div>
+                <h3 class="font-bold text-lg md:text-xl mb-2">5. الشحن</h3>
+                <p class="text-gray-500 text-sm px-2">اختر شركة الشحن المناسبة واستلم شحنتك عند بابك.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-gray-100 py-16 md:py-20">
+        <div class="container mx-auto px-6 flex flex-col md:flex-row items-center gap-8 md:gap-12">
+            <div class="w-full md:w-1/2">
+                <img src="https://cdni.iconscout.com/illustration/premium/thumb/logistics-service-illustration-download-in-svg-png-gif-file-formats--delivery-warehouse-packages-shipping-industry-pack-business-illustrations-4357288.png?f=webp"
+                    alt="Consolidation" class="rounded-xl mix-blend-multiply w-full">
+            </div>
+            <div class="w-full md:w-1/2 text-center md:text-right">
+                <span class="text-blue-600 font-bold tracking-wide uppercase text-sm mb-2 block">لماذا نحن؟</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">وفر حتى 80% مع خدمة تجميع الشحنات</h2>
+                <p class="text-gray-600 text-base md:text-lg mb-6 leading-relaxed">
+                    لا تشحن كل غرض بمفرده! في شحنتي Global، نمنحك تخزيناً مجانياً لمدة 30 يوماً. اشتري من عدة متاجر،
+                    وسنقوم بجمع كل مشترياتك في صندوق واحد.
+                </p>
+                <ul class="space-y-4 text-sm md:text-base inline-block text-right">
+                    <li class="flex items-center gap-3">
+                        <i class="fa-solid fa-check-circle text-green-500 text-xl"></i>
+                        <span class="font-bold text-gray-700">دفع رسوم الشحن الأولى مرة واحدة فقط.</span>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <i class="fa-solid fa-check-circle text-green-500 text-xl"></i>
+                        <span class="font-bold text-gray-700">صور مجانية للشحنات عند وصولها للمستودع.</span>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <i class="fa-solid fa-check-circle text-green-500 text-xl"></i>
+                        <span class="font-bold text-gray-700">إعادة تغليف احترافية لحماية مشترياتك.</span>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <i class="fa-solid fa-check-circle text-green-500 text-xl"></i>
+                        <span class="font-bold text-gray-700">دعم فني مباشر على مدار الساعة.</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-16 md:py-20 container mx-auto px-6">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900">أسئلة شائعة</h2>
+            <p class="text-gray-500 mt-2">إجابات سريعة على تساؤلاتك</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition">
+                <h3 class="font-bold text-lg mb-2 flex items-center gap-2"><i
+                        class="fa-solid fa-circle-question text-blue-600"></i> كم يستغرق الشحن؟</h3>
+                <p class="text-gray-600 text-sm">يعتمد ذلك على شركة الشحن التي تختارها (DHL, Aramex, FedEx). عادة ما
+                    يستغرق من 3 إلى 7 أيام عمل.</p>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition">
+                <h3 class="font-bold text-lg mb-2 flex items-center gap-2"><i
+                        class="fa-solid fa-circle-question text-blue-600"></i> هل التسجيل مجاني؟</h3>
+                <p class="text-gray-600 text-sm">نعم، التسجيل في "شحنتي Global" مجاني تماماً وتحصل فوراً على عناوينك.
+                </p>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition">
+                <h3 class="font-bold text-lg mb-2 flex items-center gap-2"><i
+                        class="fa-solid fa-circle-question text-blue-600"></i> ما هي المواد المحظورة؟</h3>
+                <p class="text-gray-600 text-sm">تشمل المواد القابلة للاشتعال، الأسلحة، البطاريات الليثيوم المنفصلة،
+                    والسوائل الكحولية.</p>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition">
+                <h3 class="font-bold text-lg mb-2 flex items-center gap-2"><i
+                        class="fa-solid fa-circle-question text-blue-600"></i> كيف أدفع رسوم الشحن؟</h3>
+                <p class="text-gray-600 text-sm">يمكنك الدفع عبر البطاقات الائتمانية (Visa/Mastercard)، PayPal، أو
+                    المحافظ الإلكترونية المحلية.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="bg-blue-600 py-16 text-center text-white relative overflow-hidden">
+        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10">
+        </div>
+        <div class="container mx-auto px-6 relative z-10">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">جاهز لبدء تجربة تسوق عالمية؟</h2>
+            <p class="text-blue-100 text-lg mb-8 max-w-xl mx-auto">انضم لأكثر من 50,000 عميل سعيد واستمتع بحرية التسوق
+                من أي مكان في العالم.</p>
+            <a href="register.html"
+                class="inline-block bg-white text-blue-600 font-bold text-lg px-8 py-4 rounded-xl shadow-lg hover:shadow-xl hover:bg-gray-50 transform hover:-translate-y-1 transition duration-300">
+                ابدأ الشحن الآن - مجاناً <i class="fa-solid fa-arrow-left mr-2"></i>
+            </a>
+        </div>
+    </section>
+
+    <footer class="bg-gray-900 text-white py-10 border-t border-gray-800">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-gray-400 text-sm">© 2025 جميع الحقوق محفوظة لمنصة شحنتي Global Cargo.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('open');
+        }
+    </script>
+</body>
+
+</html>

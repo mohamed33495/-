@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#0f172a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <title>الإدارة العليا | Super Admin</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Tajawal', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        ::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+        }
+
+        .pb-safe {
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 text-gray-800 h-screen flex flex-col overflow-hidden selection:bg-slate-300">
+
+    <div class="fixed top-0 left-0 w-full h-56 bg-slate-900 rounded-b-[3rem] z-0 shadow-lg"></div>
+
+    <div class="relative z-10 flex-1 overflow-y-auto pb-28 no-scrollbar">
+
+        <header class="px-6 pt-10 pb-6 text-white">
+            <div class="flex justify-between items-start mb-6">
+                <div class="flex items-center gap-3">
+                    <img src="https://ui-avatars.com/api/?name=Boss&background=4f46e5&color=fff"
+                        class="w-12 h-12 rounded-full border-2 border-slate-500 shadow-md">
+                    <div>
+                        <p class="text-slate-400 text-xs font-bold mb-0.5">لوحة القيادة 👑</p>
+                        <h1 class="text-lg font-bold">المدير العام</h1>
+                    </div>
+                </div>
+                <button onclick="window.location.href='login.html?logout=true'"
+                    class="bg-white/10 p-2 rounded-xl backdrop-blur-md border border-white/10 hover:bg-red-500 hover:border-red-500 transition">
+                    <i class="fa-solid fa-power-off text-white"></i>
+                </button>
+            </div>
+
+            <div class="grid grid-cols-3 gap-3 text-center">
+                <div class="bg-slate-800/50 p-3 rounded-2xl border border-slate-700 backdrop-blur-sm">
+                    <p class="text-[10px] text-slate-400 font-bold">دخل اليوم</p>
+                    <p class="text-lg font-black text-green-400">$4.2k</p>
+                </div>
+                <div class="bg-slate-800/50 p-3 rounded-2xl border border-slate-700 backdrop-blur-sm">
+                    <p class="text-[10px] text-slate-400 font-bold">شحنات نشطة</p>
+                    <p class="text-lg font-black text-white">1,250</p>
+                </div>
+                <div class="bg-slate-800/50 p-3 rounded-2xl border border-slate-700 backdrop-blur-sm">
+                    <p class="text-[10px] text-slate-400 font-bold">عملاء جدد</p>
+                    <p class="text-lg font-black text-blue-400">+15</p>
+                </div>
+            </div>
+        </header>
+
+        <main class="px-4 space-y-6 -mt-2">
+
+            <div class="bg-white p-5 rounded-3xl shadow-xl border border-indigo-50 relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-1.5 h-full bg-green-600"></div>
+                <h3 class="font-bold text-gray-800 mb-4 flex items-center gap-2 text-lg">
+                    <span
+                        class="w-8 h-8 bg-green-100 text-green-600 rounded-lg flex items-center justify-center text-sm"><i
+                            class="fa-solid fa-sack-dollar"></i></span>
+                    التحكم في الأسعار
+                </h3>
+
+                <div class="space-y-4">
+                    <div class="bg-gray-50 p-3 rounded-2xl border border-gray-100 flex justify-between items-center">
+                        <div>
+                            <p class="text-xs font-bold text-gray-500">سعر الصرف (الدولار)</p>
+                            <p class="text-[10px] text-gray-400">يؤثر على جميع الفواتير</p>
+                        </div>
+                        <div class="flex items-center gap-2 bg-white px-2 py-1 rounded-xl border border-gray-200">
+                            <span class="font-bold text-green-600 text-lg">5.15</span>
+                            <span class="text-xs text-gray-400 font-bold">LYD</span>
+                            <button
+                                class="w-6 h-6 bg-slate-900 text-white rounded-full flex items-center justify-center text-xs"><i
+                                    class="fa-solid fa-pen"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="bg-gray-50 p-3 rounded-2xl border border-gray-100 text-center">
+                            <p class="text-[10px] font-bold text-gray-500 mb-1">الصين (جوي)</p>
+                            <p class="text-xl font-black text-slate-800">$12 <span
+                                    class="text-[10px] text-gray-400 font-normal">/Kg</span></p>
+                        </div>
+                        <div class="bg-gray-50 p-3 rounded-2xl border border-gray-100 text-center">
+                            <p class="text-[10px] font-bold text-gray-500 mb-1">أمريكا (جوي)</p>
+                            <p class="text-xl font-black text-slate-800">$15 <span
+                                    class="text-[10px] text-gray-400 font-normal">/Kg</span></p>
+                        </div>
+                    </div>
+
+                    <button
+                        class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-3.5 rounded-xl shadow-lg active:scale-95 transition flex items-center justify-center gap-2 text-sm">
+                        <i class="fa-solid fa-save"></i> حفظ التغييرات
+                    </button>
+                </div>
+            </div>
+
+            <div>
+                <div class="flex justify-between items-end mb-3 px-2">
+                    <h3 class="font-bold text-gray-800">فريق العمل</h3>
+                    <button onclick="openAddEmployeeModal()"
+                        class="text-xs bg-blue-100 text-blue-600 px-2 py-0.5 rounded-lg font-bold flex items-center gap-1">
+                        <i class="fa-solid fa-plus"></i> إضافة
+                    </button>
+                </div>
+
+                <div class="space-y-3" id="employeeList">
+                    <div
+                        class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex justify-between items-center active:scale-[0.99] transition">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl flex items-center justify-center bg-slate-100">
+                                <img src="https://ui-avatars.com/api/?name=Ali+W&background=random"
+                                    class="w-full h-full rounded-xl">
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-sm text-gray-800">علي سالم</h4>
+                                <p class="text-[10px] text-gray-400 font-mono">مستودع (Warehouse)</p>
+                            </div>
+                        </div>
+                        <span class="w-2.5 h-2.5 bg-green-500 rounded-full shadow-sm"></span>
+                    </div>
+
+                    <div
+                        class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex justify-between items-center active:scale-[0.99] transition">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl flex items-center justify-center bg-slate-100">
+                                <img src="https://ui-avatars.com/api/?name=Sara+S&background=random"
+                                    class="w-full h-full rounded-xl">
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-sm text-gray-800">سارة محمد</h4>
+                                <p class="text-[10px] text-gray-400 font-mono">دعم فني (Support)</p>
+                            </div>
+                        </div>
+                        <span class="w-2.5 h-2.5 bg-gray-300 rounded-full shadow-sm"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-slate-900 text-white p-5 rounded-3xl relative overflow-hidden shadow-lg">
+                <div class="absolute right-0 bottom-0 w-32 h-32 bg-white/5 rounded-full -mr-10 -mb-10 blur-xl"></div>
+
+                <h3 class="font-bold mb-4 text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-chart-pie text-purple-400"></i> تقارير الأداء
+                </h3>
+
+                <div class="flex gap-3 overflow-x-auto no-scrollbar">
+                    <div class="bg-white/10 px-4 py-3 rounded-xl min-w-[100px] border border-white/5">
+                        <p class="text-[10px] text-slate-400 mb-1">أرباح الشهر</p>
+                        <p class="font-bold text-lg text-green-400">$12.5k</p>
+                    </div>
+                    <div class="bg-white/10 px-4 py-3 rounded-xl min-w-[100px] border border-white/5">
+                        <p class="text-[10px] text-slate-400 mb-1">مصروفات</p>
+                        <p class="font-bold text-lg text-red-400">$3.2k</p>
+                    </div>
+                    <div class="bg-white/10 px-4 py-3 rounded-xl min-w-[100px] border border-white/5">
+                        <p class="text-[10px] text-slate-400 mb-1">ديون عملاء</p>
+                        <p class="font-bold text-lg text-orange-400">$1.8k</p>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <nav
+        class="fixed bottom-6 left-4 right-4 bg-slate-900/90 backdrop-blur-xl border border-white/10 shadow-2xl rounded-2xl flex justify-around items-center py-3 z-50">
+        <a href="#" class="flex flex-col items-center gap-1 text-white transition group relative">
+            <i class="fa-solid fa-gauge-high text-xl"></i>
+            <span class="absolute -bottom-2 w-1 h-1 bg-white rounded-full"></span>
+        </a>
+
+        <a href="super-admin-employees.html"
+            class="flex flex-col items-center gap-1 text-slate-400 hover:text-white transition group">
+            <i class="fa-solid fa-users-gear text-xl group-active:scale-90 transition"></i>
+        </a>
+
+        <div class="relative -top-8">
+            <button onclick="openAddEmployeeModal()"
+                class="bg-green-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg shadow-green-500/40 border-4 border-gray-100 transform active:scale-90 transition">
+                <i class="fa-solid fa-plus text-2xl"></i>
+            </button>
+        </div>
+
+        <a href="super-admin-finance.html"
+            class="flex flex-col items-center gap-1 text-slate-400 hover:text-white transition group">
+            <i class="fa-solid fa-file-invoice-dollar text-xl group-active:scale-90 transition"></i>
+        </a>
+
+        <a href="super-admin-menu.html"
+            class="flex flex-col items-center gap-1 text-slate-400 hover:text-white transition group">
+            <i class="fa-solid fa-bars text-xl group-active:scale-90 transition"></i>
+        </a>
+    </nav>
+
+    <div id="addEmployeeModal"
+        class="fixed inset-0 bg-black/60 z-[60] hidden flex flex-col justify-end backdrop-blur-sm">
+        <div class="bg-white w-full rounded-t-[2.5rem] p-6 animate-slide-up pb-safe">
+            <div class="w-12 h-1.5 bg-gray-200 rounded-full mx-auto mb-6"></div>
+
+            <h3 class="text-xl font-bold text-gray-800 mb-6 text-center">إضافة موظف جديد 👤</h3>
+
+            <form class="space-y-4" onsubmit="event.preventDefault(); saveEmployee();">
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-500 mb-1">الاسم الأول</label>
+                        <input type="text" id="empName"
+                            class="w-full h-12 px-4 rounded-xl bg-gray-50 border-none focus:ring-2 focus:ring-slate-500 text-sm font-bold text-gray-700">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-500 mb-1">الدور الوظيفي</label>
+                        <select id="empRole"
+                            class="w-full h-12 px-4 rounded-xl bg-gray-50 border-none focus:ring-2 focus:ring-slate-500 text-sm font-bold text-gray-700">
+                            <option value="Warehouse">أمين مستودع</option>
+                            <option value="Support">دعم فني</option>
+                            <option value="Accountant">محاسب</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-gray-500 mb-1">البريد الإلكتروني (للدخول)</label>
+                    <input type="email"
+                        class="w-full h-12 px-4 rounded-xl bg-gray-50 border-none focus:ring-2 focus:ring-slate-500 text-sm font-bold text-gray-700 text-left"
+                        dir="ltr" placeholder="user@cargo.ly">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-gray-500 mb-1">كلمة المرور المؤقتة</label>
+                    <input type="text" value="123456"
+                        class="w-full h-12 px-4 rounded-xl bg-gray-50 border-none focus:ring-2 focus:ring-slate-500 text-sm font-bold text-gray-700 text-left tracking-widest"
+                        dir="ltr">
+                </div>
+
+                <div class="flex gap-3 mt-6 pt-2">
+                    <button type="button" onclick="closeAddEmployeeModal()"
+                        class="flex-1 py-3.5 rounded-2xl bg-gray-100 text-gray-600 font-bold text-sm active:scale-95 transition">إلغاء</button>
+                    <button type="submit"
+                        class="flex-[2] py-3.5 rounded-2xl bg-slate-900 text-white font-bold text-sm shadow-lg active:scale-95 transition">حفظ
+                        وإضافة</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openAddEmployeeModal() { document.getElementById('addEmployeeModal').classList.remove('hidden'); }
+        function closeAddEmployeeModal() { document.getElementById('addEmployeeModal').classList.add('hidden'); }
+
+        function saveEmployee() {
+            // محاكاة إضافة الموظف للقائمة
+            const name = document.getElementById('empName').value || "موظف جديد";
+            const role = document.getElementById('empRole').value;
+
+            const newCard = `
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex justify-between items-center active:scale-[0.99] transition animate-fade-in">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl flex items-center justify-center bg-slate-100">
+                        <img src="https://ui-avatars.com/api/?name=${name}&background=random" class="w-full h-full rounded-xl">
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-sm text-gray-800">${name}</h4>
+                        <p class="text-[10px] text-gray-400 font-mono">${role}</p>
+                    </div>
+                </div>
+                <span class="w-2.5 h-2.5 bg-gray-300 rounded-full shadow-sm"></span>
+            </div>`;
+
+            document.getElementById('employeeList').insertAdjacentHTML('afterbegin', newCard);
+            closeAddEmployeeModal();
+
+            // تنظيف الحقول
+            document.getElementById('empName').value = '';
+        }
+    </script>
+
+    <style>
+        @keyframes slide-up {
+            from {
+                transform: translateY(100%);
+            }
+
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        .animate-slide-up {
+            animation: slide-up 0.3s ease-out forwards;
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+
+</body>
+
+</html>

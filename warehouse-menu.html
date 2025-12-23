@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#0f172a">
+    <title>القائمة | المستودع</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Tajawal', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        ::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 text-gray-800 h-screen flex flex-col overflow-hidden selection:bg-slate-300">
+
+    <div class="fixed top-0 left-0 w-full h-40 bg-slate-900 rounded-b-[2.5rem] z-0 shadow-lg"></div>
+
+    <div class="relative z-10 flex-1 overflow-y-auto pb-28 no-scrollbar">
+        <header class="px-6 pt-10 pb-6 text-white">
+            <h1 class="text-2xl font-bold">الإعدادات ⚙️</h1>
+        </header>
+
+        <main class="px-4 mt-2 space-y-4">
+            <div class="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden divide-y divide-gray-50">
+                <a href="#" class="p-4 flex items-center justify-between active:bg-gray-50 transition">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center"><i
+                                class="fa-solid fa-warehouse"></i></div>
+                        <span class="text-sm font-bold text-gray-700">تغيير المستودع</span>
+                    </div>
+                    <span class="text-xs text-gray-400">الصين</span>
+                </a>
+                <a href="#" class="p-4 flex items-center justify-between active:bg-gray-50 transition">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center"><i
+                                class="fa-solid fa-language"></i></div>
+                        <span class="text-sm font-bold text-gray-700">اللغة</span>
+                    </div>
+                    <span class="text-xs text-gray-400">العربية</span>
+                </a>
+            </div>
+
+            <button onclick="window.location.href='login.html?logout=true'"
+                class="w-full bg-red-50 text-red-500 font-bold py-4 rounded-3xl border border-red-100 active:scale-95 transition">
+                تسجيل الخروج
+            </button>
+        </main>
+    </div>
+
+    <nav
+        class="fixed bottom-6 left-4 right-4 bg-slate-900/90 backdrop-blur-xl border border-white/10 shadow-2xl rounded-2xl flex justify-around items-center py-3 z-50">
+        <a href="warehouse.html"
+            class="flex flex-col items-center gap-1 text-slate-400 hover:text-white transition group"><i
+                class="fa-solid fa-dolly text-xl group-active:scale-90 transition"></i></a>
+        <a href="warehouse-tasks.html"
+            class="flex flex-col items-center gap-1 text-slate-400 hover:text-white transition group"><i
+                class="fa-solid fa-list-check text-xl group-active:scale-90 transition"></i></a>
+        <div class="relative -top-8"><button
+                class="bg-blue-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg shadow-blue-500/40 border-4 border-gray-100 transform active:scale-90 transition"><i
+                    class="fa-solid fa-barcode text-2xl"></i></button></div>
+        <a href="warehouse-stock.html"
+            class="flex flex-col items-center gap-1 text-slate-400 hover:text-white transition group"><i
+                class="fa-solid fa-boxes-stacked text-xl group-active:scale-90 transition"></i></a>
+        <a href="#" class="flex flex-col items-center gap-1 text-white transition group relative">
+            <i class="fa-solid fa-bars text-xl"></i>
+            <span class="absolute -bottom-2 w-1 h-1 bg-white rounded-full"></span>
+        </a>
+    </nav>
+
+</body>
+
+</html>

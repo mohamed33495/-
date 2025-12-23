@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>التحقق من الهوية | شحنتي</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>body { font-family: 'Tajawal', sans-serif; }</style>
+</head>
+<body class="bg-gray-900 h-screen flex flex-col items-center justify-center text-white p-6">
+
+    <h2 class="text-2xl font-bold mb-2">خطوة أخيرة يا كابتن 🤳</h2>
+    <p class="text-gray-400 text-sm mb-6 text-center">يرجى التقاط صورة واضحة لوجهك للتحقق من الهوية</p>
+
+    <div class="relative w-64 h-64 rounded-full overflow-hidden border-4 border-indigo-500 shadow-2xl mb-8">
+        <video id="video" class="w-full h-full object-cover" autoplay playsinline></video>
+        <canvas id="canvas" class="hidden"></canvas>
+    </div>
+
+    <div class="space-y-4 w-full max-w-sm">
+        <button id="captureBtn" class="w-full bg-white text-gray-900 font-bold py-4 rounded-2xl shadow-lg flex items-center justify-center gap-2 transition active:scale-95">
+            <i class="fa-solid fa-camera"></i> التقاط الصورة
+        </button>
+
+        <button id="submitBtn" class="w-full bg-indigo-600 text-white font-bold py-4 rounded-2xl shadow-lg hidden transition active:scale-95">
+            <i class="fa-solid fa-check"></i> إرسال وإنهاء التسجيل
+        </button>
+        
+        <button id="retakeBtn" class="w-full text-gray-400 text-sm hidden underline">إعادة الالتقاط</button>
+    </div>
+
+    <script>
+        const video = document.getElementById('video');
+        const canvas = document.getElementById('canvas');
+        const captureBtn = document.getElementById('captureBtn');
+        const submitBtn = document.getElementById('submitBtn');
+        const retakeBtn = document.getElementById('retakeBtn');
+        let imageBlob = null;
+
+        // 1. تشغيل الكاميرا
+        navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" } })
+            .then(stream => { video.srcObject = stream; })
+            .catch(err => alert("يرجى السماح بالوصول للكاميرا"));
+
+        // 2. التقاط الصورة
+        captureBtn.addEventListener('click', () => {
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            canvas.getContext('2d').drawImage(video, 0, 0);
+            
+            // تحويل الفيديو لصورة ثابتة
+            video.classList.add('hidden');
+            canvas.classList.remove('hidden');
+            canvas.classList.add('w-full', 'h-full', 'object-cover'); // تنسيق الكانفاس
+            
+            // تبديل الأزرار
+            captureBtn.classList.add('hidden');
+            submitBtn.classList.remove('hidden');
+            retakeBtn.classList.remove('hidden');
+
+            // تحويل الصورة لملف
+            canvas.toBlob(blob => { imageBlob = blob; });
+        });
+
+        // 3. إعادة المحاولة
+        retakeBtn.addEventListener('click', () => {
+            video.classList.remove('hidden');
+            canvas.classList.add('hidden');
+            captureBtn.classList.remove('hidden');
+            submitBtn.classList.add('hidden');
+            retakeBtn.classList.add('hidden');
+        });
+
+        // 4. إرسال الصورة للسيرفر
+        submitBtn.addEventListener('click', () => {
+            // هنا نرسل الصورة للباك إند
+            // const formData = new FormData();
+            // formData.append('face_image', imageBlob);
+            // fetch('/api/upload-face', { method: 'POST', body: formData })...
+            
+            // محاكاة النجاح
+            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> جاري الرفع...';
+            setTimeout(() => {
+                alert("تم استلام طلبك بنجاح! سيتم مراجعة حسابك وتفعيله قريباً.");
+                window.location.href = 'index.html';
+            }, 1500);
+        });
+    </script>
+
+</body>
+</html>

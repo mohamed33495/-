@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#0f172a">
+    <title>الموظفين | Super Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Tajawal', sans-serif; -webkit-tap-highlight-color: transparent; }
+        ::-webkit-scrollbar { width: 0px; background: transparent; }
+        .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800 h-screen flex flex-col overflow-hidden selection:bg-slate-300">
+
+    <div class="fixed top-0 left-0 w-full h-48 bg-slate-900 rounded-b-[2.5rem] z-0 shadow-lg"></div>
+
+    <div class="relative z-10 flex-1 overflow-y-auto pb-28 no-scrollbar">
+        
+        <header class="px-6 pt-10 pb-4 text-white">
+            <div class="flex justify-between items-center mb-4">
+                <h1 class="text-2xl font-bold">فريق العمل 👥</h1>
+                <button class="bg-blue-600 text-white w-10 h-10 rounded-xl flex items-center justify-center shadow-lg active:scale-90 transition">
+                    <i class="fa-solid fa-user-plus"></i>
+                </button>
+            </div>
+            
+            <div class="relative">
+                <input type="text" placeholder="بحث بالاسم أو الوظيفة..." class="w-full h-12 px-4 rounded-xl bg-slate-800/50 border border-slate-700 text-white placeholder-slate-400 focus:bg-slate-800 transition outline-none">
+                <i class="fa-solid fa-magnifying-glass absolute left-4 top-4 text-slate-400"></i>
+            </div>
+        </header>
+
+        <main class="px-4 space-y-4 -mt-2">
+
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 relative overflow-hidden group">
+                <div class="absolute top-0 left-0 w-1 h-full bg-green-500"></div>
+                <div class="flex justify-between items-start">
+                    <div class="flex items-center gap-3">
+                        <img src="https://ui-avatars.com/api/?name=Ali+Salem&background=random" class="w-12 h-12 rounded-xl">
+                        <div>
+                            <h3 class="font-bold text-gray-800">علي سالم</h3>
+                            <p class="text-xs text-slate-500">أمين مستودع (Warehouse)</p>
+                            <span class="text-[10px] text-green-600 bg-green-50 px-2 py-0.5 rounded mt-1 inline-block">● متصل الآن</span>
+                        </div>
+                    </div>
+                    <button class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-ellipsis-vertical text-lg px-2"></i></button>
+                </div>
+                <div class="mt-4 flex gap-2 border-t border-gray-50 pt-3">
+                    <button class="flex-1 py-2 bg-slate-50 text-slate-600 rounded-lg text-xs font-bold hover:bg-slate-100">تعديل الصلاحيات</button>
+                    <button class="flex-1 py-2 bg-red-50 text-red-500 rounded-lg text-xs font-bold hover:bg-red-100">تجميد الحساب</button>
+                </div>
+            </div>
+
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 relative overflow-hidden group">
+                <div class="absolute top-0 left-0 w-1 h-full bg-orange-500"></div>
+                <div class="flex justify-between items-start">
+                    <div class="flex items-center gap-3">
+                        <img src="https://ui-avatars.com/api/?name=Sara+M&background=random" class="w-12 h-12 rounded-xl">
+                        <div>
+                            <h3 class="font-bold text-gray-800">سارة محمد</h3>
+                            <p class="text-xs text-slate-500">دعم فني (Support)</p>
+                            <span class="text-[10px] text-slate-400 bg-slate-50 px-2 py-0.5 rounded mt-1 inline-block">○ آخر ظهور: منذ ساعة</span>
+                        </div>
+                    </div>
+                    <button class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-ellipsis-vertical text-lg px-2"></i></button>
+                </div>
+                <div class="mt-4 flex gap-2 border-t border-gray-50 pt-3">
+                    <button class="flex-1 py-2 bg-slate-50 text-slate-600 rounded-lg text-xs font-bold hover:bg-slate-100">تعديل الصلاحيات</button>
+                    <button class="flex-1 py-2 bg-red-50 text-red-500 rounded-lg text-xs font-bold hover:bg-red-100">تجميد الحساب</button>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <nav class="fixed bottom-6 left-4 right-4 bg-slate-900/90 backdrop-blur-xl border border-white/10 shadow-2xl rounded-2xl flex justify-around items-center py-3 z-50">
+        <a href="super-admin.html" class="flex flex-col items-center gap-1 text-slate-400 hover:text-white transition group"><i class="fa-solid fa-gauge-high text-xl group-active:scale-90 transition"></i></a>
+        <a href="#" class="flex flex-col items-center gap-1 text-white transition group relative">
+            <i class="fa-solid fa-users-gear text-xl"></i>
+            <span class="absolute -bottom-2 w-1 h-1 bg-white rounded-full"></span>
+        </a>
+        <div class="relative -top-8">
+            <button class="bg-green-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg shadow-green-500/40 border-4 border-gray-100 transform active:scale-90 transition">
+                <i class="fa-solid fa-plus text-2xl"></i>
+            </button>
+        </div>
+        <a href="super-admin-finance.html" class="flex flex-col items-center gap-1 text-slate-400 hover:text-white transition group"><i class="fa-solid fa-file-invoice-dollar text-xl group-active:scale-90 transition"></i></a>
+        <a href="super-admin-menu.html" class="flex flex-col items-center gap-1 text-slate-400 hover:text-white transition group"><i class="fa-solid fa-bars text-xl group-active:scale-90 transition"></i></a>
+    </nav>
+
+</body>
+</html>

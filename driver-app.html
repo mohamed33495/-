@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#4f46e5">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <title>تطبيق الكابتن | شحنتي Driver</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body { font-family: 'Tajawal', sans-serif; -webkit-tap-highlight-color: transparent; overscroll-behavior-y: none; }
+        ::-webkit-scrollbar { width: 0px; background: transparent; }
+        .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+        .glass-nav { 
+            background: rgba(255, 255, 255, 0.95); 
+            backdrop-filter: blur(20px); 
+            -webkit-backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(0,0,0,0.05);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 h-screen flex flex-col overflow-hidden selection:bg-indigo-200">
+
+    <div class="fixed top-0 left-0 w-full h-48 bg-indigo-600 rounded-b-[2.5rem] z-0 shadow-lg"></div>
+
+    <div class="relative z-10 flex-1 overflow-y-auto pb-32 no-scrollbar">
+        
+        <header class="px-6 pt-10 pb-6 text-white">
+            <div class="flex justify-between items-center mb-6">
+                <div class="flex items-center gap-3">
+                    <div class="relative">
+                        <img src="https://ui-avatars.com/api/?name=Ahmed+Driver&background=c7d2fe&color=3730a3&bold=true" class="w-12 h-12 rounded-full border-2 border-indigo-300 shadow-md">
+                        <span class="absolute bottom-0 right-0 w-3 h-3 bg-green-400 border-2 border-indigo-600 rounded-full animate-pulse"></span>
+                    </div>
+                    <div>
+                        <p class="text-indigo-200 text-xs font-medium mb-0.5">صباح الخير ☀️</p>
+                        <h1 class="text-lg font-bold leading-tight">كابتن أحمد</h1>
+                    </div>
+                </div>
+                <div class="bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-full flex items-center gap-2 border border-white/10">
+                    <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                    <span class="text-xs font-bold">متصل</span>
+                </div>
+            </div>
+
+            <div class="flex justify-between gap-3 text-center">
+                <div class="bg-white/10 backdrop-blur-md flex-1 p-3 rounded-2xl border border-white/10">
+                    <p class="text-[10px] text-indigo-100 mb-1">المتبقي</p>
+                    <p class="text-xl font-bold">5</p>
+                </div>
+                <div class="bg-white/10 backdrop-blur-md flex-1 p-3 rounded-2xl border border-white/10">
+                    <p class="text-[10px] text-indigo-100 mb-1">تم التسليم</p>
+                    <p class="text-xl font-bold text-green-300">12</p>
+                </div>
+                <div class="bg-white/10 backdrop-blur-md flex-1 p-3 rounded-2xl border border-amber-400/30">
+                    <p class="text-[10px] text-indigo-100 mb-1">الكاش</p>
+                    <p class="text-xl font-bold text-amber-300">250 د.ل</p>
+                </div>
+            </div>
+        </header>
+
+        <main class="px-4 space-y-4">
+            
+            <h3 class="font-bold text-gray-800 text-base mb-2 px-1 flex items-center gap-2">
+                <span class="w-2 h-2 bg-indigo-600 rounded-full"></span> الشحنة الحالية (الأولوية)
+            </h3>
+
+            <div class="bg-white p-5 rounded-3xl shadow-lg border border-indigo-100 relative overflow-hidden group">
+                <div class="absolute right-0 top-0 bottom-0 w-1.5 bg-indigo-500"></div>
+                
+                <div class="flex justify-between items-start mb-4 pl-2">
+                    <div>
+                        <h2 class="text-xl font-bold text-gray-800">محمد علي</h2>
+                        <p class="text-sm text-gray-500 mt-1 flex items-center gap-1">
+                            <i class="fa-solid fa-location-dot text-indigo-500"></i> حي الأندلس، شارع قرطبة
+                        </p>
+                    </div>
+                    <span class="bg-indigo-50 text-indigo-600 font-mono font-bold text-xs px-2 py-1 rounded-lg">#TRK-99</span>
+                </div>
+
+                <div class="flex gap-3 mb-4 pl-2">
+                    <button onclick="window.open('tel:0910000000')" class="flex-1 bg-green-50 text-green-600 py-3 rounded-2xl font-bold text-sm flex items-center justify-center gap-2 border border-green-100 hover:bg-green-100 transition active:scale-95 shadow-sm">
+                        <i class="fa-solid fa-phone"></i> اتصال
+                    </button>
+                    <a href="driver-map.html" class="flex-1 bg-blue-50 text-blue-600 py-3 rounded-2xl font-bold text-sm flex items-center justify-center gap-2 border border-blue-100 hover:bg-blue-100 transition active:scale-95 shadow-sm text-decoration-none">
+                        <i class="fa-solid fa-diamond-turn-right"></i> الخريطة
+                    </a>
+                </div>
+
+                <div class="bg-gray-50 p-3 rounded-2xl flex justify-between items-center border border-gray-100 mb-4 pl-2">
+                    <span class="text-xs font-bold text-gray-500">المطلوب تحصيله</span>
+                    <span class="font-black text-xl text-indigo-600">55.00 د.ل</span>
+                </div>
+                
+                <div class="flex gap-3">
+                    <button onclick="openDeliveryModal()" class="flex-[2] bg-indigo-600 text-white font-bold py-3.5 rounded-2xl shadow-lg shadow-indigo-200 hover:bg-indigo-700 transition flex justify-center items-center gap-2 active:scale-95">
+                        <i class="fa-solid fa-check-circle"></i> إتمام التسليم
+                    </button>
+                    <button onclick="openFailureModal()" class="flex-1 bg-red-50 text-red-600 font-bold py-3.5 rounded-2xl border border-red-100 hover:bg-red-100 transition flex justify-center items-center gap-2 active:scale-95">
+                        <i class="fa-solid fa-xmark"></i> فشل
+                    </button>
+                </div>
+            </div>
+
+            <h3 class="font-bold text-gray-400 text-sm mt-6 mb-2 px-1">المهام القادمة</h3>
+
+            <div class="bg-white p-4 rounded-3xl shadow-sm border border-gray-100 opacity-80 pl-4">
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-gray-400 font-bold">2</div>
+                        <div>
+                            <h4 class="font-bold text-gray-700">سالم محمود</h4>
+                            <p class="text-xs text-gray-500">طريق السكة، طرابلس</p>
+                        </div>
+                    </div>
+                    <span class="text-xs font-bold text-gray-400 bg-gray-50 px-3 py-1.5 rounded-xl">15:30 م</span>
+                </div>
+            </div>
+            
+            <div class="bg-white p-4 rounded-3xl shadow-sm border border-gray-100 opacity-80 pl-4">
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-gray-400 font-bold">3</div>
+                        <div>
+                            <h4 class="font-bold text-gray-700">شركة التقنية</h4>
+                            <p class="text-xs text-gray-500">بن عاشور</p>
+                        </div>
+                    </div>
+                    <span class="text-xs font-bold text-gray-400 bg-gray-50 px-3 py-1.5 rounded-xl">16:15 م</span>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <nav class="fixed bottom-0 left-0 w-full glass-nav pb-safe z-50">
+        <div class="flex justify-around items-center h-20 px-6">
+            
+            <button class="relative group">
+                <div class="w-12 h-12 bg-indigo-600 text-white rounded-2xl flex items-center justify-center shadow-lg shadow-indigo-200 transition transform active:scale-95">
+                    <i class="fa-solid fa-list-check text-xl"></i>
+                </div>
+            </button>
+
+            <a href="driver-map.html" class="text-gray-400 hover:text-indigo-600 transition group p-2">
+                <i class="fa-solid fa-map-location-dot text-2xl group-active:scale-90 transition"></i>
+            </a>
+
+            <a href="driver-wallet.html" class="text-gray-400 hover:text-indigo-600 transition group p-2">
+                <i class="fa-solid fa-sack-dollar text-2xl group-active:scale-90 transition"></i>
+            </a>
+
+            <a href="driver-profile.html" class="text-gray-400 hover:text-indigo-600 transition group p-2">
+                <i class="fa-solid fa-user-gear text-2xl group-active:scale-90 transition"></i>
+            </a>
+
+        </div>
+    </nav>
+
+    <div id="deliveryModal" class="fixed inset-0 bg-black/60 z-[60] hidden flex flex-col justify-end backdrop-blur-sm">
+        <div class="bg-white w-full rounded-t-[2.5rem] p-6 animate-slide-up pb-safe">
+            <div class="w-12 h-1.5 bg-gray-200 rounded-full mx-auto mb-6"></div>
+            <h3 class="text-xl font-bold text-gray-800 mb-6 text-center">إثبات التوصيل (POD) 📸</h3>
+            <div class="space-y-4">
+                <button class="w-full border-2 border-dashed border-indigo-200 bg-indigo-50 rounded-2xl p-5 flex flex-col items-center justify-center text-indigo-400 hover:bg-indigo-100 hover:border-indigo-400 transition group">
+                    <i class="fa-solid fa-camera text-3xl mb-2 group-hover:scale-110 transition"></i>
+                    <span class="text-xs font-bold">اضغط لتصوير الشحنة أمام الباب</span>
+                </button>
+                <div>
+                    <label class="block text-xs font-bold text-gray-500 mb-1">اسم المستلم</label>
+                    <input type="text" placeholder="من استلمها؟" class="w-full h-12 px-4 rounded-xl bg-gray-50 border-none focus:ring-2 focus:ring-indigo-500 text-sm font-bold text-gray-700">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-500 mb-1">حالة الدفع</label>
+                    <div class="flex gap-3">
+                        <button class="flex-1 py-3 rounded-xl bg-green-50 text-green-600 border border-green-200 text-xs font-bold flex items-center justify-center gap-2 active:bg-green-100 transition">
+                            <i class="fa-solid fa-money-bill-wave"></i> تم الدفع (كاش)
+                        </button>
+                        <button class="flex-1 py-3 rounded-xl bg-gray-50 text-gray-500 border border-gray-200 text-xs font-bold flex items-center justify-center gap-2 active:bg-gray-100 transition">
+                            <i class="fa-solid fa-credit-card"></i> مدفوع مسبقاً
+                        </button>
+                    </div>
+                </div>
+                <div class="flex gap-3 mt-6 pt-2">
+                    <button onclick="closeDeliveryModal()" class="flex-1 py-3.5 rounded-2xl bg-gray-100 text-gray-600 font-bold text-sm active:scale-95 transition">إلغاء</button>
+                    <button onclick="finishDelivery()" class="flex-[2] py-3.5 rounded-2xl bg-indigo-600 text-white font-bold text-sm shadow-lg shadow-indigo-200 active:scale-95 transition">تأكيد التسليم ✅</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="failureModal" class="fixed inset-0 bg-black/60 z-[60] hidden flex flex-col justify-end backdrop-blur-sm">
+        <div class="bg-white w-full rounded-t-[2.5rem] p-6 animate-slide-up pb-safe">
+            <div class="w-12 h-1.5 bg-gray-200 rounded-full mx-auto mb-6"></div>
+            <h3 class="text-xl font-bold text-gray-800 mb-6 text-center">سبب فشل التوصيل ❌</h3>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-2">السبب الرئيسي</label>
+                    <select id="failureReason" class="w-full h-12 px-4 rounded-xl bg-gray-50 border-none focus:ring-2 focus:ring-red-500 text-sm font-bold text-gray-700">
+                        <option>العميل غير متاح (لم يرد على الهاتف)</option>
+                        <option>العميل طلب التأجيل ليوم آخر</option>
+                        <option>العنوان غير صحيح / غير واضح</option>
+                        <option>العميل رفض استلام الشحنة</option>
+                        <option>مشكلة في المركبة / حادث</option>
+                        <option>أخرى (يرجى التوضيح في الملاحظات)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-2">ملاحظات الكابتن</label>
+                    <textarea rows="2" placeholder="ملاحظات إضافية..." class="w-full p-3 rounded-xl bg-gray-50 border-none focus:ring-2 focus:ring-red-500 text-sm"></textarea>
+                </div>
+                <div class="flex gap-3 mt-6 pt-2">
+                    <button onclick="closeFailureModal()" class="flex-1 py-3.5 rounded-2xl bg-gray-100 text-gray-600 font-bold text-sm active:scale-95 transition">إلغاء</button>
+                    <button onclick="reportFailure()" class="flex-[2] py-3.5 rounded-2xl bg-red-600 text-white font-bold text-sm shadow-lg shadow-red-200 active:scale-95 transition">إرسال تقرير الفشل</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openDeliveryModal() { document.getElementById('deliveryModal').classList.remove('hidden'); }
+        function closeDeliveryModal() { document.getElementById('deliveryModal').classList.add('hidden'); }
+        
+        // وظائف الفشل الجديدة
+        function openFailureModal() { document.getElementById('failureModal').classList.remove('hidden'); }
+        function closeFailureModal() { document.getElementById('failureModal').classList.add('hidden'); }
+
+        function finishDelivery() {
+            // ... (نفس محاكاة التسليم الناجح)
+            alert("تم التسليم بنجاح! (محاكاة) ✅");
+            closeDeliveryModal();
+        }
+
+        function reportFailure() {
+            const reason = document.getElementById('failureReason').value;
+            if (reason) {
+                 alert("تم إرسال تقرير الفشل بنجاح: " + reason);
+                 closeFailureModal();
+            }
+        }
+    </script>
+
+    <style>
+        @keyframes slide-up { from { transform: translateY(100%); } to { transform: translateY(0); } }
+        .animate-slide-up { animation: slide-up 0.3s ease-out forwards; }
+    </style>
+
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+    <title>تم الدفع بنجاح | شحنتي</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body { font-family: 'Tajawal', sans-serif; -webkit-tap-highlight-color: transparent; }
+        ::-webkit-scrollbar { width: 0px; background: transparent; }
+        
+        /* أنيميشن الظهور */
+        .fade-in-up { animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; transform: translateY(20px); }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* تأثير النبض للأيقونة */
+        .pulse-icon { animation: pulse-green 2s infinite; }
+        @keyframes pulse-green { 0% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(74, 222, 128, 0); } 100% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0); } }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans antialiased h-screen flex items-center justify-center p-4">
+
+    <div class="bg-white w-full max-w-md rounded-3xl shadow-2xl overflow-hidden relative fade-in-up">
+        
+        <div class="h-2 bg-gradient-to-r from-green-400 to-green-600 w-full"></div>
+
+        <div class="p-8 md:p-10 text-center">
+            
+            <div class="w-24 h-24 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-6 pulse-icon">
+                <i class="fa-solid fa-check text-5xl text-green-500"></i>
+            </div>
+
+            <h1 class="text-2xl font-bold text-gray-800 mb-2">تم الدفع بنجاح! 🎉</h1>
+            <p class="text-gray-500 text-sm mb-8 leading-relaxed">شكراً لك، تم استلام المبلغ وجاري تجهيز شحنتك للإقلاع فوراً.</p>
+
+            <div class="bg-gray-50 rounded-2xl p-5 mb-8 border border-gray-100 text-right space-y-3">
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-400 text-xs">رقم المعاملة</span>
+                    <span class="font-mono font-bold text-gray-700 text-sm">#TXN-778899</span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-400 text-xs">رقم الشحنة الجديد</span>
+                    <span class="font-mono font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded text-xs">DHL-99887766</span>
+                </div>
+                <div class="border-t border-gray-200 my-2"></div>
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-400 text-xs">المبلغ المدفوع</span>
+                    <span class="font-black text-xl text-green-600">$53.50</span>
+                </div>
+            </div>
+
+            <div class="space-y-3">
+                <a href="shipments.html" class="block w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 rounded-xl transition shadow-lg shadow-blue-200 active:scale-95 transform">
+                    تتبع الشحنة الآن
+                </a>
+                
+                <a href="dashboard.html" class="block w-full bg-white border border-gray-200 text-gray-600 font-bold py-3.5 rounded-xl hover:bg-gray-50 transition active:scale-95 transform">
+                    العودة للرئيسية
+                </a>
+            </div>
+
+            <p class="mt-8 text-[10px] text-gray-400">تم إرسال إيصال الدفع إلى بريدك الإلكتروني.</p>
+        </div>
+    </div>
+
+</body>
+</html>

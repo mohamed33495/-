@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#0f172a">
+    <title>المالية | Super Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Tajawal', sans-serif; -webkit-tap-highlight-color: transparent; }
+        .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+        ::-webkit-scrollbar { width: 0px; background: transparent; }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800 h-screen flex flex-col overflow-hidden selection:bg-slate-300">
+
+    <div class="fixed top-0 left-0 w-full h-48 bg-slate-900 rounded-b-[2.5rem] z-0 shadow-lg"></div>
+
+    <div class="relative z-10 flex-1 overflow-y-auto pb-28 no-scrollbar">
+        
+        <header class="px-6 pt-10 pb-4 text-white flex justify-between items-center">
+            <div>
+                <h1 class="text-2xl font-bold">التقارير المالية 📈</h1>
+                <p class="text-slate-400 text-xs mt-1">ملخص الأرباح والمصروفات</p>
+            </div>
+            <button class="text-xs bg-slate-800 border border-slate-600 px-3 py-1.5 rounded-lg hover:bg-slate-700">تصدير PDF</button>
+        </header>
+
+        <main class="px-4 space-y-6">
+
+            <div class="bg-slate-800 p-6 rounded-3xl shadow-xl relative overflow-hidden text-white">
+                <div class="absolute right-0 top-0 w-32 h-32 bg-green-500/10 rounded-full blur-2xl -mr-10 -mt-10"></div>
+                
+                <p class="text-slate-400 text-xs font-bold mb-1">صافي الربح (نوفمبر)</p>
+                <h2 class="text-4xl font-black tracking-tight mb-4">$12,450</h2>
+                
+                <div class="flex gap-4">
+                    <div>
+                        <span class="text-[10px] text-slate-400 block">إيرادات</span>
+                        <span class="text-green-400 font-bold text-sm">+$42k</span>
+                    </div>
+                    <div class="w-px bg-slate-600"></div>
+                    <div>
+                        <span class="text-[10px] text-slate-400 block">مصروفات</span>
+                        <span class="text-red-400 font-bold text-sm">-$29k</span>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="font-bold text-gray-700 text-sm mb-3 px-2">أحدث الفواتير</h3>
+                <div class="bg-white rounded-3xl shadow-sm border border-gray-200 overflow-hidden divide-y divide-gray-50">
+                    
+                    <div class="p-4 flex justify-between items-center">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-green-50 text-green-600 rounded-full flex items-center justify-center"><i class="fa-solid fa-arrow-down"></i></div>
+                            <div>
+                                <h4 class="font-bold text-sm">إيداع عميل</h4>
+                                <p class="text-[10px] text-gray-400">#INV-992 • Mohamed Ali</p>
+                            </div>
+                        </div>
+                        <span class="font-bold text-green-600 text-sm">+$150.00</span>
+                    </div>
+
+                    <div class="p-4 flex justify-between items-center">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-red-50 text-red-600 rounded-full flex items-center justify-center"><i class="fa-solid fa-plane-departure"></i></div>
+                            <div>
+                                <h4 class="font-bold text-sm">دفع لشركة DHL</h4>
+                                <p class="text-[10px] text-gray-400">#PO-5541 • شحن جوي</p>
+                            </div>
+                        </div>
+                        <span class="font-bold text-red-600 text-sm">-$2,100.00</span>
+                    </div>
+
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <nav class="fixed bottom-6 left-4 right-4 bg-slate-900/90 backdrop-blur-xl border border-white/10 shadow-2xl rounded-2xl flex justify-around items-center py-3 z-50">
+        <a href="super-admin.html" class="flex flex-col items-center gap-1 text-slate-400 hover:text-white transition group"><i class="fa-solid fa-gauge-high text-xl group-active:scale-90 transition"></i></a>
+        <a href="super-admin-employees.html" class="flex flex-col items-center gap-1 text-slate-400 hover:text-white transition group"><i class="fa-solid fa-users-gear text-xl group-active:scale-90 transition"></i></a>
+        <div class="relative -top-8"><button class="bg-green-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg shadow-green-500/40 border-4 border-gray-100 transform active:scale-90 transition"><i class="fa-solid fa-plus text-2xl"></i></button></div>
+        <a href="#" class="flex flex-col items-center gap-1 text-white transition group relative">
+            <i class="fa-solid fa-file-invoice-dollar text-xl"></i>
+            <span class="absolute -bottom-2 w-1 h-1 bg-white rounded-full"></span>
+        </a>
+        <a href="super-admin-menu.html" class="flex flex-col items-center gap-1 text-slate-400 hover:text-white transition group"><i class="fa-solid fa-bars text-xl group-active:scale-90 transition"></i></a>
+    </nav>
+
+</body>
+</html>

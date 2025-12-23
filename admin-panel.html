@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#334155">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>العمليات | Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Tajawal', sans-serif; -webkit-tap-highlight-color: transparent; }
+        ::-webkit-scrollbar { width: 0px; background: transparent; }
+        .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800 h-screen flex flex-col overflow-hidden selection:bg-slate-300">
+
+    <div class="fixed top-0 left-0 w-full h-48 bg-slate-700 rounded-b-[2.5rem] z-0 shadow-lg"></div>
+
+    <div class="relative z-10 flex-1 overflow-y-auto pb-28 no-scrollbar">
+        
+        <header class="px-6 pt-10 pb-6 text-white flex justify-between items-start">
+            <div class="flex items-center gap-3">
+                <img src="https://ui-avatars.com/api/?name=Ops+Manager&background=94a3b8&color=fff" class="w-12 h-12 rounded-full border-2 border-slate-400 shadow-md">
+                <div>
+                    <p class="text-slate-300 text-xs font-bold mb-0.5">إدارة العمليات 🛠️</p>
+                    <h1 class="text-lg font-bold">المشرف خالد</h1>
+                </div>
+            </div>
+            <div class="bg-white/10 p-2 rounded-xl backdrop-blur-md border border-white/10 hover:bg-red-500 transition cursor-pointer">
+                <i class="fa-solid fa-bell text-white"></i>
+                <span class="absolute top-2 left-2 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-slate-700"></span>
+            </div>
+        </header>
+
+        <main class="px-4 space-y-5 -mt-2">
+
+            <div class="grid grid-cols-3 gap-3 text-center">
+                <div class="bg-white p-3 rounded-2xl shadow-sm border border-slate-100">
+                    <p class="text-[10px] text-slate-400 font-bold">بانتظار الشحن</p>
+                    <p class="text-xl font-black text-slate-800">42</p>
+                </div>
+                <div class="bg-white p-3 rounded-2xl shadow-sm border border-slate-100">
+                    <p class="text-[10px] text-slate-400 font-bold">مع السائقين</p>
+                    <p class="text-xl font-black text-blue-600">15</p>
+                </div>
+                <div class="bg-white p-3 rounded-2xl shadow-sm border border-slate-100">
+                    <p class="text-[10px] text-slate-400 font-bold">مشاكل</p>
+                    <p class="text-xl font-black text-red-500">3</p>
+                </div>
+            </div>
+
+            <div class="bg-slate-800 p-5 rounded-3xl shadow-xl border border-slate-600 relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full blur-2xl -mr-10 -mt-10"></div>
+                
+                <h3 class="font-bold text-white mb-4 flex items-center gap-2 text-sm">
+                    <i class="fa-solid fa-network-wired text-blue-400"></i> توزيع الشحنات
+                </h3>
+                
+                <div class="flex items-center justify-between bg-slate-700/50 p-3 rounded-xl border border-slate-600 mb-3">
+                    <div>
+                        <p class="text-xs text-slate-300 font-bold">منطقة طرابلس المركز</p>
+                        <p class="text-[10px] text-slate-500">12 شحنة غير موزعة</p>
+                    </div>
+                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg text-xs font-bold hover:bg-blue-500 transition">تعيين سائق</button>
+                </div>
+
+                <div class="flex items-center justify-between bg-slate-700/50 p-3 rounded-xl border border-slate-600">
+                    <div>
+                        <p class="text-xs text-slate-300 font-bold">منطقة بن عاشور</p>
+                        <p class="text-[10px] text-slate-500">5 شحنات غير موزعة</p>
+                    </div>
+                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg text-xs font-bold hover:bg-blue-500 transition">تعيين سائق</button>
+                </div>
+            </div>
+
+            <div>
+                <div class="flex justify-between items-center mb-3 px-2">
+                    <h3 class="font-bold text-gray-700 text-sm">مراقبة حية</h3>
+                    <a href="admin-shipments.html" class="text-xs text-blue-600 font-bold">عرض الكل</a>
+                </div>
+                
+                <div class="space-y-3">
+                    <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-green-50 text-green-600 flex items-center justify-center"><i class="fa-solid fa-check"></i></div>
+                            <div>
+                                <p class="text-xs font-bold text-gray-800">تم التسليم بنجاح</p>
+                                <p class="text-[10px] text-gray-400">كابتن أحمد • TRK-9988</p>
+                            </div>
+                        </div>
+                        <span class="text-[10px] text-gray-400">الآن</span>
+                    </div>
+
+                    <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-red-50 text-red-600 flex items-center justify-center"><i class="fa-solid fa-xmark"></i></div>
+                            <div>
+                                <p class="text-xs font-bold text-gray-800">فشل التسليم (لم يرد)</p>
+                                <p class="text-[10px] text-gray-400">كابتن علي • DHL-5541</p>
+                            </div>
+                        </div>
+                        <span class="text-[10px] text-gray-400">منذ 5 د</span>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <nav class="fixed bottom-6 left-4 right-4 bg-slate-800/95 backdrop-blur-xl border border-white/10 shadow-2xl rounded-2xl flex justify-around items-center py-3 z-50">
+        
+        <a href="#" class="flex flex-col items-center gap-1 text-white transition group relative">
+            <i class="fa-solid fa-gauge-high text-xl"></i>
+            <span class="absolute -bottom-2 w-1 h-1 bg-white rounded-full"></span>
+        </a>
+
+        <a href="admin-shipments.html" class="flex flex-col items-center gap-1 text-slate-400 hover:text-white transition group">
+            <i class="fa-solid fa-boxes-stacked text-xl group-active:scale-90 transition"></i>
+        </a>
+
+        <div class="relative -top-8">
+            <button class="bg-blue-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg shadow-blue-500/40 border-4 border-gray-100 transform active:scale-90 transition">
+                <i class="fa-solid fa-plus text-2xl"></i>
+            </button>
+        </div>
+
+        <a href="admin-drivers.html" class="flex flex-col items-center gap-1 text-slate-400 hover:text-white transition group">
+            <i class="fa-solid fa-motorcycle text-xl group-active:scale-90 transition"></i>
+        </a>
+
+        <a href="admin-menu.html" class="flex flex-col items-center gap-1 text-slate-400 hover:text-white transition group">
+            <i class="fa-solid fa-bars text-xl group-active:scale-90 transition"></i>
+        </a>
+
+    </nav>
+
+</body>
+</html>

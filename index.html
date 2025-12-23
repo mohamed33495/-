@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#1e3a8a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>منصة الشحن العالمية | Global Cargo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Tajawal', sans-serif; -webkit-tap-highlight-color: transparent; }
+        ::-webkit-scrollbar { width: 0px; background: transparent; }
+        .mobile-menu { transition: max-height 0.3s ease-in-out; max-height: 0; overflow: hidden; }
+        .mobile-menu.open { max-height: 400px; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <nav class="bg-white shadow-md fixed w-full z-50 transition-all duration-300">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-paper-plane text-blue-600 text-2xl md:text-3xl"></i>
+                    <span class="text-xl md:text-2xl font-bold text-gray-800">شحنتي <span class="text-blue-600">Global</span></span>
+                </div>
+                
+                <div class="hidden md:flex gap-8 text-lg font-medium">
+                    <a href="#" class="text-blue-600 font-bold">الرئيسية</a>
+                    <a href="pricing.html" class="hover:text-blue-600 transition">الأسعار</a>
+                    <a href="how-it-works.html" class="hover:text-blue-600 transition">كيف نعمل؟</a>
+                </div>
+
+                <div class="hidden md:flex gap-4">
+                    <a href="login.html" class="px-5 py-2 text-blue-600 font-bold hover:bg-blue-50 rounded-lg transition">تسجيل الدخول</a>
+                    <a href="register.html" class="px-5 py-2 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 shadow-lg transition">حساب جديد</a>
+                </div>
+
+                <button onclick="toggleMenu()" class="md:hidden text-gray-600 focus:outline-none">
+                    <i class="fa-solid fa-bars text-2xl"></i>
+                </button>
+            </div>
+
+            <div id="mobileMenu" class="mobile-menu md:hidden flex flex-col gap-4 mt-4 border-t border-gray-100 pt-4">
+                <a href="#" class="text-blue-600 font-bold px-2">الرئيسية</a>
+                <a href="pricing.html" class="text-gray-600 hover:text-blue-600 px-2 transition">الأسعار</a>
+                <a href="how-it-works.html" class="text-gray-600 hover:text-blue-600 px-2 transition">كيف نعمل؟</a>
+                <div class="flex gap-3 mt-2 pb-2">
+                    <a href="login.html" class="flex-1 text-center px-4 py-2 border border-blue-600 text-blue-600 font-bold rounded-lg">دخول</a>
+                    <a href="register.html" class="flex-1 text-center px-4 py-2 bg-blue-600 text-white font-bold rounded-lg shadow">تسجيل</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="relative bg-gradient-to-br from-blue-900 via-blue-800 to-blue-600 h-[100dvh] md:h-screen flex items-center justify-center text-white overflow-hidden">
+        <div class="absolute inset-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')] bg-cover bg-center"></div>
+        <div class="relative container mx-auto px-6 text-center z-10 mt-10 md:mt-16">
+            <span class="inline-block py-1 px-3 rounded-full bg-blue-800/50 border border-blue-400 text-blue-200 text-xs md:text-sm mb-4 backdrop-blur-sm animate-pulse">
+                🚀 الشحن الأسرع في المنطقة
+            </span>
+            <h1 class="text-4xl md:text-6xl font-black mb-6 leading-tight drop-shadow-lg">
+                اشحن من العالم <br> <span class="text-yellow-400">إلى باب منزلك</span>
+            </h1>
+            <p class="text-base md:text-2xl mb-10 text-blue-100 max-w-2xl mx-auto leading-relaxed">
+                نوفر لك عناوين حقيقية في الصين، أمريكا، وتركيا. استلم، جمّع، واشحن بأفضل الأسعار.
+            </p>
+            <div class="flex justify-center gap-4">
+                <a href="register.html" class="bg-yellow-500 hover:bg-yellow-400 text-blue-900 font-bold py-3 px-8 rounded-full shadow-lg transition transform hover:scale-105 active:scale-95">
+                    ابدأ الآن مجاناً
+                </a>
+                <a href="how-it-works.html" class="bg-white/10 hover:bg-white/20 border border-white text-white font-bold py-3 px-8 rounded-full shadow-lg transition backdrop-blur-sm active:scale-95">
+                    اعرف المزيد
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <section class="py-16 md:py-20 container mx-auto px-6">
+        <div class="text-center mb-12 md:mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-gray-800">خدمات شحن متكاملة</h2>
+            <div class="w-20 h-1.5 bg-blue-600 mx-auto rounded-full mb-4"></div>
+            <p class="text-gray-600 text-base md:text-lg">نختار لك أفضل الطرق لتوصيل شحنتك بأمان وسرعة</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10">
+            <div class="bg-white p-8 rounded-3xl shadow-lg hover:shadow-2xl transition border-t-4 border-blue-500 text-center group active:scale-95 duration-200">
+                <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-blue-600 transition duration-300">
+                    <i class="fa-solid fa-plane-up text-3xl text-blue-600 group-hover:text-white"></i>
+                </div>
+                <h3 class="text-xl md:text-2xl font-bold mb-3">شحن جوي سريع</h3>
+                <p class="text-gray-500 text-sm md:text-base">الأسرع للطرود الشخصية والمستعجلة. تصلك خلال 3-5 أيام عمل.</p>
+            </div>
+            <div class="bg-white p-8 rounded-3xl shadow-lg hover:shadow-2xl transition border-t-4 border-teal-500 text-center group active:scale-95 duration-200">
+                <div class="w-20 h-20 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-teal-600 transition duration-300">
+                    <i class="fa-solid fa-ship text-3xl text-teal-600 group-hover:text-white"></i>
+                </div>
+                <h3 class="text-xl md:text-2xl font-bold mb-3">شحن بحري اقتصادي</h3>
+                <p class="text-gray-500 text-sm md:text-base">الحل الأمثل للشحنات الثقيلة والتجارية بأقل تكلفة ممكنة.</p>
+            </div>
+            <div class="bg-white p-8 rounded-3xl shadow-lg hover:shadow-2xl transition border-t-4 border-yellow-500 text-center group active:scale-95 duration-200">
+                <div class="w-20 h-20 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-yellow-600 transition duration-300">
+                    <i class="fa-solid fa-truck-fast text-3xl text-yellow-600 group-hover:text-white"></i>
+                </div>
+                <h3 class="text-xl md:text-2xl font-bold mb-3">شحن بري دولي</h3>
+                <p class="text-gray-500 text-sm md:text-base">شبكة نقل بري تربط الدول المجاورة بأسطول حديث ومؤمن.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-900 text-white py-10">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-gray-400 text-sm">© 2025 جميع الحقوق محفوظة لمنصة شحنتي Global Cargo.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('open');
+        }
+    </script>
+</body>
+</html>

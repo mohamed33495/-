@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#334155">
+    <title>الشحنات | Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Tajawal', sans-serif; -webkit-tap-highlight-color: transparent; }
+        .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800 h-screen flex flex-col overflow-hidden selection:bg-slate-300">
+
+    <div class="fixed top-0 left-0 w-full h-40 bg-slate-700 rounded-b-[2.5rem] z-0 shadow-lg"></div>
+
+    <div class="relative z-10 flex-1 overflow-y-auto pb-28 no-scrollbar">
+        
+        <header class="px-6 pt-10 pb-4 text-white">
+            <h1 class="text-2xl font-bold">سجل الشحنات 📦</h1>
+            <div class="relative mt-4">
+                <input type="text" placeholder="بحث برقم التتبع، اسم العميل..." class="w-full h-12 px-4 rounded-xl bg-slate-600/50 border border-slate-500/50 text-white placeholder-slate-300 focus:bg-slate-600 transition outline-none text-sm">
+                <i class="fa-solid fa-magnifying-glass absolute left-4 top-4 text-slate-300"></i>
+            </div>
+        </header>
+
+        <main class="px-4 mt-4 space-y-3">
+
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 group active:scale-[0.99] transition">
+                <div class="flex justify-between items-start mb-3">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center font-bold text-lg">
+                            <i class="fa-solid fa-box"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-sm text-gray-800">TRK-998822</h4>
+                            <p class="text-[10px] text-gray-400 font-mono">Mohamed Ali • LY-10234</p>
+                        </div>
+                    </div>
+                    <button class="text-gray-400 hover:text-blue-600"><i class="fa-solid fa-pen-to-square"></i></button>
+                </div>
+                
+                <div class="flex items-center justify-between text-xs bg-gray-50 p-2 rounded-lg border border-gray-100">
+                    <span class="text-gray-500">الحالة الحالية:</span>
+                    <span class="font-bold text-green-600">في المستودع (الصين)</span>
+                </div>
+
+                <div class="grid grid-cols-2 gap-2 mt-3">
+                    <button class="py-2 bg-slate-800 text-white rounded-lg text-xs font-bold">طباعة البوليصة</button>
+                    <button class="py-2 border border-slate-200 text-slate-600 rounded-lg text-xs font-bold">تغيير الحالة</button>
+                </div>
+            </div>
+
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 group active:scale-[0.99] transition">
+                <div class="flex justify-between items-start mb-3">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-orange-50 text-orange-600 rounded-xl flex items-center justify-center font-bold text-lg">
+                            <i class="fa-solid fa-truck-fast"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-sm text-gray-800">DHL-5544</h4>
+                            <p class="text-[10px] text-gray-400 font-mono">Sara Smith • LY-5050</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between text-xs bg-gray-50 p-2 rounded-lg border border-gray-100">
+                    <span class="text-gray-500">الحالة الحالية:</span>
+                    <span class="font-bold text-orange-600">مع السائق (أحمد)</span>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <nav class="fixed bottom-6 left-4 right-4 bg-slate-800/95 backdrop-blur-xl border border-white/10 shadow-2xl rounded-2xl flex justify-around items-center py-3 z-50">
+        <a href="admin-panel.html" class="flex flex-col items-center gap-1 text-slate-400 hover:text-white transition group"><i class="fa-solid fa-gauge-high text-xl group-active:scale-90 transition"></i></a>
+        <a href="#" class="flex flex-col items-center gap-1 text-white transition group relative">
+            <i class="fa-solid fa-boxes-stacked text-xl"></i>
+            <span class="absolute -bottom-2 w-1 h-1 bg-white rounded-full"></span>
+        </a>
+        <div class="relative -top-8"><button class="bg-blue-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg shadow-blue-500/40 border-4 border-gray-100 transform active:scale-90 transition"><i class="fa-solid fa-plus text-2xl"></i></button></div>
+        <a href="admin-drivers.html" class="flex flex-col items-center gap-1 text-slate-400 hover:text-white transition group"><i class="fa-solid fa-motorcycle text-xl group-active:scale-90 transition"></i></a>
+        <a href="admin-menu.html" class="flex flex-col items-center gap-1 text-slate-400 hover:text-white transition group"><i class="fa-solid fa-bars text-xl group-active:scale-90 transition"></i></a>
+    </nav>
+
+</body>
+</html>
