@@ -21,9 +21,10 @@ CREATE TABLE USER (
     email VARCHAR(150) UNIQUE NOT NULL,
     password_hash VARCHAR(255) NOT NULL,
     phone_number VARCHAR(20),
-    role ENUM('Client', 'Driver', 'Admin', 'SuperAdmin', 'Warehouse', 'Support') NOT NULL,
+    role ENUM('Client', 'Driver', 'Admin', 'SuperAdmin', 'Warehouse', 'Support', 'Accountant') NOT NULL,
     wallet_balance DECIMAL(10, 2) DEFAULT 0.00,
     kyc_status VARCHAR(20) DEFAULT 'Pending',
+    is_frozen BOOLEAN DEFAULT FALSE,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -143,6 +144,39 @@ CREATE TABLE INVOICES (
     FOREIGN KEY (client_id) REFERENCES USER(user_id) ON DELETE RESTRICT
 );
 
--- 3. بيانات أولية (Optional Seed Data)
+-- *********************************************************************************
+-- 2.10 جدول إعدادات النظام (SYSTEM_SETTINGS)
+-- *********************************************************************************
+CREATE TABLE SYSTEM_SETTINGS (
+    setting_key VARCHAR(50) PRIMARY KEY,
+    setting_value VARCHAR(255) NOT NULL
+);
+
+-- *********************************************************************************
+-- 2.11 جدول أسعار الشحن (SHIPPING_RATES)
+-- *********************************************************************************
+CREATE TABLE SHIPPING_RATES (
+    rate_id INT PRIMARY KEY AUTO_INCREMENT,
+    country_name VARCHAR(50) NOT NULL,
+    shipping_type VARCHAR(20) NOT NULL, -- e.g., 'Air', 'Sea'
+    rate_per_kg DECIMAL(10, 2) NOT NULL,
+    last_updated DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- 3. بيانات أولية (Seed Data)
 INSERT INTO USER (full_name, email, password_hash, phone_number, role, suite_id, kyc_status) 
 VALUES ('System Admin', 'admin@app.com', 'admin123', '0910000000', 'Admin', 'ADM-001', 'Active');
+
+INSERT INTO SYSTEM_SETTINGS (setting_key, setting_value) VALUES 
+('exchange_rate', '5.15');
+
+
+INSERT INTO SHIPPING_RATES (country_name, shipping_type, rate_per_kg) VALUES 
+('China', 'Air', 12.00),
+('China', 'Sea', 350.00), -- Per CBM usually, but using rate column for simplicity
+('USA', 'Air', 15.00),
+('USA', 'Sea', 4.50),
+('Turkey', 'Air', 6.00),
+('Turkey', 'Sea', 150.00),
+('Dubai', 'Air', 10.00),
+('Dubai', 'Sea', 4.50);

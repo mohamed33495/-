@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -7,90 +8,357 @@
     <title>المالية | Super Admin</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { font-family: 'Tajawal', sans-serif; -webkit-tap-highlight-color: transparent; }
-        .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
-        ::-webkit-scrollbar { width: 0px; background: transparent; }
+        body {
+            font-family: 'Tajawal', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .pb-safe {
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+
+        ::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+        }
     </style>
 </head>
+
 <body class="bg-gray-100 text-gray-800 h-screen flex flex-col overflow-hidden selection:bg-slate-300">
 
     <div class="fixed top-0 left-0 w-full h-48 bg-slate-900 rounded-b-[2.5rem] z-0 shadow-lg"></div>
 
     <div class="relative z-10 flex-1 overflow-y-auto pb-28 no-scrollbar">
-        
+
         <header class="px-6 pt-10 pb-4 text-white flex justify-between items-center">
             <div>
                 <h1 class="text-2xl font-bold">التقارير المالية 📈</h1>
                 <p class="text-slate-400 text-xs mt-1">ملخص الأرباح والمصروفات</p>
             </div>
-            <button class="text-xs bg-slate-800 border border-slate-600 px-3 py-1.5 rounded-lg hover:bg-slate-700">تصدير PDF</button>
+            <button class="text-xs bg-slate-800 border border-slate-600 px-3 py-1.5 rounded-lg hover:bg-slate-700">تصدير
+                PDF</button>
         </header>
 
         <main class="px-4 space-y-6">
 
             <div class="bg-slate-800 p-6 rounded-3xl shadow-xl relative overflow-hidden text-white">
                 <div class="absolute right-0 top-0 w-32 h-32 bg-green-500/10 rounded-full blur-2xl -mr-10 -mt-10"></div>
-                
-                <p class="text-slate-400 text-xs font-bold mb-1">صافي الربح (نوفمبر)</p>
-                <h2 class="text-4xl font-black tracking-tight mb-4">$12,450</h2>
-                
+
+                <p class="text-slate-400 text-xs font-bold mb-1">صافي الربح (الكلي)</p>
+                <h2 class="text-4xl font-black tracking-tight mb-4" id="netProfit">$0.00</h2>
+
                 <div class="flex gap-4">
                     <div>
                         <span class="text-[10px] text-slate-400 block">إيرادات</span>
-                        <span class="text-green-400 font-bold text-sm">+$42k</span>
+                        <span class="text-green-400 font-bold text-sm" id="totalRevenue">+$0k</span>
                     </div>
                     <div class="w-px bg-slate-600"></div>
                     <div>
                         <span class="text-[10px] text-slate-400 block">مصروفات</span>
-                        <span class="text-red-400 font-bold text-sm">-$29k</span>
+                        <span class="text-red-400 font-bold text-sm" id="totalExpenses">-$0k</span>
                     </div>
                 </div>
             </div>
 
             <div>
-                <h3 class="font-bold text-gray-700 text-sm mb-3 px-2">أحدث الفواتير</h3>
-                <div class="bg-white rounded-3xl shadow-sm border border-gray-200 overflow-hidden divide-y divide-gray-50">
-                    
-                    <div class="p-4 flex justify-between items-center">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 bg-green-50 text-green-600 rounded-full flex items-center justify-center"><i class="fa-solid fa-arrow-down"></i></div>
-                            <div>
-                                <h4 class="font-bold text-sm">إيداع عميل</h4>
-                                <p class="text-[10px] text-gray-400">#INV-992 • Mohamed Ali</p>
-                            </div>
-                        </div>
-                        <span class="font-bold text-green-600 text-sm">+$150.00</span>
+                <h3 class="font-bold text-gray-700 text-sm mb-3 px-2">أحدث العمليات المالية</h3>
+                <div id="activityList"
+                    class="bg-white rounded-3xl shadow-sm border border-gray-200 overflow-hidden divide-y divide-gray-50 min-h-[200px]">
+                    <div class="flex flex-col items-center justify-center h-48 text-gray-400">
+                        <i class="fa-solid fa-spinner fa-spin text-2xl mb-2"></i>
+                        <p class="text-xs">جاري تحميل البيانات...</p>
                     </div>
+                </div>
+            </div>
 
-                    <div class="p-4 flex justify-between items-center">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 bg-red-50 text-red-600 rounded-full flex items-center justify-center"><i class="fa-solid fa-plane-departure"></i></div>
-                            <div>
-                                <h4 class="font-bold text-sm">دفع لشركة DHL</h4>
-                                <p class="text-[10px] text-gray-400">#PO-5541 • شحن جوي</p>
-                            </div>
-                        </div>
-                        <span class="font-bold text-red-600 text-sm">-$2,100.00</span>
-                    </div>
-
+            <div class="mt-6">
+                <h3 class="font-bold text-gray-700 text-sm mb-3 px-2">تسليم عهد السائقين (Handovers)</h3>
+                <div id="handoverList"
+                    class="bg-indigo-50 rounded-3xl shadow-sm border border-indigo-100 overflow-hidden divide-y divide-indigo-100 min-h-[100px]">
+                    <div class="p-4 text-center text-xs text-indigo-400">جاري التحميل...</div>
                 </div>
             </div>
 
         </main>
     </div>
 
-    <nav class="fixed bottom-6 left-4 right-4 bg-slate-900/90 backdrop-blur-xl border border-white/10 shadow-2xl rounded-2xl flex justify-around items-center py-3 z-50">
-        <a href="super-admin.html" class="flex flex-col items-center gap-1 text-slate-400 hover:text-white transition group"><i class="fa-solid fa-gauge-high text-xl group-active:scale-90 transition"></i></a>
-        <a href="super-admin-employees.html" class="flex flex-col items-center gap-1 text-slate-400 hover:text-white transition group"><i class="fa-solid fa-users-gear text-xl group-active:scale-90 transition"></i></a>
-        <div class="relative -top-8"><button class="bg-green-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg shadow-green-500/40 border-4 border-gray-100 transform active:scale-90 transition"><i class="fa-solid fa-plus text-2xl"></i></button></div>
+    <!-- Transaction Details Modal -->
+    <div id="detailsModal" class="fixed inset-0 bg-black/60 z-[60] hidden flex flex-col justify-end backdrop-blur-sm">
+        <div class="bg-white w-full rounded-t-[2.5rem] p-6 animate-slide-up pb-safe">
+            <div class="w-12 h-1.5 bg-gray-200 rounded-full mx-auto mb-6"></div>
+
+            <div class="text-center mb-6">
+                <div id="modalIcon"
+                    class="w-16 h-16 rounded-full flex items-center justify-center text-3xl mx-auto mb-3 shadow-sm">
+                </div>
+                <h3 id="modalTitle" class="text-xl font-bold text-gray-800"></h3>
+                <p id="modalRef" class="text-xs text-gray-400 font-mono mt-1"></p>
+            </div>
+
+            <div class="bg-slate-50 rounded-2xl p-4 space-y-4 mb-6">
+                <div class="flex justify-between items-center">
+                    <span class="text-xs text-gray-500 font-bold">المبلغ</span>
+                    <span id="modalAmount" class="text-lg font-black font-mono"></span>
+                </div>
+                <div class="w-full h-px bg-gray-200"></div>
+                <div class="flex justify-between items-center">
+                    <span class="text-xs text-gray-500 font-bold">التاريخ</span>
+                    <span id="modalDate" class="text-sm font-bold text-gray-700"></span>
+                </div>
+                <div class="w-full h-px bg-gray-200"></div>
+                <div class="flex justify-between items-center">
+                    <span class="text-xs text-gray-500 font-bold">العميل</span>
+                    <span id="modalClient" class="text-sm font-bold text-gray-700"></span>
+                </div>
+                <div class="w-full h-px bg-gray-200"></div>
+                <div class="flex justify-between items-center">
+                    <span class="text-xs text-gray-500 font-bold">الحالة</span>
+                    <span id="modalStatus" class="text-xs font-bold px-2 py-1 rounded-lg"></span>
+                </div>
+            </div>
+
+            <div class="flex gap-3">
+                <button onclick="closeModal()"
+                    class="flex-1 py-4 rounded-2xl bg-gray-100 text-gray-600 font-bold active:scale-95 transition">إغلاق</button>
+                <button onclick="downloadPDF()"
+                    class="flex-[2] py-4 rounded-2xl bg-slate-900 text-white font-bold shadow-lg active:scale-95 transition flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-file-pdf"></i> تحميل PDF
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <nav
+        class="fixed bottom-6 left-4 right-4 bg-slate-900/90 backdrop-blur-xl border border-white/10 shadow-2xl rounded-2xl flex justify-around items-center py-3 z-50">
+        <a href="super-admin.html"
+            class="flex flex-col items-center gap-1 text-slate-400 hover:text-white transition group"><i
+                class="fa-solid fa-gauge-high text-xl group-active:scale-90 transition"></i></a>
+        <a href="super-admin-employees.html"
+            class="flex flex-col items-center gap-1 text-slate-400 hover:text-white transition group"><i
+                class="fa-solid fa-users-gear text-xl group-active:scale-90 transition"></i></a>
+        <div class="relative -top-8">
+            <a href="super-admin-add-country.html"
+                class="bg-green-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg shadow-green-500/40 border-4 border-gray-100 transform active:scale-90 transition">
+                <i class="fa-solid fa-plus text-2xl"></i>
+            </a>
+        </div>
         <a href="#" class="flex flex-col items-center gap-1 text-white transition group relative">
             <i class="fa-solid fa-file-invoice-dollar text-xl"></i>
             <span class="absolute -bottom-2 w-1 h-1 bg-white rounded-full"></span>
         </a>
-        <a href="super-admin-menu.html" class="flex flex-col items-center gap-1 text-slate-400 hover:text-white transition group"><i class="fa-solid fa-bars text-xl group-active:scale-90 transition"></i></a>
+        <a href="super-admin-menu.html"
+            class="flex flex-col items-center gap-1 text-slate-400 hover:text-white transition group"><i
+                class="fa-solid fa-bars text-xl group-active:scale-90 transition"></i></a>
     </nav>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            checkUserRole();
+            fetchFinanceData();
+        });
+
+        function checkUserRole() {
+            const role = localStorage.getItem('userRole');
+            if (role === 'accountant') {
+                const nav = document.querySelector('nav');
+                nav.innerHTML = `
+                    <a href="#" class="flex flex-col items-center gap-1 text-white transition group relative">
+                        <i class="fa-solid fa-file-invoice-dollar text-xl"></i>
+                        <span class="absolute -bottom-2 w-1 h-1 bg-white rounded-full"></span>
+                    </a>
+                    <a href="admin-menu.html" class="flex flex-col items-center gap-1 text-slate-400 hover:text-white transition group">
+                        <i class="fa-solid fa-bars text-xl group-active:scale-90 transition"></i>
+                    </a>
+                `;
+                nav.classList.remove('justify-around');
+                nav.classList.add('justify-center', 'gap-12');
+            }
+        }
+
+        fetchFinanceData();
+        fetchHandovers();
+        });
+
+        // ... checkUserRole ...
+
+        async function fetchFinanceData() {
+            try {
+                const res = await fetch('http://localhost:3000/api/admin/finance/activity');
+                const data = await res.json();
+
+                if (data.success) {
+                    renderSummary(data.totals);
+                    renderActivity(data.activity);
+                }
+            } catch (e) {
+                console.error('Finance Load Error', e);
+                document.getElementById('activityList').innerHTML = '<p class="text-center p-10 text-red-400">فشل في تحميل البيانات</p>';
+            }
+        }
+
+        async function fetchHandovers() {
+            try {
+                const res = await fetch('http://localhost:3000/api/admin/finance/custody');
+                const data = await res.json();
+                if (data.success) {
+                    renderHandovers(data.handovers);
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        }
+
+        function renderHandovers(list) {
+            const container = document.getElementById('handoverList');
+            if (list.length === 0) {
+                container.innerHTML = '<div class="p-4 text-center text-xs text-indigo-400">لا توجد عمليات تسليم حديثة</div>';
+                return;
+            }
+
+            container.innerHTML = list.map(item => `
+                <div class="p-4 flex justify-between items-center hover:bg-indigo-100/50 transition">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 bg-indigo-200 text-indigo-700 rounded-full flex items-center justify-center text-sm">
+                            <i class="fa-solid fa-hand-holding-hand"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-xs text-gray-800">${item.driver_name}</h4>
+                            <p class="text-[9px] text-gray-500 font-mono">${new Date(item.transaction_date).toLocaleString()}</p>
+                        </div>
+                    </div>
+                    <span class="font-bold text-sm text-indigo-700">${parseFloat(item.amount).toFixed(2)} د.ل</span>
+                </div>
+            `).join('');
+        }
+
+        function renderSummary(totals) {
+            document.getElementById('netProfit').innerText = '$' + totals.net.toLocaleString();
+            document.getElementById('totalRevenue').innerText = '+$' + (totals.revenue / 1000).toFixed(1) + 'k';
+            document.getElementById('totalExpenses').innerText = '-$' + (totals.expenses / 1000).toFixed(1) + 'k';
+        }
+
+        function renderActivity(list) {
+            const container = document.getElementById('activityList');
+
+            if (list.length === 0) {
+                container.innerHTML = '<div class="flex flex-col items-center justify-center h-48 text-gray-400"><i class="fa-regular fa-folder-open text-2xl mb-2"></i><p class="text-xs">لا توجد عمليات مالية حديثة</p></div>';
+                return;
+            }
+
+            container.innerHTML = list.map(item => {
+                const isIncome = item.is_income;
+                const icon = isIncome ? 'fa-arrow-down' : 'fa-arrow-up';
+                const colorClass = isIncome ? 'text-green-600 bg-green-50' : 'text-red-600 bg-red-50';
+                const sign = isIncome ? '+' : '-';
+                let title = item.type === 'Invoice' ? 'فاتورة' : (item.description || 'معاملة مالية');
+                let subTitle = `#${item.ref} • ${item.name}`;
+
+                // JSON stringify for onclick
+                const itemData = JSON.stringify(item).replace(/"/g, '&quot;');
+
+                return `
+                    <div onclick="openModal(${itemData})" class="p-4 flex justify-between items-center hover:bg-gray-50 transition cursor-pointer active:bg-gray-100">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 ${colorClass} rounded-full flex items-center justify-center shadow-sm">
+                                <i class="fa-solid ${icon}"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-sm text-gray-800">${title}</h4>
+                                <p class="text-[10px] text-gray-400 font-mono">${subTitle}</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <span class="font-bold text-sm ${isIncome ? 'text-green-600' : 'text-red-600'} block">
+                                ${sign}$${parseFloat(item.amount).toLocaleString()}
+                            </span>
+                            <span class="text-[9px] text-gray-400 block">${new Date(item.date).toLocaleDateString()}</span>
+                        </div>
+                    </div>`;
+            }).join('');
+        }
+
+        let currentItem = null;
+
+        function openModal(item) {
+            currentItem = item;
+            const modal = document.getElementById('detailsModal');
+            // ... (rest of function remains similar but updated)
+
+            const isIncome = item.is_income;
+
+            // Icon
+            const iconClass = isIncome ? 'bg-green-100 text-green-600' : 'bg-red-100 text-red-600';
+            const icon = isIncome ? 'fa-arrow-down' : 'fa-arrow-up';
+            document.getElementById('modalIcon').className = `w-16 h-16 rounded-full flex items-center justify-center text-3xl mx-auto mb-3 shadow-sm ${iconClass}`;
+            document.getElementById('modalIcon').innerHTML = `<i class="fa-solid ${icon}"></i>`;
+
+            // Text
+            document.getElementById('modalTitle').innerText = item.type === 'Invoice' ? 'فاتورة' : (item.description || 'معاملة مالية');
+            document.getElementById('modalRef').innerText = `#${item.ref} • ${new Date(item.date).toLocaleString()}`;
+
+            document.getElementById('modalAmount').innerText = '$' + parseFloat(item.amount).toLocaleString();
+            document.getElementById('modalDate').innerText = new Date(item.date).toLocaleDateString();
+            document.getElementById('modalClient').innerText = item.name;
+
+            const statusEl = document.getElementById('modalStatus');
+            statusEl.innerText = item.status;
+            statusEl.className = 'text-xs font-bold px-2 py-1 rounded-lg ' + (item.status === 'Paid' || item.status === 'Completed' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700');
+
+            modal.classList.remove('hidden');
+        }
+
+        async function downloadPDF() {
+            if (!currentItem) return;
+
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF({ orientation: 'p', unit: 'mm', format: 'a6' });
+
+            doc.setFontSize(18);
+            doc.text("CargoApp Receipt", 52, 20, { align: 'center' });
+
+            doc.setFontSize(10);
+            doc.text(`Ref: ${currentItem.ref}`, 52, 30, { align: 'center' });
+            doc.text(`Date: ${new Date(currentItem.date).toLocaleDateString()}`, 52, 35, { align: 'center' });
+
+            doc.setLineWidth(0.5);
+            doc.line(10, 40, 95, 40);
+
+            doc.setFontSize(14);
+            doc.text(`Amount: $${parseFloat(currentItem.amount).toLocaleString()}`, 10, 55);
+
+            doc.setFontSize(10);
+            doc.text(`Type: ${currentItem.type}`, 10, 65);
+            doc.text(`Client: ${currentItem.name}`, 10, 75);
+            doc.text(`Status: ${currentItem.status}`, 10, 85);
+
+            doc.setFontSize(8);
+            doc.text("Thank you for your business.", 52, 110, { align: 'center' });
+
+            doc.save(`Invoice_${currentItem.ref}.pdf`);
+        }
+
+        function closeModal() {
+            document.getElementById('detailsModal').classList.add('hidden');
+        }
+    </script>
+    <style>
+        @keyframes slide-up {
+            from {
+                transform: translateY(100%);
+            }
+
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        .animate-slide-up {
+            animation: slide-up 0.3s ease-out forwards;
+        }
+    </style>
 </body>
+
 </html>

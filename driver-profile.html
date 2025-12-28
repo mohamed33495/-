@@ -89,7 +89,8 @@
                 <div class="p-4 flex items-center justify-between">
                     <div class="flex items-center gap-3">
                         <div class="w-10 h-10 rounded-full bg-green-50 text-green-600 flex items-center justify-center">
-                            <i class="fa-solid fa-power-off"></i></div>
+                            <i class="fa-solid fa-power-off"></i>
+                        </div>
                         <span class="text-sm font-bold text-gray-700">حالة العمل</span>
                     </div>
                     <label class="relative inline-flex items-center cursor-pointer">
@@ -105,7 +106,8 @@
                     <div class="flex items-center gap-3">
                         <div
                             class="w-10 h-10 rounded-full bg-orange-50 text-orange-500 flex items-center justify-center">
-                            <i class="fa-solid fa-lock"></i></div>
+                            <i class="fa-solid fa-lock"></i>
+                        </div>
                         <span class="text-sm font-bold text-gray-700">تغيير كلمة المرور</span>
                     </div>
                     <i class="fa-solid fa-chevron-left text-gray-300 text-xs"></i>
@@ -125,7 +127,8 @@
                     <div class="flex items-center gap-3">
                         <div
                             class="w-10 h-10 rounded-full bg-red-50 text-red-500 flex items-center justify-center group-active:bg-red-100 transition">
-                            <i class="fa-solid fa-right-from-bracket"></i></div>
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                        </div>
                         <span class="text-sm font-bold">تسجيل الخروج</span>
                     </div>
                 </a>
@@ -202,6 +205,66 @@
     </div>
 
     <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const driverId = localStorage.getItem('userId') || '101';
+
+            try {
+                const res = await fetch(`http://localhost:3000/api/driver/profile?driverId=${driverId}`);
+                const data = await res.json();
+
+                if (data.success) {
+                    const p = data.profile;
+
+                    // Name & ID
+                    document.querySelector('h1').textContent = p.name;
+
+                    // ID Button
+                    const btn = document.querySelector('button[onclick^="copyID"]');
+                    if (btn) {
+                        btn.innerHTML = `<span>ID: ${p.id_code}</span><i class="fa-regular fa-copy text-xs opacity-70"></i>`;
+                        btn.setAttribute('onclick', `copyID('${p.id_code}')`);
+                    }
+
+                    // Stats
+                    // 1st stat: Completed (Blue)
+                    document.querySelector('.text-indigo-600.text-xl').textContent = p.stats.completed;
+
+                    // 3rd stat: Experience (Orange) - Border-right one
+                    document.querySelector('.text-orange-500.text-xl').textContent = p.stats.experience;
+
+                    // Vehicle Info
+                    const vehicleEl = document.querySelector('a i.fa-car').parentNode.parentNode.nextElementSibling;
+                    if (vehicleEl) vehicleEl.textContent = `${p.truck} (كيا)`; // Defaulting to Kia/Type if not in DB
+
+                    // Status Toggle Sync
+                    const toggleInput = document.querySelector('input[type="checkbox"]');
+                    if (toggleInput) {
+                        // Set Initial State
+                        toggleInput.checked = (p.availability_status === 'Available');
+
+                        // Add Listener
+                        toggleInput.onchange = async (e) => {
+                            const isOnline = e.target.checked;
+                            try {
+                                await fetch('http://localhost:3000/api/driver/status', {
+                                    method: 'POST',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify({ driverId: driverId, status: isOnline ? 'Available' : 'Offline' })
+                                });
+                                // Optional: Toast message
+                            } catch (err) {
+                                console.error("Failed to update status", err);
+                                // Revert toggle if failed?
+                                e.target.checked = !isOnline;
+                            }
+                        };
+                    }
+                }
+
+            } catch (e) { console.error(e); }
+        });
+
+        // ... existing copyID ...
         // نسخ الـ ID
         function copyID(text) {
             navigator.clipboard.writeText(text);

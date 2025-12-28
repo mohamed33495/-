@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -9,88 +10,422 @@
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { font-family: 'Tajawal', sans-serif; -webkit-tap-highlight-color: transparent; }
-        ::-webkit-scrollbar { width: 0px; background: transparent; }
-        .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+        body {
+            font-family: 'Tajawal', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        ::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+        }
+
+        .pb-safe {
+            padding-bottom: env(safe-area-inset-bottom);
+        }
     </style>
 </head>
+
 <body class="bg-gray-100 text-gray-800 h-screen flex flex-col overflow-hidden selection:bg-slate-300">
 
     <div class="fixed top-0 left-0 w-full h-48 bg-slate-900 rounded-b-[2.5rem] z-0 shadow-lg"></div>
 
     <div class="relative z-10 flex-1 overflow-y-auto pb-28 no-scrollbar">
-        
+
         <header class="px-6 pt-10 pb-4 text-white">
             <div class="flex justify-between items-center mb-4">
                 <h1 class="text-2xl font-bold">فريق العمل 👥</h1>
-                <button class="bg-blue-600 text-white w-10 h-10 rounded-xl flex items-center justify-center shadow-lg active:scale-90 transition">
+                <button onclick="openAddEmployeeModal()"
+                    class="bg-blue-600 text-white w-10 h-10 rounded-xl flex items-center justify-center shadow-lg active:scale-90 transition">
                     <i class="fa-solid fa-user-plus"></i>
                 </button>
             </div>
-            
+
             <div class="relative">
-                <input type="text" placeholder="بحث بالاسم أو الوظيفة..." class="w-full h-12 px-4 rounded-xl bg-slate-800/50 border border-slate-700 text-white placeholder-slate-400 focus:bg-slate-800 transition outline-none">
+                <input type="text" id="searchInput" onkeyup="filterEmployees()" placeholder="بحث بالاسم أو الوظيفة..."
+                    class="w-full h-12 px-4 rounded-xl bg-slate-800/50 border border-slate-700 text-white placeholder-slate-400 focus:bg-slate-800 transition outline-none">
                 <i class="fa-solid fa-magnifying-glass absolute left-4 top-4 text-slate-400"></i>
             </div>
         </header>
 
-        <main class="px-4 space-y-4 -mt-2">
-
-            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 relative overflow-hidden group">
-                <div class="absolute top-0 left-0 w-1 h-full bg-green-500"></div>
-                <div class="flex justify-between items-start">
-                    <div class="flex items-center gap-3">
-                        <img src="https://ui-avatars.com/api/?name=Ali+Salem&background=random" class="w-12 h-12 rounded-xl">
-                        <div>
-                            <h3 class="font-bold text-gray-800">علي سالم</h3>
-                            <p class="text-xs text-slate-500">أمين مستودع (Warehouse)</p>
-                            <span class="text-[10px] text-green-600 bg-green-50 px-2 py-0.5 rounded mt-1 inline-block">● متصل الآن</span>
-                        </div>
-                    </div>
-                    <button class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-ellipsis-vertical text-lg px-2"></i></button>
-                </div>
-                <div class="mt-4 flex gap-2 border-t border-gray-50 pt-3">
-                    <button class="flex-1 py-2 bg-slate-50 text-slate-600 rounded-lg text-xs font-bold hover:bg-slate-100">تعديل الصلاحيات</button>
-                    <button class="flex-1 py-2 bg-red-50 text-red-500 rounded-lg text-xs font-bold hover:bg-red-100">تجميد الحساب</button>
-                </div>
+        <main class="px-4 space-y-4 -mt-2" id="employeeList">
+            <div class="text-center py-10 opacity-60">
+                <i class="fa-solid fa-spinner fa-spin text-2xl mb-2"></i>
+                <p>جاري تحميل الموظفين...</p>
             </div>
-
-            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 relative overflow-hidden group">
-                <div class="absolute top-0 left-0 w-1 h-full bg-orange-500"></div>
-                <div class="flex justify-between items-start">
-                    <div class="flex items-center gap-3">
-                        <img src="https://ui-avatars.com/api/?name=Sara+M&background=random" class="w-12 h-12 rounded-xl">
-                        <div>
-                            <h3 class="font-bold text-gray-800">سارة محمد</h3>
-                            <p class="text-xs text-slate-500">دعم فني (Support)</p>
-                            <span class="text-[10px] text-slate-400 bg-slate-50 px-2 py-0.5 rounded mt-1 inline-block">○ آخر ظهور: منذ ساعة</span>
-                        </div>
-                    </div>
-                    <button class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-ellipsis-vertical text-lg px-2"></i></button>
-                </div>
-                <div class="mt-4 flex gap-2 border-t border-gray-50 pt-3">
-                    <button class="flex-1 py-2 bg-slate-50 text-slate-600 rounded-lg text-xs font-bold hover:bg-slate-100">تعديل الصلاحيات</button>
-                    <button class="flex-1 py-2 bg-red-50 text-red-500 rounded-lg text-xs font-bold hover:bg-red-100">تجميد الحساب</button>
-                </div>
-            </div>
-
         </main>
     </div>
 
-    <nav class="fixed bottom-6 left-4 right-4 bg-slate-900/90 backdrop-blur-xl border border-white/10 shadow-2xl rounded-2xl flex justify-around items-center py-3 z-50">
-        <a href="super-admin.html" class="flex flex-col items-center gap-1 text-slate-400 hover:text-white transition group"><i class="fa-solid fa-gauge-high text-xl group-active:scale-90 transition"></i></a>
+    <nav
+        class="fixed bottom-6 left-4 right-4 bg-slate-900/90 backdrop-blur-xl border border-white/10 shadow-2xl rounded-2xl flex justify-around items-center py-3 z-50">
+        <a href="super-admin.html"
+            class="flex flex-col items-center gap-1 text-slate-400 hover:text-white transition group"><i
+                class="fa-solid fa-gauge-high text-xl group-active:scale-90 transition"></i></a>
         <a href="#" class="flex flex-col items-center gap-1 text-white transition group relative">
             <i class="fa-solid fa-users-gear text-xl"></i>
             <span class="absolute -bottom-2 w-1 h-1 bg-white rounded-full"></span>
         </a>
         <div class="relative -top-8">
-            <button class="bg-green-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg shadow-green-500/40 border-4 border-gray-100 transform active:scale-90 transition">
+            <a href="super-admin-add-country.html"
+                class="bg-green-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg shadow-green-500/40 border-4 border-gray-100 transform active:scale-90 transition">
                 <i class="fa-solid fa-plus text-2xl"></i>
-            </button>
+            </a>
         </div>
-        <a href="super-admin-finance.html" class="flex flex-col items-center gap-1 text-slate-400 hover:text-white transition group"><i class="fa-solid fa-file-invoice-dollar text-xl group-active:scale-90 transition"></i></a>
-        <a href="super-admin-menu.html" class="flex flex-col items-center gap-1 text-slate-400 hover:text-white transition group"><i class="fa-solid fa-bars text-xl group-active:scale-90 transition"></i></a>
+        <a href="super-admin-finance.html"
+            class="flex flex-col items-center gap-1 text-slate-400 hover:text-white transition group"><i
+                class="fa-solid fa-file-invoice-dollar text-xl group-active:scale-90 transition"></i></a>
+        <a href="super-admin-menu.html"
+            class="flex flex-col items-center gap-1 text-slate-400 hover:text-white transition group"><i
+                class="fa-solid fa-bars text-xl group-active:scale-90 transition"></i></a>
     </nav>
 
+    <!-- Add Employee Modal -->
+    <div id="addEmployeeModal"
+        class="fixed inset-0 bg-black/60 z-[60] hidden flex flex-col justify-end backdrop-blur-sm">
+        <div class="bg-white w-full rounded-t-[2.5rem] p-6 animate-slide-up pb-safe">
+            <div class="w-12 h-1.5 bg-gray-200 rounded-full mx-auto mb-6"></div>
+
+            <h3 class="text-xl font-bold text-gray-800 mb-6 text-center">إضافة موظف جديد 👤</h3>
+
+            <form class="space-y-4" onsubmit="event.preventDefault(); saveEmployee();">
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-500 mb-1">الاسم الأول</label>
+                        <input type="text" id="empName"
+                            class="w-full h-12 px-4 rounded-xl bg-gray-50 border-none focus:ring-2 focus:ring-slate-500 text-sm font-bold text-gray-700"
+                            required>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-500 mb-1">الدور الوظيفي</label>
+                        <select id="empRole"
+                            class="w-full h-12 px-4 rounded-xl bg-gray-50 border-none focus:ring-2 focus:ring-slate-500 text-sm font-bold text-gray-700"
+                            required>
+                            <option value="Warehouse">أمين مستودع</option>
+                            <option value="Support">دعم فني</option>
+                            <option value="Accountant">محاسب</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-gray-500 mb-1">البريد الإلكتروني (للدخول)</label>
+                    <input type="email" id="empEmail"
+                        class="w-full h-12 px-4 rounded-xl bg-gray-50 border-none focus:ring-2 focus:ring-slate-500 text-sm font-bold text-gray-700 text-left"
+                        dir="ltr" placeholder="user@cargo.ly" required>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-gray-500 mb-1">كلمة المرور المؤقتة</label>
+                    <input type="text" id="empPassword" value="123456"
+                        class="w-full h-12 px-4 rounded-xl bg-gray-50 border-none focus:ring-2 focus:ring-slate-500 text-sm font-bold text-gray-700 text-left tracking-widest"
+                        dir="ltr" required>
+                </div>
+
+                <div id="addWarehouseContainer" class="hidden">
+                    <label class="block text-xs font-bold text-gray-500 mb-1">تعيين مستودع</label>
+                    <select id="empWarehouse"
+                        class="w-full h-12 px-4 rounded-xl bg-gray-50 border-none focus:ring-2 focus:ring-slate-500 text-sm font-bold text-gray-700">
+                        <option value="">اختر المستودع...</option>
+                    </select>
+                </div>
+
+                <div class="flex gap-3 mt-6 pt-2">
+                    <button type="button" onclick="closeAddEmployeeModal()"
+                        class="flex-1 py-3.5 rounded-2xl bg-gray-100 text-gray-600 font-bold text-sm active:scale-95 transition">إلغاء</button>
+                    <button type="submit"
+                        class="flex-[2] py-3.5 rounded-2xl bg-slate-900 text-white font-bold text-sm shadow-lg active:scale-95 transition">حفظ
+                        وإضافة</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit Employee Modal -->
+    <div id="editEmployeeModal"
+        class="fixed inset-0 bg-black/60 z-[60] hidden flex flex-col justify-end backdrop-blur-sm">
+        <div class="bg-white w-full rounded-t-[2.5rem] p-6 animate-slide-up pb-safe">
+            <div class="w-12 h-1.5 bg-gray-200 rounded-full mx-auto mb-6"></div>
+
+            <h3 class="text-xl font-bold text-gray-800 mb-6 text-center">تعديل بيانات الموظف ✏️</h3>
+
+            <form class="space-y-4" onsubmit="event.preventDefault(); saveEditEmployee();">
+                <input type="hidden" id="editEmpId">
+
+                <div>
+                    <label class="block text-xs font-bold text-gray-500 mb-1">البريد الإلكتروني</label>
+                    <input type="email" id="editEmpEmail"
+                        class="w-full h-12 px-4 rounded-xl bg-gray-50 border-none focus:ring-2 focus:ring-slate-500 text-sm font-bold text-gray-700 text-left"
+                        dir="ltr" required>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-gray-500 mb-1">كلمة المرور الجديدة (اختياري)</label>
+                    <input type="text" id="editEmpPassword" placeholder="اتركه فارغاً للاحتفاظ بالقديمة"
+                        class="w-full h-12 px-4 rounded-xl bg-gray-50 border-none focus:ring-2 focus:ring-slate-500 text-sm font-bold text-gray-700 text-left tracking-widest"
+                        dir="ltr">
+                </div>
+
+                <div id="editWarehouseContainer" class="hidden">
+                    <label class="block text-xs font-bold text-gray-500 mb-1">نقل إلى مستودع آخر</label>
+                    <select id="editEmpWarehouse"
+                        class="w-full h-12 px-4 rounded-xl bg-gray-50 border-none focus:ring-2 focus:ring-slate-500 text-sm font-bold text-gray-700">
+                        <option value="">اختر المستودع...</option>
+                    </select>
+                </div>
+
+                <div class="flex gap-3 mt-6 pt-2">
+                    <button type="button" onclick="closeEditEmployeeModal()"
+                        class="flex-1 py-3.5 rounded-2xl bg-gray-100 text-gray-600 font-bold text-sm active:scale-95 transition">إلغاء</button>
+                    <button type="submit"
+                        class="flex-[2] py-3.5 rounded-2xl bg-slate-900 text-white font-bold text-sm shadow-lg active:scale-95 transition">حفظ
+                        التعديلات</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Empty placeholder for old Assign Modal if needed, or just remove it -->
+
+    <script>
+        let allEmployees = [];
+        let globalWarehouses = [];
+
+        // Initial Load
+        fetchEmployees();
+        fetchWarehouses();
+
+        function filterEmployees() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = allEmployees.filter(emp =>
+                emp.full_name.toLowerCase().includes(query) ||
+                emp.role.toLowerCase().includes(query) ||
+                emp.email.toLowerCase().includes(query)
+            );
+            renderEmployees(filtered);
+        }
+
+        async function fetchEmployees() {
+            try {
+                const res = await fetch('http://localhost:3000/api/admin/employees');
+                const data = await res.json();
+                if (data.success) {
+                    allEmployees = data.employees;
+                    renderEmployees(allEmployees);
+                }
+            } catch (e) {
+                console.error(e);
+                document.getElementById('employeeList').innerHTML = '<p class="text-center text-red-500 py-10">فشل الاتصال بالخادم</p>';
+            }
+        }
+
+        async function fetchWarehouses() {
+            try {
+                const res = await fetch('http://localhost:3000/api/admin/warehouses');
+                const data = await res.json();
+                if (data.success) {
+                    globalWarehouses = data.warehouses;
+
+                    // Pre-fill Edit Modal Select
+                    const editSelect = document.getElementById('editEmpWarehouse');
+                    const addSelect = document.getElementById('empWarehouse');
+
+                    const options = '<option value="">اختر المستودع...</option>' +
+                        globalWarehouses.map(wh => `<option value="${wh.name}">${wh.name} (${wh.city})</option>`).join('');
+
+                    editSelect.innerHTML = options;
+                    addSelect.innerHTML = options;
+                }
+            } catch (e) { console.error('Failed to load warehouses', e); }
+        }
+
+        // Specific Listener for Add Modal Role Change
+        document.getElementById('empRole').addEventListener('change', function () {
+            const container = document.getElementById('addWarehouseContainer');
+            if (this.value === 'Warehouse') {
+                container.classList.remove('hidden');
+            } else {
+                container.classList.add('hidden');
+            }
+        });
+
+        function renderEmployees(list) {
+            const container = document.getElementById('employeeList');
+            if (list.length === 0) {
+                container.innerHTML = '<p class="text-center text-slate-400 py-10">لا يوجد موظفين</p>';
+                return;
+            }
+
+            container.innerHTML = list.map(emp => {
+                let borderClass = 'border-gray-100';
+                let indicatorClass = 'bg-gray-300';
+                if (emp.role === 'Warehouse') { borderClass = 'border-green-500'; indicatorClass = 'bg-green-500'; }
+                if (emp.role === 'Support') { borderClass = 'border-orange-500'; indicatorClass = 'bg-orange-500'; }
+                if (emp.role === 'Accountant') { borderClass = 'border-blue-500'; indicatorClass = 'bg-blue-500'; }
+
+                const whDisplay = emp.assigned_warehouse ?
+                    `<span class="bg-indigo-50 text-indigo-600 text-[10px] px-2 py-0.5 rounded ml-2 font-bold"><i class="fa-solid fa-location-dot"></i> ${emp.assigned_warehouse}</span>`
+                    : '';
+
+                return `
+                <div class="bg-white p-4 rounded-2xl shadow-sm border ${borderClass} relative overflow-visible group">
+                    <div class="absolute top-0 left-0 w-1 h-full ${indicatorClass}"></div>
+                    <div class="flex justify-between items-start">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-xl bg-slate-100 flex items-center justify-center font-bold text-slate-500 text-xl">
+                                ${emp.full_name.charAt(0).toUpperCase()}
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-800 flex items-center">${emp.full_name} ${whDisplay}</h3>
+                                <p class="text-xs text-slate-500">${emp.role}</p>
+                                <p class="text-[10px] text-gray-400 font-mono">${emp.email}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 flex gap-2 border-t border-gray-50 pt-3">
+                        <button onclick="openEditModal(${emp.user_id}, '${emp.email}', '${emp.role}', '${emp.assigned_warehouse || ''}')" class="flex-1 py-2 bg-slate-50 text-slate-600 rounded-lg text-xs font-bold hover:bg-slate-100">تعديل</button>
+                        
+                        <button onclick="deleteEmployee(${emp.user_id}, '${emp.full_name}')" class="flex-1 py-2 bg-red-50 text-red-500 rounded-lg text-xs font-bold hover:bg-red-100">
+                            <i class="fa-solid fa-trash-can ml-1"></i> تجميد
+                        </button>
+                    </div>
+                </div>`;
+            }).join('');
+        }
+
+        // Add Employee Logic
+        async function saveEmployee() {
+            const btn = document.querySelector('#addEmployeeModal button[type="submit"]');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> جاري الإضافة...';
+            btn.disabled = true;
+
+            const name = document.getElementById('empName').value;
+            const role = document.getElementById('empRole').value;
+            const email = document.getElementById('empEmail').value;
+            const password = document.getElementById('empPassword').value;
+            const warehouse = document.getElementById('empWarehouse').value; // Get warehouse
+
+            try {
+                const res = await fetch('http://localhost:3000/api/admin/add-employee', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email, password, role, assigned_warehouse: warehouse })
+                });
+
+                const data = await res.json();
+                if (data.success) {
+                    alert('✅ تم إضافة الموظف بنجاح');
+                    closeAddEmployeeModal();
+                    fetchEmployees();
+                    document.querySelector('#addEmployeeModal form').reset();
+                    document.getElementById('addWarehouseContainer').classList.add('hidden'); // Reset visibility
+                } else {
+                    alert('❌ خطأ: ' + data.message);
+                }
+            } catch (e) {
+                console.error(e);
+                alert('حدث خطأ في الاتصال');
+            } finally {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
+        }
+
+        // Edit Employee Logic
+        async function saveEditEmployee() {
+            const btn = document.querySelector('#editEmployeeModal button[type="submit"]');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> جاري الحفظ...';
+            btn.disabled = true;
+
+            const id = document.getElementById('editEmpId').value;
+            const email = document.getElementById('editEmpEmail').value;
+            const password = document.getElementById('editEmpPassword').value;
+            const warehouse = document.getElementById('editEmpWarehouse').value;
+
+            try {
+                const res = await fetch(`http://localhost:3000/api/admin/employee/${id}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password, assigned_warehouse: warehouse })
+                });
+
+                const data = await res.json();
+                if (data.success) {
+                    alert('✅ تم التحديث بنجاح');
+                    closeEditEmployeeModal();
+                    fetchEmployees();
+                } else {
+                    alert('❌ ' + data.message);
+                }
+            } catch (e) { console.error(e); alert('Error'); }
+            finally { btn.innerHTML = originalText; btn.disabled = false; }
+        }
+
+        // Delete Employee Logic
+        async function deleteEmployee(id, name) {
+            if (!confirm(`هل أنت متأكد من تجميد حساب الموظف ${name}؟`)) return;
+            try {
+                const res = await fetch(`http://localhost:3000/api/admin/employee/${id}`, { method: 'DELETE' });
+                const data = await res.json();
+                if (data.success) {
+                    alert('✅ تم تجميد الحساب');
+                    fetchEmployees();
+                } else {
+                    alert('❌ ' + data.message);
+                }
+            } catch (e) { console.error(e); }
+        }
+
+        // Modals Control
+        function openEditModal(id, email, role, currentWarehouse) {
+            console.log('OpenEditModal Called:', { id, email, role, currentWarehouse }); // DEBUG
+            document.getElementById('editEmpId').value = id;
+            document.getElementById('editEmpEmail').value = email;
+            document.getElementById('editEmpPassword').value = '';
+
+            // Handle Warehouse Field Visibility
+            const whContainer = document.getElementById('editWarehouseContainer');
+            const whSelect = document.getElementById('editEmpWarehouse');
+
+            if (role === 'Warehouse') {
+                console.log('Role is Warehouse - SHOWING container'); // DEBUG
+                whContainer.classList.remove('hidden');
+                // Ensure logic runs to populate check
+                if (globalWarehouses.length === 0) fetchWarehouses().then(() => {
+                    whSelect.value = currentWarehouse;
+                });
+                else whSelect.value = currentWarehouse;
+            } else {
+                console.log('Role is NOT Warehouse (' + role + ') - HIDING container'); // DEBUG
+                whContainer.classList.add('hidden');
+            }
+
+            document.getElementById('editEmployeeModal').classList.remove('hidden');
+        }
+
+        function closeEditEmployeeModal() { document.getElementById('editEmployeeModal').classList.add('hidden'); }
+        function openAddEmployeeModal() { document.getElementById('addEmployeeModal').classList.remove('hidden'); }
+        function closeAddEmployeeModal() { document.getElementById('addEmployeeModal').classList.add('hidden'); }
+    </script>
+
+    <style>
+        @keyframes slide-up {
+            from {
+                transform: translateY(100%);
+            }
+
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        .animate-slide-up {
+            animation: slide-up 0.3s ease-out forwards;
+        }
+    </style>
 </body>
+
 </html>

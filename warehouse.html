@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -10,23 +11,36 @@
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { font-family: 'Tajawal', sans-serif; -webkit-tap-highlight-color: transparent; overscroll-behavior-y: none; }
-        ::-webkit-scrollbar { width: 0px; background: transparent; }
-        .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+        body {
+            font-family: 'Tajawal', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+            overscroll-behavior-y: none;
+        }
+
+        ::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+        }
+
+        .pb-safe {
+            padding-bottom: env(safe-area-inset-bottom);
+        }
     </style>
 </head>
+
 <body class="bg-gray-100 text-gray-800 h-screen flex flex-col overflow-hidden selection:bg-slate-300">
 
     <div class="fixed top-0 left-0 w-full h-48 bg-slate-900 rounded-b-[2.5rem] z-0 shadow-lg"></div>
 
     <div class="relative z-10 flex-1 overflow-y-auto pb-28 no-scrollbar">
-        
+
         <header class="px-6 pt-10 pb-4 flex justify-between items-center text-white">
             <div class="flex items-center gap-3">
-                <img src="https://ui-avatars.com/api/?name=Ali+Worker&background=334155&color=fff" class="w-12 h-12 rounded-full border-2 border-slate-500 shadow-md">
+                <img src="https://ui-avatars.com/api/?name=Ali+Worker&background=334155&color=fff"
+                    class="w-12 h-12 rounded-full border-2 border-slate-500 shadow-md">
                 <div>
-                    <p class="text-slate-400 text-xs font-bold mb-0.5">مستودع الصين 🇨🇳</p>
-                    <h1 class="text-lg font-bold">الموظف علي</h1>
+                    <p id="currentWarehouse" class="text-slate-400 text-xs font-bold mb-0.5">مستودع ...</p>
+                    <h1 id="userName" class="text-lg font-bold">...</h1>
                 </div>
             </div>
             <div class="bg-slate-800/50 p-2.5 rounded-xl backdrop-blur-md border border-slate-700">
@@ -38,9 +52,10 @@
 
             <div class="bg-white p-6 rounded-3xl shadow-xl relative overflow-hidden mt-2">
                 <div class="absolute top-0 right-0 w-32 h-32 bg-slate-100 rounded-full blur-2xl -mr-10 -mt-10"></div>
-                
+
                 <h3 class="font-bold text-gray-800 mb-6 flex items-center gap-2 relative z-10">
-                    <span class="w-8 h-8 bg-slate-900 text-white rounded-lg flex items-center justify-center text-sm"><i class="fa-solid fa-barcode"></i></span>
+                    <span class="w-8 h-8 bg-slate-900 text-white rounded-lg flex items-center justify-center text-sm"><i
+                            class="fa-solid fa-barcode"></i></span>
                     تسجيل شحنة واردة
                 </h3>
 
@@ -48,75 +63,169 @@
                     <div class="grid grid-cols-2 gap-3">
                         <div>
                             <label class="text-[10px] font-bold text-gray-500 mb-1 block">كود العميل</label>
-                            <input type="text" placeholder="LY-" class="w-full h-12 px-4 rounded-xl bg-gray-50 border-2 border-gray-100 focus:border-slate-900 focus:bg-white text-lg font-mono font-bold uppercase transition outline-none">
+                            <input type="text" placeholder="LY-"
+                                class="w-full h-12 px-4 rounded-xl bg-gray-50 border-2 border-gray-100 focus:border-slate-900 focus:bg-white text-lg font-mono font-bold uppercase transition outline-none">
                         </div>
                         <div>
                             <label class="text-[10px] font-bold text-gray-500 mb-1 block">الوزن (Kg)</label>
-                            <input type="number" step="0.1" placeholder="0.0" class="w-full h-12 px-4 rounded-xl bg-gray-50 border-2 border-gray-100 focus:border-slate-900 focus:bg-white text-center font-bold outline-none">
+                            <input type="number" step="0.1" placeholder="0.0"
+                                class="w-full h-12 px-4 rounded-xl bg-gray-50 border-2 border-gray-100 focus:border-slate-900 focus:bg-white text-center font-bold outline-none">
                         </div>
                     </div>
 
-                    <div>
-                        <label class="text-[10px] font-bold text-gray-500 mb-1 block">رقم التتبع (Tracking ID)</label>
-                        <div class="relative">
-                            <input type="text" placeholder="Scan Barcode..." class="w-full h-12 px-4 rounded-xl bg-gray-50 border-2 border-gray-100 focus:border-slate-900 focus:bg-white text-sm font-mono outline-none pl-10 transition">
-                            <i class="fa-solid fa-qrcode absolute left-3.5 top-4 text-gray-400"></i>
-                        </div>
-                    </div>
-
-                    <button class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-4 rounded-xl shadow-lg active:scale-95 transition flex items-center justify-center gap-2 text-base">
-                        <i class="fa-solid fa-plus"></i> تسجيل ودخول المخزون
-                    </button>
-                </div>
-            </div>
-
-            <div>
-                <h3 class="font-bold text-gray-600 text-sm mb-3 px-2">تم الاستلام مؤخراً</h3>
-                <div class="space-y-3">
-                    <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex justify-between items-center active:scale-[0.99] transition">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 bg-green-50 text-green-600 rounded-xl flex items-center justify-center font-bold">
-                                <i class="fa-solid fa-check"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-sm text-gray-800">TRK-998822</h4>
-                                <p class="text-[10px] text-gray-400 font-mono">LY-10234 • 2.5kg</p>
-                            </div>
-                        </div>
-                        <span class="text-[10px] font-bold text-gray-400">منذ دقيقة</span>
+                    <div class="pt-2">
+                        <button onclick="registerInbound()" id="regBtn"
+                            class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-4 rounded-xl shadow-lg active:scale-95 transition flex items-center justify-center gap-2 text-base">
+                            <i class="fa-solid fa-plus-circle"></i> إنشاء (Create)
+                        </button>
                     </div>
                 </div>
             </div>
 
-        </main>
+            <script>
+                async function registerInbound() {
+                    const codeInput = document.querySelector('input[placeholder="LY-"]');
+                    // Tracking Input Removed
+                    const weightInput = document.querySelector('input[placeholder="0.0"]');
+                    const btn = document.getElementById('regBtn');
+
+                    // Construct Full Client Code
+                    // Logic: If user types numbers only, default to LY-.
+                    // If they type a prefix (SH- or LY-), keep it.
+                    let clientCode = codeInput.value.trim().toUpperCase();
+                    if (!clientCode.includes('-')) {
+                        clientCode = 'LY-' + clientCode;
+                    }
+                    // If they typed SH-123, it stays SH-123. 
+                    // If they typed LY-123, it stays LY-123.
+
+                    const trackingNumber = ''; // Auto-generate in backend
+                    const weight = weightInput.value;
+
+                    if (!codeInput.value || !weight) {
+                        alert("يرجى إدخال كود العميل والوزن");
+                        return;
+                    }
+
+                    btn.disabled = true;
+                    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> جاري الإنشاء...';
+
+                    // Get Warehouse from User Object
+                    let currentWarehouse = 'China';
+                    try {
+                        const u = JSON.parse(localStorage.getItem('user'));
+                        if (u && u.assigned_warehouse) currentWarehouse = u.assigned_warehouse;
+                    } catch (e) { }
+
+                    try {
+                        const res = await fetch('http://localhost:3000/api/warehouse/inbound', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ clientCode, trackingNumber, weight, currentWarehouse })
+                        });
+                        const data = await res.json();
+
+                        if (data.success) {
+                            alert(data.message);
+                            // Clear inputs
+                            codeInput.value = '';
+                            weightInput.value = '';
+                        } else {
+                            alert('❌ خطأ: ' + data.message);
+                        }
+                    } catch (e) {
+                        console.error(e);
+                        alert('خطأ في الاتصال');
+                    } finally {
+                        btn.disabled = false;
+                        btn.innerHTML = '<i class="fa-solid fa-plus-circle"></i> إنشاء (Create)';
+                    }
+                }
+            </script>
+
+            <script>
+                // Load User Info
+                document.addEventListener('DOMContentLoaded', () => {
+                    const userStr = localStorage.getItem('user');
+                    if (userStr) {
+                        const user = JSON.parse(userStr);
+                        document.getElementById('userName').textContent = user.full_name || user.email || 'الموظف';
+
+                        // Update Header Warehouse Name
+                        const warehouseName = user.assigned_warehouse || 'غير محدد';
+                        // Assuming the element with text "مستودع الصين 🇨🇳" needs updating. 
+                        // I need to add an ID to that element first or select it smartly.
+                        // Looking at file content: line 42 has the text. I will target it by context or add ID in a separate step if needed, 
+                        // but here I will try to select it via class structure or add ID in this replace if I can target the block.
+                        const warehouseLabel = document.querySelector('header p.text-slate-400');
+                        if (warehouseLabel) warehouseLabel.textContent = `مستودع ${warehouseName}`;
+
+                        // Update Avatar
+                        const nameForAvatar = (user.full_name || 'Admin').replace(' ', '+');
+                        document.getElementById('userAvatar').src = `https://ui-avatars.com/api/?name=${nameForAvatar}&background=334155&color=fff`;
+                    } else {
+                        // Redirect if not logged in?
+                        // window.location.href = 'login.html';
+                    }
+                });
+            </script>
     </div>
 
-    <nav class="fixed bottom-6 left-4 right-4 bg-slate-900/90 backdrop-blur-xl border border-white/10 shadow-2xl rounded-2xl flex justify-around items-center py-3 z-50">
-        
+    <div>
+        <h3 class="font-bold text-gray-600 text-sm mb-3 px-2">تم الاستلام مؤخراً</h3>
+        <div class="space-y-3">
+            <div
+                class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex justify-between items-center active:scale-[0.99] transition">
+                <div class="flex items-center gap-3">
+                    <div
+                        class="w-10 h-10 bg-green-50 text-green-600 rounded-xl flex items-center justify-center font-bold">
+                        <i class="fa-solid fa-check"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-sm text-gray-800">TRK-998822</h4>
+                        <p class="text-[10px] text-gray-400 font-mono">LY-10234 • 2.5kg</p>
+                    </div>
+                </div>
+                <span class="text-[10px] font-bold text-gray-400">منذ دقيقة</span>
+            </div>
+        </div>
+    </div>
+
+    </main>
+    </div>
+
+    <nav
+        class="fixed bottom-6 left-4 right-4 bg-slate-900/90 backdrop-blur-xl border border-white/10 shadow-2xl rounded-2xl flex justify-around items-center py-3 z-50">
+
         <a href="warehouse.html" class="flex flex-col items-center gap-1 text-white transition group relative">
             <i class="fa-solid fa-dolly text-xl"></i>
             <span class="absolute -bottom-2 w-1 h-1 bg-white rounded-full"></span>
         </a>
 
-        <a href="warehouse-tasks.html" class="flex flex-col items-center gap-1 text-slate-400 hover:text-white transition group">
+        <a href="warehouse-tasks.html"
+            class="flex flex-col items-center gap-1 text-slate-400 hover:text-white transition group">
             <i class="fa-solid fa-list-check text-xl group-active:scale-90 transition"></i>
         </a>
 
         <div class="relative -top-8">
-            <button class="bg-blue-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg shadow-blue-500/40 border-4 border-gray-100 transform active:scale-90 transition">
+            <button
+                class="bg-blue-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg shadow-blue-500/40 border-4 border-gray-100 transform active:scale-90 transition">
                 <i class="fa-solid fa-barcode text-2xl"></i>
             </button>
         </div>
 
-        <a href="warehouse-stock.html" class="flex flex-col items-center gap-1 text-slate-400 hover:text-white transition group">
+        <a href="warehouse-stock.html"
+            class="flex flex-col items-center gap-1 text-slate-400 hover:text-white transition group">
             <i class="fa-solid fa-boxes-stacked text-xl group-active:scale-90 transition"></i>
         </a>
 
-        <a href="warehouse-menu.html" class="flex flex-col items-center gap-1 text-slate-400 hover:text-white transition group">
+        <a href="warehouse-menu.html"
+            class="flex flex-col items-center gap-1 text-slate-400 hover:text-white transition group">
             <i class="fa-solid fa-bars text-xl group-active:scale-90 transition"></i>
         </a>
 
     </nav>
 
 </body>
+
 </html>

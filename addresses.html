@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -8,40 +9,73 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
     <title>عناويني | شحنتي</title>
-    
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <style>
-        body { font-family: 'Tajawal', sans-serif; -webkit-tap-highlight-color: transparent; overscroll-behavior-y: none; }
-        ::-webkit-scrollbar { width: 0px; background: transparent; }
-        .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        
+        body {
+            font-family: 'Tajawal', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+            overscroll-behavior-y: none;
+        }
+
+        ::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+        }
+
+        .pb-safe {
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
         /* أنيميشن التبويب */
-        .tab-content { display: none; animation: fadeIn 0.3s ease-in-out; }
-        .tab-content.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
     </style>
-    
+
     <script>
         function copyToClipboard(text) {
             navigator.clipboard.writeText(text);
-            alert("تم نسخ: " + text); 
+            alert("تم نسخ: " + text);
         }
     </script>
 </head>
+
 <body class="bg-gray-50 text-gray-800 h-screen flex flex-col overflow-hidden selection:bg-indigo-200">
 
     <div class="fixed top-0 left-0 w-full h-40 bg-indigo-600 rounded-b-[2.5rem] z-0 shadow-lg"></div>
 
     <div class="relative z-10 flex-1 overflow-y-auto pb-28 no-scrollbar">
-        
+
         <header class="px-6 pt-10 pb-16 flex justify-between items-center text-white">
             <div>
                 <h1 class="text-2xl font-bold">دليل العناوين 🌍</h1>
-                <div class="flex items-center gap-2 mt-1 bg-indigo-700/50 px-3 py-1 rounded-full w-fit backdrop-blur-sm border border-indigo-500/30">
+                <div
+                    class="flex items-center gap-2 mt-1 bg-indigo-700/50 px-3 py-1 rounded-full w-fit backdrop-blur-sm border border-indigo-500/30">
                     <i class="fa-solid fa-id-badge text-indigo-200 text-xs"></i>
                     <span class="text-xs font-mono tracking-wider">LY-10234</span>
                 </div>
@@ -50,10 +84,12 @@
 
         <div class="px-6 -mt-8 relative z-20">
             <div class="bg-white p-1.5 rounded-2xl shadow-lg flex text-sm font-bold">
-                <button onclick="switchTab('warehouses')" id="tab-warehouses" class="flex-1 py-3 rounded-xl transition text-indigo-600 bg-indigo-50 shadow-sm">
+                <button onclick="switchTab('warehouses')" id="tab-warehouses"
+                    class="flex-1 py-3 rounded-xl transition text-indigo-600 bg-indigo-50 shadow-sm">
                     مستودعاتي (للتسوق)
                 </button>
-                <button onclick="switchTab('delivery')" id="tab-delivery" class="flex-1 py-3 rounded-xl transition text-gray-500 hover:text-gray-700">
+                <button onclick="switchTab('delivery')" id="tab-delivery"
+                    class="flex-1 py-3 rounded-xl transition text-gray-500 hover:text-gray-700">
                     عناوين التوصيل (لي)
                 </button>
             </div>
@@ -62,122 +98,39 @@
         <main class="px-4 mt-6 space-y-6">
 
             <div id="content-warehouses" class="tab-content active space-y-4">
-                
+
                 <div class="bg-yellow-50 border border-yellow-200 p-4 rounded-2xl flex items-start gap-3">
                     <i class="fa-solid fa-triangle-exclamation text-yellow-500 mt-0.5"></i>
                     <div>
                         <p class="text-xs text-yellow-800 font-bold">تنبيه هام</p>
-                        <p class="text-[10px] text-yellow-700 mt-0.5">يجب كتابة كود العميل (LY-10234) دائماً بجانب اسمك في مواقع التسوق لضمان وصول الشحنة.</p>
+                        <p class="text-[10px] text-yellow-700 mt-0.5">يجب كتابة كود العميل (<span
+                                id="userSuiteIdDisplay">...</span>) دائماً بجانب اسمك في مواقع التسوق لضمان وصول الشحنة.
+                        </p>
                     </div>
                 </div>
 
-                <div class="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden group active:scale-[0.99] transition">
-                    <div class="bg-red-50 p-4 flex justify-between items-center">
-                        <div class="flex items-center gap-3">
-                            <img src="https://flagcdn.com/w40/cn.png" class="w-8 rounded shadow-sm">
-                            <h3 class="font-bold text-gray-800 text-sm">الصين (Guangzhou)</h3>
-                        </div>
-                        <i class="fa-solid fa-plane-up text-red-400"></i>
-                    </div>
-                    <div class="p-5 space-y-3">
-                        <div>
-                            <label class="text-[10px] text-gray-400 uppercase font-bold">Full Name</label>
-                            <div class="flex bg-gray-50 rounded-xl border border-gray-100 p-3 justify-between items-center mt-1">
-                                <span class="font-mono text-sm text-gray-700 font-bold select-all">Mohamed Ali (LY-10234)</span>
-                                <button onclick="copyToClipboard('Mohamed Ali (LY-10234)')" class="text-blue-500"><i class="fa-regular fa-copy"></i></button>
-                            </div>
-                        </div>
-                        <div>
-                            <label class="text-[10px] text-gray-400 uppercase font-bold">Address</label>
-                            <div class="flex bg-gray-50 rounded-xl border border-gray-100 p-3 justify-between items-center mt-1">
-                                <span class="font-mono text-sm text-gray-700 select-all">Baiyun District, No. 88 Road</span>
-                                <button onclick="copyToClipboard('Baiyun District, No. 88 Road')" class="text-blue-500"><i class="fa-regular fa-copy"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden group active:scale-[0.99] transition">
-                    <div class="bg-blue-50 p-4 flex justify-between items-center">
-                        <div class="flex items-center gap-3">
-                            <img src="https://flagcdn.com/w40/us.png" class="w-8 rounded shadow-sm">
-                            <h3 class="font-bold text-gray-800 text-sm">أمريكا (Delaware)</h3>
-                        </div>
-                        <span class="text-[10px] bg-white text-blue-600 px-2 py-0.5 rounded border border-blue-200 font-bold">Tax Free</span>
-                    </div>
-                    <div class="p-5 space-y-3">
-                        <div>
-                            <label class="text-[10px] text-gray-400 uppercase font-bold">Full Name</label>
-                            <div class="flex bg-gray-50 rounded-xl border border-gray-100 p-3 justify-between items-center mt-1">
-                                <span class="font-mono text-sm text-gray-700 font-bold select-all">Mohamed Ali (LY-10234)</span>
-                                <button onclick="copyToClipboard('Mohamed Ali (LY-10234)')" class="text-blue-500"><i class="fa-regular fa-copy"></i></button>
-                            </div>
-                        </div>
-                        <div>
-                            <label class="text-[10px] text-gray-400 uppercase font-bold">Address Line 1</label>
-                            <div class="flex bg-gray-50 rounded-xl border border-gray-100 p-3 justify-between items-center mt-1">
-                                <span class="font-mono text-sm text-gray-700 select-all">401 North West St</span>
-                                <button onclick="copyToClipboard('401 North West St')" class="text-blue-500"><i class="fa-regular fa-copy"></i></button>
-                            </div>
-                        </div>
+                <div id="warehousesContainer" class="space-y-4">
+                    <div class="text-center py-10 opacity-60">
+                        <i class="fa-solid fa-spinner fa-spin text-3xl mb-4 text-indigo-600"></i>
+                        <p>جاري تحميل العناوين...</p>
                     </div>
                 </div>
 
             </div>
 
             <div id="content-delivery" class="tab-content space-y-4">
-                
-                <button onclick="openAddModal()" class="w-full border-2 border-dashed border-indigo-300 bg-indigo-50 text-indigo-600 rounded-3xl p-4 flex flex-col items-center justify-center gap-2 hover:bg-indigo-100 transition active:scale-95">
-                    <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm text-indigo-600">
+
+                <button onclick="openAddModal()"
+                    class="w-full border-2 border-dashed border-indigo-300 bg-indigo-50 text-indigo-600 rounded-3xl p-4 flex flex-col items-center justify-center gap-2 hover:bg-indigo-100 transition active:scale-95">
+                    <div
+                        class="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm text-indigo-600">
                         <i class="fa-solid fa-plus text-lg"></i>
                     </div>
                     <span class="font-bold text-sm">إضافة عنوان جديد</span>
                 </button>
 
-                <div class="bg-white p-5 rounded-3xl shadow-sm border border-gray-100 relative group active:scale-[0.99] transition">
-                    <div class="absolute top-4 left-4 flex gap-2">
-                        <button class="w-8 h-8 bg-gray-50 rounded-full text-gray-400 hover:text-blue-600 flex items-center justify-center"><i class="fa-solid fa-pen text-xs"></i></button>
-                        <button class="w-8 h-8 bg-gray-50 rounded-full text-gray-400 hover:text-red-500 flex items-center justify-center"><i class="fa-solid fa-trash text-xs"></i></button>
-                    </div>
-                    
-                    <div class="flex items-center gap-4 mb-3">
-                        <div class="w-12 h-12 bg-orange-50 text-orange-500 rounded-2xl flex items-center justify-center text-xl">
-                            <i class="fa-solid fa-house-chimney"></i>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-gray-800">المنزل</h3>
-                            <p class="text-xs text-gray-400">طرابلس - حي الأندلس</p>
-                        </div>
-                    </div>
-                    <p class="text-sm text-gray-600 leading-relaxed bg-gray-50 p-3 rounded-xl">
-                        شارع قرطبة، بالقرب من جامع الشريف، المنزل رقم 5 (بوابة سوداء).
-                    </p>
-                    <div class="mt-3 flex gap-2">
-                        <span class="text-[10px] bg-green-50 text-green-600 px-2 py-1 rounded-lg border border-green-100 font-bold">الافتراضي</span>
-                        <span class="text-[10px] bg-gray-100 text-gray-500 px-2 py-1 rounded-lg border border-gray-200">091-1234567</span>
-                    </div>
-                </div>
-
-                <div class="bg-white p-5 rounded-3xl shadow-sm border border-gray-100 relative group active:scale-[0.99] transition">
-                    <div class="absolute top-4 left-4 flex gap-2">
-                        <button class="w-8 h-8 bg-gray-50 rounded-full text-gray-400 hover:text-blue-600 flex items-center justify-center"><i class="fa-solid fa-pen text-xs"></i></button>
-                    </div>
-                    
-                    <div class="flex items-center gap-4 mb-3">
-                        <div class="w-12 h-12 bg-blue-50 text-blue-500 rounded-2xl flex items-center justify-center text-xl">
-                            <i class="fa-solid fa-building"></i>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-gray-800">المكتب</h3>
-                            <p class="text-xs text-gray-400">طرابلس - برج الفاتح</p>
-                        </div>
-                    </div>
-                    <p class="text-sm text-gray-600 leading-relaxed bg-gray-50 p-3 rounded-xl">
-                        الدور 15، مكتب شركة التقنية.
-                    </p>
-                    <div class="mt-3 flex gap-2">
-                        <span class="text-[10px] bg-gray-100 text-gray-500 px-2 py-1 rounded-lg border border-gray-200">092-5556667</span>
-                    </div>
+                <div id="deliveryContainer" class="space-y-4">
+                    <!-- Dynamic addresses will go here -->
                 </div>
 
             </div>
@@ -185,71 +138,95 @@
         </main>
     </div>
 
-    <div id="addAddressModal" class="fixed inset-0 bg-black/50 z-[60] hidden flex flex-col justify-end backdrop-blur-sm">
+    <div id="addAddressModal"
+        class="fixed inset-0 bg-black/50 z-[60] hidden flex flex-col justify-end backdrop-blur-sm">
         <div class="bg-white w-full rounded-t-[2.5rem] p-6 animate-slide-up h-[85vh] overflow-y-auto">
             <div class="w-12 h-1.5 bg-gray-200 rounded-full mx-auto mb-6"></div>
-            
+
             <h2 class="text-xl font-bold text-gray-800 mb-6 text-center">إضافة عنوان جديد 📍</h2>
-            
-            <form class="space-y-4" onsubmit="event.preventDefault(); closeAddModal();">
+
+            <form class="space-y-4" onsubmit="event.preventDefault(); saveAddress();">
                 <div>
                     <label class="text-xs font-bold text-gray-500 mb-1 block">تسمية العنوان</label>
                     <div class="flex gap-2">
-                        <button type="button" class="flex-1 py-2 rounded-xl bg-indigo-600 text-white text-xs font-bold border border-indigo-600">المنزل</button>
-                        <button type="button" class="flex-1 py-2 rounded-xl bg-white text-gray-500 text-xs font-bold border border-gray-200">العمل</button>
-                        <button type="button" class="flex-1 py-2 rounded-xl bg-white text-gray-500 text-xs font-bold border border-gray-200">آخر</button>
+                        <button type="button"
+                            onclick="document.getElementById('addrName').value='المنزل'; this.parentElement.querySelectorAll('button').forEach(b=>b.classList.replace('bg-indigo-600','bg-white')); this.parentElement.querySelectorAll('button').forEach(b=>b.classList.replace('text-white','text-gray-500')); this.classList.add('bg-indigo-600','text-white');"
+                            class="flex-1 py-2 rounded-xl bg-white text-gray-500 text-xs font-bold border border-gray-200">المنزل</button>
+                        <button type="button"
+                            onclick="document.getElementById('addrName').value='العمل'; this.parentElement.querySelectorAll('button').forEach(b=>b.classList.replace('bg-indigo-600','bg-white')); this.parentElement.querySelectorAll('button').forEach(b=>b.classList.replace('text-white','text-gray-500')); this.classList.add('bg-indigo-600','text-white');"
+                            class="flex-1 py-2 rounded-xl bg-white text-gray-500 text-xs font-bold border border-gray-200">العمل</button>
+                        <button type="button"
+                            onclick="document.getElementById('addrName').value='آخر'; this.parentElement.querySelectorAll('button').forEach(b=>b.classList.replace('bg-indigo-600','bg-white')); this.parentElement.querySelectorAll('button').forEach(b=>b.classList.replace('text-white','text-gray-500')); this.classList.add('bg-indigo-600','text-white');"
+                            class="flex-1 py-2 rounded-xl bg-white text-gray-500 text-xs font-bold border border-gray-200">آخر</button>
                     </div>
+                    <input type="hidden" id="addrName" value="">
                 </div>
 
                 <div class="grid grid-cols-2 gap-3">
                     <div>
                         <label class="text-xs font-bold text-gray-500 mb-1 block">المدينة</label>
-                        <select class="w-full h-12 px-4 rounded-xl bg-gray-50 border-none focus:ring-2 focus:ring-indigo-500 text-sm">
-                            <option>طرابلس</option>
-                            <option>بنغازي</option>
+                        <select id="addrCity"
+                            class="w-full h-12 px-4 rounded-xl bg-gray-50 border-none focus:ring-2 focus:ring-indigo-500 text-sm">
+                            <option value="Tripoli">طرابلس</option>
+                            <option value="Benghazi">بنغازي</option>
+                            <option value="Misrata">مصراتة</option>
                         </select>
                     </div>
                     <div>
                         <label class="text-xs font-bold text-gray-500 mb-1 block">رقم الهاتف</label>
-                        <input type="tel" class="w-full h-12 px-4 rounded-xl bg-gray-50 border-none focus:ring-2 focus:ring-indigo-500 text-sm text-left" placeholder="091..." dir="ltr">
+                        <input type="tel" id="addrPhone"
+                            class="w-full h-12 px-4 rounded-xl bg-gray-50 border-none focus:ring-2 focus:ring-indigo-500 text-sm text-left"
+                            placeholder="091..." dir="ltr">
                     </div>
                 </div>
 
                 <div>
                     <label class="text-xs font-bold text-gray-500 mb-1 block">الشارع / المنطقة</label>
-                    <input type="text" class="w-full h-12 px-4 rounded-xl bg-gray-50 border-none focus:ring-2 focus:ring-indigo-500 text-sm" placeholder="مثلاً: حي الأندلس، شارع الظل">
+                    <input type="text" id="addrStreet"
+                        class="w-full h-12 px-4 rounded-xl bg-gray-50 border-none focus:ring-2 focus:ring-indigo-500 text-sm"
+                        placeholder="مثلاً: حي الأندلس، شارع الظل">
                 </div>
 
                 <div>
                     <label class="text-xs font-bold text-gray-500 mb-1 block">وصف إضافي (اختياري)</label>
-                    <textarea class="w-full p-4 rounded-xl bg-gray-50 border-none focus:ring-2 focus:ring-indigo-500 text-sm resize-none" rows="2" placeholder="أقرب نقطة دالة، لون الباب..."></textarea>
+                    <textarea id="addrDetails"
+                        class="w-full p-4 rounded-xl bg-gray-50 border-none focus:ring-2 focus:ring-indigo-500 text-sm resize-none"
+                        rows="2" placeholder="أقرب نقطة دالة، لون الباب..."></textarea>
                 </div>
 
                 <div class="pt-4 flex gap-3">
-                    <button type="button" onclick="closeAddModal()" class="flex-1 py-3.5 rounded-2xl bg-gray-100 text-gray-600 font-bold text-sm">إلغاء</button>
-                    <button type="submit" class="flex-[2] py-3.5 rounded-2xl bg-indigo-600 text-white font-bold text-sm shadow-lg shadow-indigo-200">حفظ العنوان</button>
+                    <button type="button" onclick="closeAddModal()"
+                        class="flex-1 py-3.5 rounded-2xl bg-gray-100 text-gray-600 font-bold text-sm">إلغاء</button>
+                    <button type="submit"
+                        class="flex-[2] py-3.5 rounded-2xl bg-indigo-600 text-white font-bold text-sm shadow-lg shadow-indigo-200">حفظ
+                        العنوان</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <nav class="fixed bottom-6 left-4 right-4 bg-white/90 backdrop-blur-xl border border-white/20 shadow-[0_8px_30px_rgb(0,0,0,0.12)] rounded-2xl flex justify-around items-center py-3 z-50">
-        
-        <a href="dashboard.html" class="flex flex-col items-center gap-1 text-gray-400 hover:text-indigo-600 transition group">
+    <nav
+        class="fixed bottom-6 left-4 right-4 bg-white/90 backdrop-blur-xl border border-white/20 shadow-[0_8px_30px_rgb(0,0,0,0.12)] rounded-2xl flex justify-around items-center py-3 z-50">
+
+        <a href="dashboard.html"
+            class="flex flex-col items-center gap-1 text-gray-400 hover:text-indigo-600 transition group">
             <i class="fa-solid fa-house text-xl group-active:scale-90 transition"></i>
         </a>
 
-        <a href="shipments.html" class="flex flex-col items-center gap-1 text-gray-400 hover:text-indigo-600 transition group">
+        <a href="shipments.html"
+            class="flex flex-col items-center gap-1 text-gray-400 hover:text-indigo-600 transition group">
             <i class="fa-solid fa-box-open text-xl group-active:scale-90 transition"></i>
         </a>
 
         <div class="relative -top-8">
-            <a href="create-shipment.html" class="bg-indigo-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg shadow-indigo-500/40 border-4 border-gray-50 transform active:scale-90 transition">
+            <a href="create-shipment.html"
+                class="bg-indigo-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg shadow-indigo-500/40 border-4 border-gray-50 transform active:scale-90 transition">
                 <i class="fa-solid fa-plus text-2xl"></i>
             </a>
         </div>
 
-        <a href="wallet.html" class="flex flex-col items-center gap-1 text-gray-400 hover:text-indigo-600 transition group">
+        <a href="wallet.html"
+            class="flex flex-col items-center gap-1 text-gray-400 hover:text-indigo-600 transition group">
             <i class="fa-solid fa-wallet text-xl group-active:scale-90 transition"></i>
         </a>
 
@@ -265,7 +242,7 @@
         function switchTab(tabName) {
             // إخفاء كل المحتوى
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-            
+
             // إظهار المحتوى المختار
             document.getElementById('content-' + tabName).classList.add('active');
 
@@ -273,12 +250,15 @@
             const btnWarehouses = document.getElementById('tab-warehouses');
             const btnDelivery = document.getElementById('tab-delivery');
 
-            if(tabName === 'warehouses') {
+            if (tabName === 'warehouses') {
                 btnWarehouses.className = "flex-1 py-3 rounded-xl transition text-indigo-600 bg-indigo-50 shadow-sm";
                 btnDelivery.className = "flex-1 py-3 rounded-xl transition text-gray-500 hover:text-gray-700";
             } else {
                 btnDelivery.className = "flex-1 py-3 rounded-xl transition text-indigo-600 bg-indigo-50 shadow-sm";
                 btnWarehouses.className = "flex-1 py-3 rounded-xl transition text-gray-500 hover:text-gray-700";
+
+                // Load data if function exists
+                if (window.loadDeliveryAddresses) window.loadDeliveryAddresses();
             }
         }
 
@@ -289,15 +269,192 @@
         function closeAddModal() {
             document.getElementById('addAddressModal').classList.add('hidden');
         }
+
+        // Fetch Data
+        document.addEventListener('DOMContentLoaded', async () => {
+            const userId = localStorage.getItem('userId');
+            if (!userId) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            try {
+                // 1. Fetch User Details (Name & Suite ID)
+                const userRes = await fetch(`http://localhost:3000/api/user-details?id=${userId}`);
+                const userData = await userRes.json();
+
+                let fullName = 'Client';
+                let suiteId = 'LY-XXXX';
+
+                if (userData.success) {
+                    fullName = userData.user.full_name;
+                    suiteId = userData.user.suite_id;
+
+                    // Update header and alert
+                    const headerBadge = document.querySelector('.fa-id-badge').nextElementSibling;
+                    if (headerBadge) headerBadge.textContent = suiteId;
+
+                    const alertSuite = document.getElementById('userSuiteIdDisplay');
+                    if (alertSuite) alertSuite.textContent = suiteId;
+                }
+
+                // 2. Fetch Warehouses
+                loadWarehouses(fullName, suiteId);
+
+                // 3. Setup Tab Switching to Load Delivery Addresses
+                window.loadDeliveryAddresses = async () => {
+                    const container = document.getElementById('deliveryContainer');
+                    container.innerHTML = '<div class="text-center py-4"><i class="fa-solid fa-spinner fa-spin text-indigo-600"></i></div>';
+
+                    try {
+                        const res = await fetch(`http://localhost:3000/api/client/addresses?clientId=${userId}`);
+                        const data = await res.json();
+
+                        if (data.success && data.addresses.length > 0) {
+                            container.innerHTML = '';
+                            data.addresses.forEach(addr => {
+                                // Determine icon/color based on name
+                                let icon = 'fa-location-dot';
+                                let colorClass = 'bg-gray-50 text-gray-500';
+                                if (addr.name === 'المنزل') { icon = 'fa-house-chimney'; colorClass = 'bg-orange-50 text-orange-500'; }
+                                else if (addr.name === 'العمل') { icon = 'fa-building'; colorClass = 'bg-blue-50 text-blue-500'; }
+
+                                const html = `
+                                <div class="bg-white p-5 rounded-3xl shadow-sm border border-gray-100 relative group active:scale-[0.99] transition">
+                                    <div class="flex items-center gap-4 mb-3">
+                                        <div class="w-12 h-12 ${colorClass} rounded-2xl flex items-center justify-center text-xl">
+                                            <i class="fa-solid ${icon}"></i>
+                                        </div>
+                                        <div>
+                                            <h3 class="font-bold text-gray-800">${addr.name || 'عنوان'}</h3>
+                                            <p class="text-xs text-gray-400">${addr.city}</p>
+                                        </div>
+                                    </div>
+                                    <p class="text-sm text-gray-600 leading-relaxed bg-gray-50 p-3 rounded-xl">
+                                        ${addr.address_line_1}
+                                    </p>
+                                </div>`;
+                                container.insertAdjacentHTML('beforeend', html);
+                            });
+                        } else {
+                            container.innerHTML = '<p class="text-center text-gray-400 py-4">لا توجد عناوين محفوظة</p>';
+                        }
+                    } catch (err) {
+                        console.error(err);
+                        container.innerHTML = '<p class="text-center text-red-400">فشل تحميل العناوين</p>';
+                    }
+                };
+
+            } catch (err) {
+                console.error('Error loading data:', err);
+            }
+        });
+
+        async function loadWarehouses(fullName, suiteId) {
+            const whRes = await fetch('http://localhost:3000/api/warehouses');
+            const whData = await whRes.json();
+            const container = document.getElementById('warehousesContainer');
+
+            if (whData.success && whData.warehouses.length > 0) {
+                container.innerHTML = '';
+                whData.warehouses.forEach(wh => {
+                    let flag = 'https://flagcdn.com/w40/un.png';
+                    if (wh.country === 'China') flag = 'https://flagcdn.com/w40/cn.png';
+                    else if (wh.country === 'USA') flag = 'https://flagcdn.com/w40/us.png';
+                    else if (wh.country === 'Turkey') flag = 'https://flagcdn.com/w40/tr.png';
+                    else if (wh.country === 'UAE') flag = 'https://flagcdn.com/w40/ae.png';
+
+                    const fullAddressString = `${fullName} (${suiteId})`;
+
+                    const html = `
+                     <div class="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden group active:scale-[0.99] transition">
+                         <div class="bg-indigo-50 p-4 flex justify-between items-center">
+                             <div class="flex items-center gap-3">
+                                 <img src="${flag}" class="w-8 rounded shadow-sm">
+                                 <h3 class="font-bold text-gray-800 text-sm">${wh.country} (${wh.city})</h3>
+                             </div>
+                             <i class="fa-solid fa-warehouse text-indigo-400"></i>
+                         </div>
+                         <div class="p-5 space-y-3">
+                             <div>
+                                 <label class="text-[10px] text-gray-400 uppercase font-bold">Full Name</label>
+                                 <div class="flex bg-gray-50 rounded-xl border border-gray-100 p-3 justify-between items-center mt-1">
+                                     <span class="font-mono text-sm text-gray-700 font-bold select-all">${fullAddressString}</span>
+                                     <button onclick="copyToClipboard('${fullAddressString}')" class="text-blue-500"><i class="fa-regular fa-copy"></i></button>
+                                 </div>
+                             </div>
+                             <div>
+                                 <label class="text-[10px] text-gray-400 uppercase font-bold">Address</label>
+                                 <div class="flex bg-gray-50 rounded-xl border border-gray-100 p-3 justify-between items-center mt-1">
+                                     <span class="font-mono text-sm text-gray-700 select-all">${wh.address_line_1}</span>
+                                     <button onclick="copyToClipboard('${wh.address_line_1}')" class="text-blue-500"><i class="fa-regular fa-copy"></i></button>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>`;
+                    container.insertAdjacentHTML('beforeend', html);
+                });
+            } else {
+                container.innerHTML = '<p class="text-center text-gray-400 py-4">لا توجد مستودعات متاحة حالياً</p>';
+            }
+        }
+
+        async function saveAddress() {
+            const formData = {
+                clientId: localStorage.getItem('userId'),
+                name: document.getElementById('addrName').value || 'عنوان',
+                city: document.getElementById('addrCity').value,
+                phone: document.getElementById('addrPhone').value,
+                address_line_1: document.getElementById('addrStreet').value,
+                details: document.getElementById('addrDetails').value
+            };
+
+            if (!formData.city || !formData.address_line_1 || !formData.phone) {
+                alert('الرجاء تعبئة الحقول المطلوبة');
+                return;
+            }
+
+            try {
+                const res = await fetch('http://localhost:3000/api/client/addresses', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+                const data = await res.json();
+
+                if (data.success) {
+                    alert('تم حفظ العنوان بنجاح');
+                    closeAddModal();
+                    // Reload list
+                    if (document.getElementById('content-delivery').classList.contains('active')) {
+                        window.loadDeliveryAddresses();
+                    }
+                } else {
+                    alert('خطأ: ' + data.message);
+                }
+            } catch (e) {
+                console.error(e);
+                alert('فشل الاتصال بالسيرفر');
+            }
+        }
     </script>
 
     <style>
         @keyframes slide-up {
-            from { transform: translateY(100%); }
-            to { transform: translateY(0); }
+            from {
+                transform: translateY(100%);
+            }
+
+            to {
+                transform: translateY(0);
+            }
         }
-        .animate-slide-up { animation: slide-up 0.3s ease-out forwards; }
+
+        .animate-slide-up {
+            animation: slide-up 0.3s ease-out forwards;
+        }
     </style>
 
 </body>
+
 </html>

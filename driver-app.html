@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -8,42 +9,59 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
     <title>تطبيق الكابتن | شحنتي Driver</title>
-    
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+
     <style>
-        body { font-family: 'Tajawal', sans-serif; -webkit-tap-highlight-color: transparent; overscroll-behavior-y: none; }
-        ::-webkit-scrollbar { width: 0px; background: transparent; }
-        .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
-        .glass-nav { 
-            background: rgba(255, 255, 255, 0.95); 
-            backdrop-filter: blur(20px); 
+        body {
+            font-family: 'Tajawal', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+            overscroll-behavior-y: none;
+        }
+
+        ::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+        }
+
+        .pb-safe {
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border-top: 1px solid rgba(0,0,0,0.05);
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
         }
     </style>
 </head>
+
 <body class="bg-gray-50 text-gray-800 h-screen flex flex-col overflow-hidden selection:bg-indigo-200">
 
     <div class="fixed top-0 left-0 w-full h-48 bg-indigo-600 rounded-b-[2.5rem] z-0 shadow-lg"></div>
 
     <div class="relative z-10 flex-1 overflow-y-auto pb-32 no-scrollbar">
-        
+
         <header class="px-6 pt-10 pb-6 text-white">
             <div class="flex justify-between items-center mb-6">
                 <div class="flex items-center gap-3">
                     <div class="relative">
-                        <img src="https://ui-avatars.com/api/?name=Ahmed+Driver&background=c7d2fe&color=3730a3&bold=true" class="w-12 h-12 rounded-full border-2 border-indigo-300 shadow-md">
-                        <span class="absolute bottom-0 right-0 w-3 h-3 bg-green-400 border-2 border-indigo-600 rounded-full animate-pulse"></span>
+                        <img src="https://ui-avatars.com/api/?name=Ahmed+Driver&background=c7d2fe&color=3730a3&bold=true"
+                            class="w-12 h-12 rounded-full border-2 border-indigo-300 shadow-md">
+                        <span
+                            class="absolute bottom-0 right-0 w-3 h-3 bg-green-400 border-2 border-indigo-600 rounded-full animate-pulse"></span>
                     </div>
                     <div>
                         <p class="text-indigo-200 text-xs font-medium mb-0.5">صباح الخير ☀️</p>
                         <h1 class="text-lg font-bold leading-tight">كابتن أحمد</h1>
                     </div>
                 </div>
-                <div class="bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-full flex items-center gap-2 border border-white/10">
+                <div
+                    class="bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-full flex items-center gap-2 border border-white/10">
                     <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
                     <span class="text-xs font-bold">متصل</span>
                 </div>
@@ -66,73 +84,11 @@
         </header>
 
         <main class="px-4 space-y-4">
-            
-            <h3 class="font-bold text-gray-800 text-base mb-2 px-1 flex items-center gap-2">
-                <span class="w-2 h-2 bg-indigo-600 rounded-full"></span> الشحنة الحالية (الأولوية)
-            </h3>
 
-            <div class="bg-white p-5 rounded-3xl shadow-lg border border-indigo-100 relative overflow-hidden group">
-                <div class="absolute right-0 top-0 bottom-0 w-1.5 bg-indigo-500"></div>
-                
-                <div class="flex justify-between items-start mb-4 pl-2">
-                    <div>
-                        <h2 class="text-xl font-bold text-gray-800">محمد علي</h2>
-                        <p class="text-sm text-gray-500 mt-1 flex items-center gap-1">
-                            <i class="fa-solid fa-location-dot text-indigo-500"></i> حي الأندلس، شارع قرطبة
-                        </p>
-                    </div>
-                    <span class="bg-indigo-50 text-indigo-600 font-mono font-bold text-xs px-2 py-1 rounded-lg">#TRK-99</span>
-                </div>
-
-                <div class="flex gap-3 mb-4 pl-2">
-                    <button onclick="window.open('tel:0910000000')" class="flex-1 bg-green-50 text-green-600 py-3 rounded-2xl font-bold text-sm flex items-center justify-center gap-2 border border-green-100 hover:bg-green-100 transition active:scale-95 shadow-sm">
-                        <i class="fa-solid fa-phone"></i> اتصال
-                    </button>
-                    <a href="driver-map.html" class="flex-1 bg-blue-50 text-blue-600 py-3 rounded-2xl font-bold text-sm flex items-center justify-center gap-2 border border-blue-100 hover:bg-blue-100 transition active:scale-95 shadow-sm text-decoration-none">
-                        <i class="fa-solid fa-diamond-turn-right"></i> الخريطة
-                    </a>
-                </div>
-
-                <div class="bg-gray-50 p-3 rounded-2xl flex justify-between items-center border border-gray-100 mb-4 pl-2">
-                    <span class="text-xs font-bold text-gray-500">المطلوب تحصيله</span>
-                    <span class="font-black text-xl text-indigo-600">55.00 د.ل</span>
-                </div>
-                
-                <div class="flex gap-3">
-                    <button onclick="openDeliveryModal()" class="flex-[2] bg-indigo-600 text-white font-bold py-3.5 rounded-2xl shadow-lg shadow-indigo-200 hover:bg-indigo-700 transition flex justify-center items-center gap-2 active:scale-95">
-                        <i class="fa-solid fa-check-circle"></i> إتمام التسليم
-                    </button>
-                    <button onclick="openFailureModal()" class="flex-1 bg-red-50 text-red-600 font-bold py-3.5 rounded-2xl border border-red-100 hover:bg-red-100 transition flex justify-center items-center gap-2 active:scale-95">
-                        <i class="fa-solid fa-xmark"></i> فشل
-                    </button>
-                </div>
-            </div>
-
-            <h3 class="font-bold text-gray-400 text-sm mt-6 mb-2 px-1">المهام القادمة</h3>
-
-            <div class="bg-white p-4 rounded-3xl shadow-sm border border-gray-100 opacity-80 pl-4">
-                <div class="flex justify-between items-center">
-                    <div class="flex items-center gap-4">
-                        <div class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-gray-400 font-bold">2</div>
-                        <div>
-                            <h4 class="font-bold text-gray-700">سالم محمود</h4>
-                            <p class="text-xs text-gray-500">طريق السكة، طرابلس</p>
-                        </div>
-                    </div>
-                    <span class="text-xs font-bold text-gray-400 bg-gray-50 px-3 py-1.5 rounded-xl">15:30 م</span>
-                </div>
-            </div>
-            
-            <div class="bg-white p-4 rounded-3xl shadow-sm border border-gray-100 opacity-80 pl-4">
-                <div class="flex justify-between items-center">
-                    <div class="flex items-center gap-4">
-                        <div class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-gray-400 font-bold">3</div>
-                        <div>
-                            <h4 class="font-bold text-gray-700">شركة التقنية</h4>
-                            <p class="text-xs text-gray-500">بن عاشور</p>
-                        </div>
-                    </div>
-                    <span class="text-xs font-bold text-gray-400 bg-gray-50 px-3 py-1.5 rounded-xl">16:15 م</span>
+            <div id="tasksContainer">
+                <div class="text-center py-10">
+                    <i class="fa-solid fa-spinner fa-spin text-3xl text-indigo-600 mb-4"></i>
+                    <p class="text-gray-400">تحميل المهام...</p>
                 </div>
             </div>
 
@@ -141,9 +97,10 @@
 
     <nav class="fixed bottom-0 left-0 w-full glass-nav pb-safe z-50">
         <div class="flex justify-around items-center h-20 px-6">
-            
+
             <button class="relative group">
-                <div class="w-12 h-12 bg-indigo-600 text-white rounded-2xl flex items-center justify-center shadow-lg shadow-indigo-200 transition transform active:scale-95">
+                <div
+                    class="w-12 h-12 bg-indigo-600 text-white rounded-2xl flex items-center justify-center shadow-lg shadow-indigo-200 transition transform active:scale-95">
                     <i class="fa-solid fa-list-check text-xl"></i>
                 </div>
             </button>
@@ -168,28 +125,35 @@
             <div class="w-12 h-1.5 bg-gray-200 rounded-full mx-auto mb-6"></div>
             <h3 class="text-xl font-bold text-gray-800 mb-6 text-center">إثبات التوصيل (POD) 📸</h3>
             <div class="space-y-4">
-                <button class="w-full border-2 border-dashed border-indigo-200 bg-indigo-50 rounded-2xl p-5 flex flex-col items-center justify-center text-indigo-400 hover:bg-indigo-100 hover:border-indigo-400 transition group">
+                <button
+                    class="w-full border-2 border-dashed border-indigo-200 bg-indigo-50 rounded-2xl p-5 flex flex-col items-center justify-center text-indigo-400 hover:bg-indigo-100 hover:border-indigo-400 transition group">
                     <i class="fa-solid fa-camera text-3xl mb-2 group-hover:scale-110 transition"></i>
                     <span class="text-xs font-bold">اضغط لتصوير الشحنة أمام الباب</span>
                 </button>
                 <div>
                     <label class="block text-xs font-bold text-gray-500 mb-1">اسم المستلم</label>
-                    <input type="text" placeholder="من استلمها؟" class="w-full h-12 px-4 rounded-xl bg-gray-50 border-none focus:ring-2 focus:ring-indigo-500 text-sm font-bold text-gray-700">
+                    <input type="text" placeholder="من استلمها؟"
+                        class="w-full h-12 px-4 rounded-xl bg-gray-50 border-none focus:ring-2 focus:ring-indigo-500 text-sm font-bold text-gray-700">
                 </div>
                 <div>
                     <label class="block text-xs font-bold text-gray-500 mb-1">حالة الدفع</label>
                     <div class="flex gap-3">
-                        <button class="flex-1 py-3 rounded-xl bg-green-50 text-green-600 border border-green-200 text-xs font-bold flex items-center justify-center gap-2 active:bg-green-100 transition">
+                        <button
+                            class="flex-1 py-3 rounded-xl bg-green-50 text-green-600 border border-green-200 text-xs font-bold flex items-center justify-center gap-2 active:bg-green-100 transition">
                             <i class="fa-solid fa-money-bill-wave"></i> تم الدفع (كاش)
                         </button>
-                        <button class="flex-1 py-3 rounded-xl bg-gray-50 text-gray-500 border border-gray-200 text-xs font-bold flex items-center justify-center gap-2 active:bg-gray-100 transition">
+                        <button
+                            class="flex-1 py-3 rounded-xl bg-gray-50 text-gray-500 border border-gray-200 text-xs font-bold flex items-center justify-center gap-2 active:bg-gray-100 transition">
                             <i class="fa-solid fa-credit-card"></i> مدفوع مسبقاً
                         </button>
                     </div>
                 </div>
                 <div class="flex gap-3 mt-6 pt-2">
-                    <button onclick="closeDeliveryModal()" class="flex-1 py-3.5 rounded-2xl bg-gray-100 text-gray-600 font-bold text-sm active:scale-95 transition">إلغاء</button>
-                    <button onclick="finishDelivery()" class="flex-[2] py-3.5 rounded-2xl bg-indigo-600 text-white font-bold text-sm shadow-lg shadow-indigo-200 active:scale-95 transition">تأكيد التسليم ✅</button>
+                    <button onclick="closeDeliveryModal()"
+                        class="flex-1 py-3.5 rounded-2xl bg-gray-100 text-gray-600 font-bold text-sm active:scale-95 transition">إلغاء</button>
+                    <button onclick="finishDelivery()"
+                        class="flex-[2] py-3.5 rounded-2xl bg-indigo-600 text-white font-bold text-sm shadow-lg shadow-indigo-200 active:scale-95 transition">تأكيد
+                        التسليم ✅</button>
                 </div>
             </div>
         </div>
@@ -202,7 +166,8 @@
             <div class="space-y-4">
                 <div>
                     <label class="block text-sm font-bold text-gray-700 mb-2">السبب الرئيسي</label>
-                    <select id="failureReason" class="w-full h-12 px-4 rounded-xl bg-gray-50 border-none focus:ring-2 focus:ring-red-500 text-sm font-bold text-gray-700">
+                    <select id="failureReason"
+                        class="w-full h-12 px-4 rounded-xl bg-gray-50 border-none focus:ring-2 focus:ring-red-500 text-sm font-bold text-gray-700">
                         <option>العميل غير متاح (لم يرد على الهاتف)</option>
                         <option>العميل طلب التأجيل ليوم آخر</option>
                         <option>العنوان غير صحيح / غير واضح</option>
@@ -213,20 +178,202 @@
                 </div>
                 <div>
                     <label class="block text-sm font-bold text-gray-700 mb-2">ملاحظات الكابتن</label>
-                    <textarea rows="2" placeholder="ملاحظات إضافية..." class="w-full p-3 rounded-xl bg-gray-50 border-none focus:ring-2 focus:ring-red-500 text-sm"></textarea>
+                    <textarea rows="2" placeholder="ملاحظات إضافية..."
+                        class="w-full p-3 rounded-xl bg-gray-50 border-none focus:ring-2 focus:ring-red-500 text-sm"></textarea>
                 </div>
                 <div class="flex gap-3 mt-6 pt-2">
-                    <button onclick="closeFailureModal()" class="flex-1 py-3.5 rounded-2xl bg-gray-100 text-gray-600 font-bold text-sm active:scale-95 transition">إلغاء</button>
-                    <button onclick="reportFailure()" class="flex-[2] py-3.5 rounded-2xl bg-red-600 text-white font-bold text-sm shadow-lg shadow-red-200 active:scale-95 transition">إرسال تقرير الفشل</button>
+                    <button onclick="closeFailureModal()"
+                        class="flex-1 py-3.5 rounded-2xl bg-gray-100 text-gray-600 font-bold text-sm active:scale-95 transition">إلغاء</button>
+                    <button onclick="reportFailure()"
+                        class="flex-[2] py-3.5 rounded-2xl bg-red-600 text-white font-bold text-sm shadow-lg shadow-red-200 active:scale-95 transition">إرسال
+                        تقرير الفشل</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- New Shipment Offer Modal -->
+    <div id="offerModal"
+        class="fixed inset-0 bg-black/80 z-[70] hidden flex flex-col justify-center items-center backdrop-blur-md px-6">
+        <div class="bg-white w-full max-w-sm rounded-[2rem] p-6 animate-bounce-in relative overflow-hidden">
+            <!-- Pulsing Background -->
+            <div class="absolute inset-0 bg-indigo-500/10 animate-pulse"></div>
+
+            <div class="relative z-10 text-center">
+                <div
+                    class="w-16 h-16 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-inner">
+                    <i class="fa-solid fa-bolt text-3xl animate-pulse"></i>
+                </div>
+
+                <h3 id="offerTitle" class="text-2xl font-black text-gray-800 mb-2">طلب توصيل جديد!</h3>
+                <p class="text-gray-500 text-sm mb-6">كن الأسرع في قبول الطلب للحصول عليه.</p>
+
+                <div class="bg-gray-50 p-4 rounded-2xl mb-6 border border-gray-100">
+                    <p class="text-[10px] text-gray-400 font-bold uppercase mb-1">الوجهة</p>
+                    <p id="offerLocation" class="text-lg font-bold text-gray-800">...</p>
+                </div>
+
+                <div class="flex gap-3">
+                    <button onclick="rejectOffer()"
+                        class="flex-1 py-4 rounded-2xl bg-gray-100 text-gray-500 font-bold active:scale-95 transition">تجاهل</button>
+                    <button onclick="acceptOffer()"
+                        class="flex-[2] py-4 rounded-2xl bg-indigo-600 text-white font-bold text-lg shadow-xl shadow-indigo-300 active:scale-95 transition animate-pulse">قبول
+                        الطلب ⚡</button>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
+        // Fetch Driver Tasks
+        document.addEventListener('DOMContentLoaded', async () => {
+            const storedDriverId = localStorage.getItem('userId');
+            // If no ID and not on login page, technically should redirect, but for dev we allow fallback or check
+            const driverId = storedDriverId || '101';
+            window.currentDriverId = driverId;
+
+            // 1. Initial Data Load
+            loadTasks(driverId);
+
+            // 2. Fetch Header Info (Name, Stats)
+            try {
+                const res = await fetch(`http://localhost:3000/api/driver/profile?driverId=${driverId}`);
+                const data = await res.json();
+
+                if (data.success && data.profile) {
+                    // Update Name
+                    const nameEl = document.querySelector('header h1');
+                    if (nameEl) nameEl.textContent = data.profile.name;
+
+                    // Update Avatar
+                    const avatarEl = document.querySelector('header img');
+                    if (avatarEl) {
+                        avatarEl.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(data.profile.name)}&background=c7d2fe&color=3730a3&bold=true`;
+                    }
+
+                    // Update Stats (Delivered Count, Active, Cash)
+                    // The stats are in 3 boxes: Remaining (Active), Delivered, Cash (Wallet)
+                    const statValues = document.querySelectorAll('header .flex.justify-between.gap-3 .text-xl.font-bold');
+                    if (statValues.length >= 3) {
+                        // Box 1: Active
+                        statValues[0].textContent = data.profile.stats.active;
+                        // Box 2: Delivered
+                        statValues[1].textContent = data.profile.stats.completed;
+                        // Box 3: Cash
+                        statValues[2].textContent = (data.profile.wallet_balance || 0) + ' د.ل';
+                    }
+                }
+            } catch (e) {
+                console.error("Failed to load driver profile", e);
+            }
+        });
+
+        async function loadTasks(driverId) {
+            const container = document.getElementById('tasksContainer');
+            try {
+                const res = await fetch(`http://localhost:3000/api/driver/tasks?driverId=${driverId}`);
+                const data = await res.json();
+
+                if (data.success && data.tasks.length > 0) {
+                    container.innerHTML = '';
+
+                    // 1. Current Task (First one)
+                    const currentTask = data.tasks[0];
+                    renderCurrentTask(currentTask, container);
+
+                    // 2. Upcoming Tasks (Rest)
+                    if (data.tasks.length > 1) {
+                        const upcomingHtml = `<h3 class="font-bold text-gray-400 text-sm mt-6 mb-2 px-1">المهام القادمة</h3>`;
+                        container.insertAdjacentHTML('beforeend', upcomingHtml);
+
+                        for (let i = 1; i < data.tasks.length; i++) {
+                            renderUpcomingTask(data.tasks[i], i + 1, container);
+                        }
+                    }
+
+                } else {
+                    container.innerHTML = `
+                    <div class="text-center py-20 opacity-50">
+                        <i class="fa-solid fa-box-open text-6xl text-gray-300 mb-4"></i>
+                        <p class="font-bold text-gray-400">لا توجد مهام حالياً</p>
+                        <p class="text-xs text-gray-400 mt-2">استرح قليلاً! ☕</p>
+                    </div>`;
+                }
+
+            } catch (e) {
+                console.error(e);
+                container.innerHTML = '<p class="text-center text-red-400 py-10">فشل تحميل المهام</p>';
+            }
+        }
+
+        function renderCurrentTask(task, container) {
+            const html = `
+            <h3 class="font-bold text-gray-800 text-base mb-2 px-1 flex items-center gap-2">
+                <span class="w-2 h-2 bg-indigo-600 rounded-full"></span> الشحنة الحالية (الأولوية)
+            </h3>
+
+            <div class="bg-white p-5 rounded-3xl shadow-lg border border-indigo-100 relative overflow-hidden group">
+                <div class="absolute right-0 top-0 bottom-0 w-1.5 bg-indigo-500"></div>
+
+                <div class="flex justify-between items-start mb-4 pl-2">
+                    <div>
+                        <h2 class="text-xl font-bold text-gray-800">${task.client_name || 'عميل محترم'}</h2>
+                        <p class="text-sm text-gray-500 mt-1 flex items-center gap-1">
+                            <i class="fa-solid fa-location-dot text-indigo-500"></i> ${task.destination_address}
+                        </p>
+                    </div>
+                    <span class="bg-indigo-50 text-indigo-600 font-mono font-bold text-xs px-2 py-1 rounded-lg">#${task.shipment_id}</span>
+                </div>
+
+                <div class="flex gap-3 mb-4 pl-2">
+                    <button onclick="window.open('tel:${task.client_phone || '0910000000'}')"
+                        class="flex-1 bg-green-50 text-green-600 py-3 rounded-2xl font-bold text-sm flex items-center justify-center gap-2 border border-green-100 hover:bg-green-100 transition active:scale-95 shadow-sm">
+                        <i class="fa-solid fa-phone"></i> اتصال
+                    </button>
+                    <a href="driver-map.html"
+                        class="flex-1 bg-blue-50 text-blue-600 py-3 rounded-2xl font-bold text-sm flex items-center justify-center gap-2 border border-blue-100 hover:bg-blue-100 transition active:scale-95 shadow-sm text-decoration-none">
+                        <i class="fa-solid fa-diamond-turn-right"></i> الخريطة
+                    </a>
+                </div>
+
+                <div class="bg-gray-50 p-3 rounded-2xl flex justify-between items-center border border-gray-100 mb-4 pl-2">
+                    <span class="text-xs font-bold text-gray-500">المطلوب تحصيله</span>
+                    <span class="font-black text-xl text-indigo-600">${task.estimated_cost || '0'} د.ل</span>
+                </div>
+
+                <div class="flex gap-3">
+                    <button onclick="openDeliveryModal()"
+                        class="flex-[2] bg-indigo-600 text-white font-bold py-3.5 rounded-2xl shadow-lg shadow-indigo-200 hover:bg-indigo-700 transition flex justify-center items-center gap-2 active:scale-95">
+                        <i class="fa-solid fa-check-circle"></i> إتمام التسليم
+                    </button>
+                    <button onclick="openFailureModal()"
+                        class="flex-1 bg-red-50 text-red-600 font-bold py-3.5 rounded-2xl border border-red-100 hover:bg-red-100 transition flex justify-center items-center gap-2 active:scale-95">
+                        <i class="fa-solid fa-xmark"></i> فشل
+                    </button>
+                </div>
+            </div>`;
+            container.insertAdjacentHTML('beforeend', html);
+        }
+
+        function renderUpcomingTask(task, index, container) {
+            const html = `
+            <div class="bg-white p-4 rounded-3xl shadow-sm border border-gray-100 opacity-80 pl-4 mb-3">
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-gray-400 font-bold">${index}</div>
+                        <div>
+                            <h4 class="font-bold text-gray-700">${task.client_name || 'عميل'}</h4>
+                            <p class="text-xs text-gray-500">${task.destination_address}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+            container.insertAdjacentHTML('beforeend', html);
+        }
+
         function openDeliveryModal() { document.getElementById('deliveryModal').classList.remove('hidden'); }
         function closeDeliveryModal() { document.getElementById('deliveryModal').classList.add('hidden'); }
-        
+
         // وظائف الفشل الجديدة
         function openFailureModal() { document.getElementById('failureModal').classList.remove('hidden'); }
         function closeFailureModal() { document.getElementById('failureModal').classList.add('hidden'); }
@@ -240,16 +387,89 @@
         function reportFailure() {
             const reason = document.getElementById('failureReason').value;
             if (reason) {
-                 alert("تم إرسال تقرير الفشل بنجاح: " + reason);
-                 closeFailureModal();
+                alert("تم إرسال تقرير الفشل بنجاح: " + reason);
+                closeFailureModal();
             }
+        }
+
+        // ==========================================
+        // SOCKET.IO LOGIC
+        // ==========================================
+        const socket = io("http://localhost:3000"); // Connect to Backend
+        let currentOfferId = null;
+
+
+        socket.on("connect", () => {
+            console.log("⚡ Connected to Server");
+            const dId = window.currentDriverId || 101;
+            socket.emit("join_driver_room", dId);
+        });
+
+        // Listen for New Shipment Offers
+        socket.on("new_shipment", (shipment) => {
+            console.log("📦 New Shipment Offer:", shipment);
+            currentOfferId = shipment.shipment_id;
+
+            // Populate Modal
+            document.getElementById('offerTitle').innerText = `طلب توصيل جديد #${shipment.shipment_id}`;
+            document.getElementById('offerLocation').innerText = shipment.destination_address || 'طرابلس';
+
+            // Show Modal
+            document.getElementById('offerModal').classList.remove('hidden');
+
+            // Play Sound (Optional)
+            // const audio = new Audio('alert.mp3'); audio.play();
+        });
+
+        // Accept Offer
+        function acceptOffer() {
+            if (!currentOfferId) return;
+            const dId = window.currentDriverId || 101;
+            socket.emit("accept_shipment", { driverId: dId, shipmentId: currentOfferId });
+            document.getElementById('offerModal').classList.add('hidden');
+        }
+
+        // Handle Success
+        socket.on("assignment_success", (data) => {
+            alert(data.message);
+            // Reload to show in "Current Shipment" (In a real SPA we'd just update state)
+            location.reload();
+        });
+
+        // Handle Failure (Another driver took it)
+        socket.on("assignment_failed", (data) => {
+            alert(data.message);
+        });
+
+        // Handle 'Shipment Taken' (Broadcast to everyone else to close the modal if open)
+        socket.on("shipment_taken", (data) => {
+            if (currentOfferId === data.shipmentId) {
+                document.getElementById('offerModal').classList.add('hidden');
+                // Optional: Show small toast "Shipment taken by another driver"
+            }
+        });
+
+        function rejectOffer() {
+            document.getElementById('offerModal').classList.add('hidden');
         }
     </script>
 
     <style>
-        @keyframes slide-up { from { transform: translateY(100%); } to { transform: translateY(0); } }
-        .animate-slide-up { animation: slide-up 0.3s ease-out forwards; }
+        @keyframes slide-up {
+            from {
+                transform: translateY(100%);
+            }
+
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        .animate-slide-up {
+            animation: slide-up 0.3s ease-out forwards;
+        }
     </style>
 
 </body>
+
 </html>

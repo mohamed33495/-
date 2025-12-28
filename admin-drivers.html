@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -9,108 +10,111 @@
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { font-family: 'Tajawal', sans-serif; -webkit-tap-highlight-color: transparent; }
-        .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
-        .no-scrollbar::-webkit-scrollbar { display: none; }
+        body {
+            font-family: 'Tajawal', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .pb-safe {
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
     </style>
 </head>
+
 <body class="bg-gray-100 text-gray-800 h-screen flex flex-col overflow-hidden selection:bg-slate-300">
 
     <div class="fixed top-0 left-0 w-full h-40 bg-slate-700 rounded-b-[2.5rem] z-0 shadow-lg"></div>
 
     <div class="relative z-10 flex-1 overflow-y-auto pb-28 no-scrollbar">
-        
+
         <header class="px-6 pt-10 pb-6 text-white flex justify-between items-center">
             <div>
                 <h1 class="text-2xl font-bold">إدارة الأسطول 🛵</h1>
                 <p class="text-slate-300 text-xs mt-1">توزيع المهام ومراقبة السائقين</p>
             </div>
-            <button class="bg-blue-500 text-white px-3 py-1.5 rounded-lg text-xs font-bold shadow-lg hover:bg-blue-400">إضافة كابتن</button>
+            <div class="flex gap-2">
+                <a href="admin-requests.html"
+                    class="bg-indigo-500 text-white px-3 py-1.5 rounded-lg text-xs font-bold shadow-lg hover:bg-indigo-400 flex items-center gap-1">
+                    <i class="fa-solid fa-user-clock"></i> الطلبات
+                </a>
+            </div>
         </header>
 
         <main class="px-4 mt-2 space-y-4">
 
-            <div class="bg-white p-4 rounded-2xl shadow-xl border-t-4 border-red-500/50 relative overflow-hidden">
-                <h3 class="font-bold text-gray-800 text-sm mb-4 flex items-center gap-2">
-                    <i class="fa-solid fa-user-plus text-red-500"></i> طلبات انضمام جديدة (1)
-                </h3>
 
-                <div class="bg-red-50 p-3 rounded-xl border border-red-200 mb-3">
-                    <div class="flex justify-between items-center mb-2">
-                        <div class="flex items-center gap-3">
-                            <img src="https://ui-avatars.com/api/?name=Fahad+Ali&background=e2e8f0&color=f87171" class="w-10 h-10 rounded-full border border-red-300">
-                            <div>
-                                <h4 class="font-bold text-red-700 text-sm">فهد علي</h4>
-                                <p class="text-xs text-red-500">هاتف: 092xxxxxx</p>
-                            </div>
-                        </div>
-                        <span class="text-[10px] text-gray-500">منذ ساعة</span>
-                    </div>
-                    
-                    <div class="flex gap-2 border-t border-red-100 pt-2">
-                        <button class="flex-1 py-2 bg-green-600 text-white rounded-lg text-xs font-bold active:scale-95 transition">قبول ✅</button>
-                        <button class="flex-1 py-2 bg-red-600 text-white rounded-lg text-xs font-bold active:scale-95 transition">رفض</button>
-                        <button class="py-2 bg-gray-200 text-gray-700 rounded-lg text-xs font-bold">مراجعة البيانات</button>
-                    </div>
-                </div>
-            </div>
+
             <h3 class="font-bold text-gray-700 text-sm mb-3 px-2">الأسطول النشط</h3>
 
-            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 relative overflow-hidden active:scale-[0.99] transition">
-                <div class="absolute top-0 left-0 w-1 h-full bg-green-500"></div>
-                <div class="flex justify-between items-start mb-3 pl-2">
-                    <div class="flex items-center gap-3">
-                        <img src="https://ui-avatars.com/api/?name=Ahmed&background=random" class="w-12 h-12 rounded-xl shadow-sm">
-                        <div>
-                            <h3 class="font-bold text-gray-800">كابتن أحمد</h3>
-                            <p class="text-[10px] text-gray-500">طرابلس المركز</p>
-                        </div>
-                    </div>
-                    <span class="text-[10px] bg-green-50 text-green-600 px-2 py-1 rounded font-bold">متصل</span>
-                </div>
-                
-                <div class="grid grid-cols-3 gap-2 pl-2 border-t border-gray-50 pt-2">
-                    <div class="bg-gray-50 p-2 rounded-lg text-center border border-gray-100">
-                        <span class="block text-[10px] text-gray-400">معه الآن</span>
-                        <span class="font-bold text-gray-800">5 شحنات</span>
-                    </div>
-                    <div class="bg-gray-50 p-2 rounded-lg text-center border border-gray-100">
-                        <span class="block text-[10px] text-gray-400">العهدة</span>
-                        <span class="font-bold text-indigo-600">250 د.ل</span>
-                    </div>
-                    <button class="bg-blue-600 text-white rounded-lg text-xs font-bold hover:bg-blue-500 active:scale-95 transition">تعيين مهام</button>
-                </div>
-            </div>
-
-            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 relative overflow-hidden active:scale-[0.99] transition opacity-75">
-                <div class="absolute top-0 left-0 w-1 h-full bg-gray-400"></div>
-                <div class="flex justify-between items-start mb-3 pl-2">
-                    <div class="flex items-center gap-3">
-                        <img src="https://ui-avatars.com/api/?name=Salem&background=random" class="w-12 h-12 rounded-xl shadow-sm grayscale">
-                        <div>
-                            <h3 class="font-bold text-gray-800">كابتن سالم</h3>
-                            <p class="text-[10px] text-gray-400">تاجوراء</p>
-                        </div>
-                    </div>
-                    <span class="text-[10px] bg-gray-100 text-gray-500 px-2 py-1 rounded font-bold">غير متصل</span>
+            <div id="activeFleetContainer" class="space-y-4">
+                <!-- Loading State -->
+                <div class="text-center py-10 text-gray-400">
+                    <i class="fa-solid fa-spinner fa-spin text-2xl"></i>
+                    <p class="text-xs mt-2">جاري تحميل السائقين...</p>
                 </div>
             </div>
 
         </main>
     </div>
 
-    <nav class="fixed bottom-6 left-4 right-4 bg-slate-800/95 backdrop-blur-xl border border-white/10 shadow-2xl rounded-2xl flex justify-around items-center py-3 z-50">
-        
-        <a href="admin-panel.html" class="flex flex-col items-center gap-1 text-slate-400 hover:text-white transition group">
+    <!-- Driver Details Modal -->
+    <div id="driverDetailsModal"
+        class="fixed inset-0 bg-black/50 z-[60] hidden flex items-end justify-center sm:items-center">
+        <div class="bg-white w-full sm:w-96 rounded-t-3xl sm:rounded-3xl p-6 transform transition-transform duration-300 translate-y-full sm:translate-y-0"
+            id="modalContent">
+            <div class="w-12 h-1 bg-gray-200 rounded-full mx-auto mb-6"></div>
+
+            <div class="text-center mb-6">
+                <img id="modalImg" src="" class="w-20 h-20 rounded-2xl mx-auto shadow-md mb-3">
+                <h3 id="modalName" class="text-xl font-bold text-gray-800"></h3>
+                <p id="modalLocation" class="text-sm text-gray-500"></p>
+                <div id="modalStatus" class="mt-2 inline-block px-3 py-1 rounded-full text-xs font-bold"></div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3 mb-6">
+                <div class="bg-slate-50 p-3 rounded-xl text-center border border-slate-100">
+                    <span class="block text-xs text-slate-400 mb-1">الشحنات الحالية</span>
+                    <span id="modalShipments" class="text-lg font-bold text-slate-800"></span>
+                </div>
+                <div class="bg-slate-50 p-3 rounded-xl text-center border border-slate-100">
+                    <span class="block text-xs text-slate-400 mb-1">العهدة المالية</span>
+                    <span id="modalCash" class="text-lg font-bold text-indigo-600"></span>
+                </div>
+            </div>
+
+            <div class="space-y-3">
+                <button id="freezeBtn" onclick="toggleFreezeDriver()"
+                    class="w-full py-3 rounded-xl font-bold shadow-lg active:scale-95 transition text-white">
+                    تجميد الحساب ❄️
+                </button>
+                <button onclick="closeDriverModal()"
+                    class="w-full bg-gray-100 text-gray-600 py-3 rounded-xl font-bold hover:bg-gray-200 active:scale-95 transition">
+                    إغلاق
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <nav
+        class="fixed bottom-6 left-4 right-4 bg-slate-800/95 backdrop-blur-xl border border-white/10 shadow-2xl rounded-2xl flex justify-around items-center py-3 z-50">
+
+        <a href="admin-panel.html"
+            class="flex flex-col items-center gap-1 text-slate-400 hover:text-white transition group">
             <i class="fa-solid fa-gauge-high text-xl group-active:scale-90 transition"></i>
         </a>
 
-        <a href="admin-shipments.html" class="flex flex-col items-center gap-1 text-slate-400 hover:text-white transition group">
+        <a href="admin-shipments.html"
+            class="flex flex-col items-center gap-1 text-slate-400 hover:text-white transition group">
             <i class="fa-solid fa-boxes-stacked text-xl group-active:scale-90 transition"></i>
         </a>
 
         <div class="relative -top-8">
-            <button class="bg-blue-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg shadow-blue-500/40 border-4 border-gray-100 transform active:scale-90 transition">
+            <button
+                class="bg-blue-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg shadow-blue-500/40 border-4 border-gray-100 transform active:scale-90 transition">
                 <i class="fa-solid fa-plus text-2xl"></i>
             </button>
         </div>
@@ -120,11 +124,175 @@
             <span class="absolute -bottom-2 w-1 h-1 bg-white rounded-full"></span>
         </a>
 
-        <a href="admin-menu.html" class="flex flex-col items-center gap-1 text-slate-400 hover:text-white transition group">
+        <a href="admin-menu.html"
+            class="flex flex-col items-center gap-1 text-slate-400 hover:text-white transition group">
             <i class="fa-solid fa-bars text-xl group-active:scale-90 transition"></i>
         </a>
 
     </nav>
 
+    <script>
+        let currentDriverId = null;
+        let currentIsFrozen = false;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchDrivers();
+        });
+
+        async function fetchDrivers() {
+            try {
+                const response = await fetch('http://localhost:3000/api/admin/drivers');
+                const data = await response.json();
+
+                if (data.success) {
+                    renderDrivers(data.drivers);
+                } else {
+                    document.getElementById('activeFleetContainer').innerHTML = '<p class="text-center text-red-500">فشل في تحميل البيانات</p>';
+                }
+            } catch (err) {
+                console.error(err);
+                document.getElementById('activeFleetContainer').innerHTML = `<p class="text-center text-red-500">خطأ: ${err.message}</p>`;
+            }
+        }
+
+        function renderDrivers(drivers) {
+            const container = document.getElementById('activeFleetContainer');
+            if (drivers.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-10 opacity-50">
+                        <i class="fa-solid fa-users-slash text-4xl mb-2"></i>
+                        <p>لا يوجد سائقين نشطين حالياً</p>
+                    </div>
+                `;
+                return;
+            }
+
+            let html = '';
+            drivers.forEach(driver => {
+                const isOnline = driver.availability_status === 'Available';
+                const statusColor = isOnline ? 'green' : 'gray';
+                const statusText = isOnline ? 'متصل' : 'غير متصل';
+                const opacity = isOnline ? '' : 'opacity-75';
+                const grayscale = isOnline ? '' : 'grayscale';
+                const frozenBorder = driver.is_frozen ? 'border-red-500 border-2' : 'border-gray-100';
+
+                html += `
+                <div onclick="showDriverDetails(${driver.user_id}, '${driver.full_name}', '${driver.truck_number || 'غير محدد'}', '${statusText}', ${driver.active_shipments}, ${driver.wallet_balance}, ${driver.is_frozen})"
+                    class="bg-white p-4 rounded-2xl shadow-sm border ${frozenBorder} relative overflow-hidden active:scale-[0.99] transition cursor-pointer ${opacity}">
+                    <div class="absolute top-0 left-0 w-1 h-full bg-${statusColor}-500"></div>
+                    <div class="flex justify-between items-start pl-2">
+                        <div class="flex items-center gap-3">
+                            <img src="https://ui-avatars.com/api/?name=${driver.full_name}&background=random"
+                                class="w-12 h-12 rounded-xl shadow-sm ${grayscale}">
+                            <div>
+                                <h3 class="font-bold text-gray-800">كابتن ${driver.full_name}</h3>
+                                <p class="text-[10px] text-gray-500">${driver.truck_number || 'نوع السيارة غير محدد'}</p>
+                            </div>
+                        </div>
+                        <span class="text-[10px] bg-${statusColor}-50 text-${statusColor}-600 px-2 py-1 rounded font-bold">
+                            ${driver.is_frozen ? 'مجمد ❄️' : statusText}
+                        </span>
+                    </div>
+                </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        function showDriverDetails(id, name, location, status, shipments, cash, isFrozen = false) {
+            currentDriverId = id;
+            currentIsFrozen = isFrozen;
+
+            const modal = document.getElementById('driverDetailsModal');
+            const content = document.getElementById('modalContent');
+
+            // Populate Data
+            document.getElementById('modalName').textContent = 'كابتن ' + name;
+            document.getElementById('modalLocation').textContent = location;
+            document.getElementById('modalImg').src = `https://ui-avatars.com/api/?name=${name}&background=random&size=128`;
+            document.getElementById('modalShipments').textContent = shipments + ' شحنات';
+            document.getElementById('modalCash').textContent = cash + ' د.ل';
+
+            const statusEl = document.getElementById('modalStatus');
+            if (status === 'متصل') {
+                statusEl.className = 'mt-2 inline-block px-3 py-1 rounded-full text-xs font-bold bg-green-100 text-green-600';
+                statusEl.textContent = 'متصل ✅';
+            } else {
+                statusEl.className = 'mt-2 inline-block px-3 py-1 rounded-full text-xs font-bold bg-gray-100 text-gray-500';
+                statusEl.textContent = 'غير متصل 💤';
+            }
+
+            // Update Freeze Button
+            updateFreezeButton();
+
+            // Show
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                content.classList.remove('translate-y-full');
+            }, 10);
+        }
+
+        function updateFreezeButton() {
+            const btn = document.getElementById('freezeBtn');
+            if (currentIsFrozen) {
+                btn.textContent = 'إلغاء التجميد 🔓';
+                btn.className = 'w-full py-3 rounded-xl font-bold shadow-lg active:scale-95 transition text-white bg-gray-600 hover:bg-gray-500';
+            } else {
+                btn.textContent = 'تجميد الحساب ❄️';
+                btn.className = 'w-full py-3 rounded-xl font-bold shadow-lg active:scale-95 transition text-white bg-red-500 hover:bg-red-400';
+            }
+        }
+
+        async function toggleFreezeDriver() {
+            if (!currentDriverId) return;
+
+            const action = currentIsFrozen ? 'unfreeze' : 'freeze';
+            const confirmMsg = currentIsFrozen ? 'هل أنت متأكد من إلغاء تجميد هذا الحساب؟' : 'هل أنت متأكد من تجميد هذا الحساب؟ لن يتمكن السائق من الدخول.';
+
+            if (!confirm(confirmMsg)) return;
+
+            try {
+                const response = await fetch('/api/admin/driver/freeze', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ userId: currentDriverId, action: action })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    alert(data.message);
+                    currentIsFrozen = !currentIsFrozen;
+                    updateFreezeButton();
+                    closeDriverModal();
+                    fetchDrivers(); // Refresh list to update UI state
+                } else {
+                    alert('حدث خطأ: ' + data.message);
+                }
+            } catch (err) {
+                console.error(err);
+                alert('فشل الاتصال بالخادم');
+            }
+        }
+
+        function closeDriverModal() {
+            const modal = document.getElementById('driverDetailsModal');
+            const content = document.getElementById('modalContent');
+
+            content.classList.add('translate-y-full');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        // Close on background click
+        document.getElementById('driverDetailsModal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('driverDetailsModal')) {
+                closeDriverModal();
+            }
+        });
+    </script>
+
 </body>
+
 </html>

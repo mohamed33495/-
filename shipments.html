@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -8,25 +9,44 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
     <title>شحناتي | شحنتي</title>
-    
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <style>
-        body { font-family: 'Tajawal', sans-serif; -webkit-tap-highlight-color: transparent; overscroll-behavior-y: none; }
-        ::-webkit-scrollbar { width: 0px; background: transparent; }
-        .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        body {
+            font-family: 'Tajawal', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+            overscroll-behavior-y: none;
+        }
+
+        ::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+        }
+
+        .pb-safe {
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
     </style>
 </head>
+
 <body class="bg-gray-50 text-gray-800 h-screen flex flex-col overflow-hidden selection:bg-indigo-200">
 
     <div class="fixed top-0 left-0 w-full h-40 bg-indigo-600 rounded-b-[2.5rem] z-0 shadow-lg"></div>
 
     <div class="relative z-10 flex-1 overflow-y-auto pb-28 no-scrollbar">
-        
+
         <header class="px-6 pt-10 pb-2 flex justify-between items-center text-white mb-4">
             <div>
                 <h1 class="text-2xl font-bold">سجل الشحنات 📦</h1>
@@ -38,147 +58,44 @@
         </header>
 
         <div class="px-6 space-y-4 mb-6">
-            
+
             <div class="relative shadow-lg rounded-2xl">
-                <input type="text" placeholder="بحث برقم التتبع..." class="w-full h-12 pr-12 pl-4 rounded-2xl border-none focus:ring-2 focus:ring-indigo-500 text-sm shadow-sm bg-white text-gray-700">
+                <input type="text" placeholder="بحث برقم التتبع..."
+                    class="w-full h-12 pr-12 pl-4 rounded-2xl border-none focus:ring-2 focus:ring-indigo-500 text-sm shadow-sm bg-white text-gray-700">
                 <div class="absolute top-0 right-0 h-12 w-12 flex items-center justify-center text-gray-400">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </div>
             </div>
 
             <div class="flex gap-2 overflow-x-auto no-scrollbar py-1">
-                <button class="px-5 py-2 bg-indigo-600 text-white rounded-full text-xs font-bold shadow-md whitespace-nowrap border border-indigo-600 transition">الكل (12)</button>
-                <button class="px-5 py-2 bg-white text-gray-500 rounded-full text-xs font-bold shadow-sm whitespace-nowrap border border-transparent hover:border-gray-200 transition">في المستودع (3)</button>
-                <button class="px-5 py-2 bg-white text-gray-500 rounded-full text-xs font-bold shadow-sm whitespace-nowrap border border-transparent hover:border-gray-200 transition">جاري الشحن (2)</button>
-                <button class="px-5 py-2 bg-white text-gray-500 rounded-full text-xs font-bold shadow-sm whitespace-nowrap border border-transparent hover:border-gray-200 transition">تم التسليم (7)</button>
+                <button
+                    class="px-5 py-2 bg-indigo-600 text-white rounded-full text-xs font-bold shadow-md whitespace-nowrap border border-indigo-600 transition">الكل
+                    (12)</button>
+                <button
+                    class="px-5 py-2 bg-white text-gray-500 rounded-full text-xs font-bold shadow-sm whitespace-nowrap border border-transparent hover:border-gray-200 transition">في
+                    المستودع (3)</button>
+                <button
+                    class="px-5 py-2 bg-white text-gray-500 rounded-full text-xs font-bold shadow-sm whitespace-nowrap border border-transparent hover:border-gray-200 transition">جاري
+                    الشحن (2)</button>
+                <button
+                    class="px-5 py-2 bg-white text-gray-500 rounded-full text-xs font-bold shadow-sm whitespace-nowrap border border-transparent hover:border-gray-200 transition">تم
+                    التسليم (7)</button>
             </div>
         </div>
 
-        <main class="px-6 space-y-4">
-
-            <div onclick="window.location.href='package-details.html'" class="bg-white p-5 rounded-3xl shadow-sm border border-gray-100 relative overflow-hidden group active:scale-[0.98] transition duration-200">
-                <div class="absolute right-0 top-0 bottom-0 w-1.5 bg-blue-500"></div>
-                
-                <div class="flex justify-between items-start mb-3 pl-2">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center text-lg">
-                            <i class="fa-solid fa-box"></i>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-gray-800 text-sm">شحنة إلكترونيات</h3>
-                            <p class="text-[10px] text-gray-400 font-mono mt-0.5">#TRK-998822</p>
-                        </div>
-                    </div>
-                    <span class="bg-blue-100 text-blue-700 text-[10px] px-2.5 py-1 rounded-lg font-bold">في المستودع</span>
-                </div>
-
-                <div class="flex items-center justify-between text-xs text-gray-500 border-t border-gray-50 pt-3 mt-2 pl-2">
-                    <div class="flex items-center gap-2">
-                        <img src="https://flagcdn.com/w20/cn.png" class="w-4 rounded-sm shadow-sm"> 
-                        <i class="fa-solid fa-arrow-left text-gray-300 text-[10px]"></i>
-                        <img src="https://flagcdn.com/w20/ly.png" class="w-4 rounded-sm shadow-sm">
-                    </div>
-                    <div class="flex items-center gap-4">
-                        <span class="font-bold text-gray-800">2.5 kg</span>
-                        <span class="text-blue-600 font-bold flex items-center gap-1 group-hover:underline">
-                            التفاصيل <i class="fa-solid fa-chevron-left text-[8px]"></i>
-                        </span>
-                    </div>
-                </div>
+        <main class="px-6 space-y-4" id="shipmentsList">
+            <div class="text-center py-10 opacity-60">
+                <i class="fa-solid fa-spinner fa-spin text-3xl mb-4 text-indigo-600"></i>
+                <p>جاري تحميل شحناتك...</p>
             </div>
-
-            <div class="bg-white p-5 rounded-3xl shadow-sm border border-gray-100 relative overflow-hidden group active:scale-[0.98] transition duration-200">
-                <div class="absolute right-0 top-0 bottom-0 w-1.5 bg-amber-500"></div>
-                
-                <div class="flex justify-between items-start mb-3 pl-2">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 bg-amber-50 text-amber-600 rounded-xl flex items-center justify-center text-lg">
-                            <i class="fa-solid fa-plane-up"></i>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-gray-800 text-sm">ملابس العيد</h3>
-                            <p class="text-[10px] text-gray-400 font-mono mt-0.5">#AWB-554433</p>
-                        </div>
-                    </div>
-                    <span class="bg-amber-100 text-amber-700 text-[10px] px-2.5 py-1 rounded-lg font-bold">جاري الشحن</span>
-                </div>
-
-                <div class="flex items-center justify-between text-xs text-gray-500 border-t border-gray-50 pt-3 mt-2 pl-2">
-                    <div class="flex items-center gap-2">
-                        <img src="https://flagcdn.com/w20/tr.png" class="w-4 rounded-sm shadow-sm"> 
-                        <i class="fa-solid fa-arrow-left text-gray-300 text-[10px]"></i>
-                        <img src="https://flagcdn.com/w20/ly.png" class="w-4 rounded-sm shadow-sm">
-                    </div>
-                    <div class="flex items-center gap-4">
-                        <span class="font-bold text-gray-800">5.0 kg</span>
-                        <button onclick="window.location.href='tracking.html?id=AWB-554433'" class="text-amber-600 font-bold bg-amber-50 px-2 py-1 rounded border border-amber-100 hover:bg-amber-100 transition">
-                            تتبع المسار
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="bg-white p-5 rounded-3xl shadow-sm border border-gray-100 relative overflow-hidden group active:scale-[0.98] transition duration-200">
-                <div class="absolute right-0 top-0 bottom-0 w-1.5 bg-red-500"></div>
-                
-                <div class="flex justify-between items-start mb-3 pl-2">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 bg-red-50 text-red-600 rounded-xl flex items-center justify-center text-lg">
-                            <i class="fa-solid fa-credit-card"></i>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-gray-800 text-sm">قطع غيار سيارات</h3>
-                            <p class="text-[10px] text-gray-400 font-mono mt-0.5">#TRK-112233</p>
-                        </div>
-                    </div>
-                    <span class="bg-red-100 text-red-700 text-[10px] px-2.5 py-1 rounded-lg font-bold">بانتظار الدفع</span>
-                </div>
-
-                <div class="flex items-center justify-between text-xs text-gray-500 border-t border-gray-50 pt-3 mt-2 pl-2">
-                    <div class="flex items-center gap-2">
-                        <img src="https://flagcdn.com/w20/us.png" class="w-4 rounded-sm shadow-sm"> 
-                        <i class="fa-solid fa-arrow-left text-gray-300 text-[10px]"></i>
-                        <img src="https://flagcdn.com/w20/ly.png" class="w-4 rounded-sm shadow-sm">
-                    </div>
-                    <div class="flex items-center gap-4">
-                        <span class="font-bold text-gray-800">1.2 kg</span>
-                        <a href="checkout.html" class="text-white font-bold bg-red-500 px-3 py-1 rounded-lg shadow-sm shadow-red-200 hover:bg-red-600 transition">
-                            ادفع الآن
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="bg-white/60 p-5 rounded-3xl shadow-sm border border-gray-100 relative overflow-hidden group active:scale-[0.98] transition duration-200">
-                <div class="absolute right-0 top-0 bottom-0 w-1.5 bg-gray-300"></div>
-                
-                <div class="flex justify-between items-start mb-3 pl-2">
-                    <div class="flex items-center gap-3 grayscale opacity-70">
-                        <div class="w-10 h-10 bg-gray-100 text-gray-500 rounded-xl flex items-center justify-center text-lg">
-                            <i class="fa-solid fa-check-circle"></i>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-gray-800 text-sm">أحذية رياضية</h3>
-                            <p class="text-[10px] text-gray-400 font-mono mt-0.5">#DHL-123456</p>
-                        </div>
-                    </div>
-                    <span class="bg-green-100 text-green-700 text-[10px] px-2.5 py-1 rounded-lg font-bold">تم التسليم</span>
-                </div>
-
-                <div class="flex items-center justify-between text-xs text-gray-500 border-t border-gray-100 pt-3 mt-2 pl-2">
-                    <span class="text-[10px]">10/09/2023</span>
-                    <button class="text-gray-400 hover:text-gray-600 font-bold flex items-center gap-1">
-                        <i class="fa-solid fa-file-invoice"></i> الفاتورة
-                    </button>
-                </div>
-            </div>
-
         </main>
     </div>
 
-    <nav class="fixed bottom-6 left-4 right-4 bg-white/90 backdrop-blur-xl border border-white/20 shadow-[0_8px_30px_rgb(0,0,0,0.12)] rounded-2xl flex justify-around items-center py-3 z-50">
-        
-        <a href="dashboard.html" class="flex flex-col items-center gap-1 text-gray-400 hover:text-indigo-600 transition group">
+    <nav
+        class="fixed bottom-6 left-4 right-4 bg-white/90 backdrop-blur-xl border border-white/20 shadow-[0_8px_30px_rgb(0,0,0,0.12)] rounded-2xl flex justify-around items-center py-3 z-50">
+
+        <a href="dashboard.html"
+            class="flex flex-col items-center gap-1 text-gray-400 hover:text-indigo-600 transition group">
             <i class="fa-solid fa-house text-xl group-active:scale-90 transition"></i>
         </a>
 
@@ -188,20 +105,143 @@
         </a>
 
         <div class="relative -top-8">
-            <a href="create-shipment.html" class="bg-indigo-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg shadow-indigo-500/40 border-4 border-gray-50 transform active:scale-90 transition">
+            <a href="create-shipment.html"
+                class="bg-indigo-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg shadow-indigo-500/40 border-4 border-gray-50 transform active:scale-90 transition">
                 <i class="fa-solid fa-plus text-2xl"></i>
             </a>
         </div>
 
-        <a href="wallet.html" class="flex flex-col items-center gap-1 text-gray-400 hover:text-indigo-600 transition group">
+        <a href="wallet.html"
+            class="flex flex-col items-center gap-1 text-gray-400 hover:text-indigo-600 transition group">
             <i class="fa-solid fa-wallet text-xl group-active:scale-90 transition"></i>
         </a>
 
-        <a href="profile.html" class="flex flex-col items-center gap-1 text-gray-400 hover:text-indigo-600 transition group">
+        <a href="profile.html"
+            class="flex flex-col items-center gap-1 text-gray-400 hover:text-indigo-600 transition group">
             <i class="fa-solid fa-user-gear text-xl group-active:scale-90 transition"></i>
         </a>
 
     </nav>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const userId = localStorage.getItem('userId');
+            if (!userId) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            try {
+                const response = await fetch(`http://localhost:3000/api/client/shipments?clientId=${userId}`);
+                const data = await response.json();
+                const container = document.getElementById('shipmentsList');
+
+                if (data.success && data.shipments.length > 0) {
+                    container.innerHTML = '';
+
+                    // Calculate Counts
+                    const stats = {
+                        all: data.shipments.length,
+                        warehouse: 0,
+                        shipping: 0,
+                        delivered: 0
+                    };
+
+                    data.shipments.forEach(s => {
+                        if (s.status === 'Pending') stats.warehouse++;
+                        else if (['PickedUp', 'InTransit', 'OutForDelivery'].includes(s.status)) stats.shipping++;
+                        else if (s.status === 'Delivered') stats.delivered++;
+                    });
+
+                    // Update Filter Buttons (Order: All, Warehouse, Shipping, Delivered)
+                    const buttons = document.querySelectorAll('.overflow-x-auto button');
+                    if (buttons.length >= 4) {
+                        buttons[0].textContent = `الكل (${stats.all})`;
+                        buttons[1].textContent = `في المستودع (${stats.warehouse})`;
+                        buttons[2].textContent = `جاري الشحن (${stats.shipping})`;
+                        buttons[3].textContent = `تم التسليم (${stats.delivered})`;
+                    }
+
+                    data.shipments.forEach(ship => {
+                        // Determine Style based on Status
+                        let statusConfig = {
+                            text: ship.status,
+                            color: 'gray',
+                            icon: 'fa-box',
+                            barColor: 'bg-gray-400'
+                        };
+
+                        switch (ship.status) {
+                            case 'Pending':
+                                statusConfig = { text: 'قيد المراجعة', color: 'orange', icon: 'fa-clock', barColor: 'bg-orange-500' };
+                                break;
+                            case 'PickedUp':
+                            case 'InTransit':
+                            case 'OutForDelivery':
+                                statusConfig = { text: 'جاري الشحن', color: 'blue', icon: 'fa-plane-up', barColor: 'bg-blue-500' };
+                                break;
+                            case 'Delivered':
+                                statusConfig = { text: 'تم التسليم', color: 'green', icon: 'fa-check-circle', barColor: 'bg-green-500' };
+                                break;
+                            case 'Cancelled':
+                            case 'Failed':
+                                statusConfig = { text: 'ملغاة/فشلت', color: 'red', icon: 'fa-triangle-exclamation', barColor: 'bg-red-500' };
+                                break;
+                        }
+
+                        // Tailwind Classes Construction
+                        const bgLight = `bg-${statusConfig.color}-50`;
+                        const textDark = `text-${statusConfig.color}-600`;
+                        const textDarker = `text-${statusConfig.color}-700`;
+                        const bgLightest = `bg-${statusConfig.color}-100`;
+
+                        const html = `
+                        <div onclick="window.location.href='package-details.html?id=${ship.shipment_id}'" 
+                             class="bg-white p-5 rounded-3xl shadow-sm border border-gray-100 relative overflow-hidden group active:scale-[0.98] transition duration-200">
+                            <div class="absolute right-0 top-0 bottom-0 w-1.5 ${statusConfig.barColor}"></div>
+                            
+                            <div class="flex justify-between items-start mb-3 pl-2">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 ${bgLight} ${textDark} rounded-xl flex items-center justify-center text-lg">
+                                        <i class="fa-solid ${statusConfig.icon}"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold text-gray-800 text-sm">${ship.content_description || 'شحنة'}</h3>
+                                        <p class="text-[10px] text-gray-400 font-mono mt-0.5">#${ship.shipment_id}</p>
+                                    </div>
+                                </div>
+                                <span class="${bgLightest} ${textDarker} text-[10px] px-2.5 py-1 rounded-lg font-bold">${statusConfig.text}</span>
+                            </div>
+
+                            <div class="flex items-center justify-between text-xs text-gray-500 border-t border-gray-50 pt-3 mt-2 pl-2">
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-calendar-days text-gray-300"></i>
+                                    <span>${new Date(ship.creation_date).toLocaleDateString('ar-LY')}</span>
+                                </div>
+                                <div class="flex items-center gap-4">
+                                    <span class="font-bold text-gray-800">${ship.weight_kg} k.g</span>
+                                    <span class="${textDark} font-bold flex items-center gap-1 group-hover:underline">
+                                        التفاصيل <i class="fa-solid fa-chevron-left text-[8px]"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>`;
+
+                        container.insertAdjacentHTML('beforeend', html);
+                    });
+                } else {
+                    container.innerHTML = `
+                        <div class="text-center py-10 opacity-60">
+                            <i class="fa-solid fa-box-open text-4xl mb-4 text-gray-300"></i>
+                            <p class="text-sm font-bold text-gray-400">لا توجد شحنات مسجلة حالياً</p>
+                        </div>`;
+                }
+            } catch (err) {
+                console.error('Error fetching shipments:', err);
+                document.getElementById('shipmentsList').innerHTML = '<p class="text-center text-red-500 mt-10">حدث خطأ في تحميل البيانات</p>';
+            }
+        });
+    </script>
 </body>
+
 </html>

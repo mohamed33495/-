@@ -159,8 +159,10 @@
                 if (data.success) {
                     // Login Success
                     localStorage.setItem('isLoggedIn', 'true');
+                    localStorage.setItem('userId', data.user.user_id);
                     localStorage.setItem('userEmail', data.user.email);
                     localStorage.setItem('userRole', data.user.role);
+                    localStorage.setItem('user', JSON.stringify(data.user)); // Save full user object
 
                     // Determine destination based on role
                     const usersDestinations = {
@@ -168,7 +170,9 @@
                         'driver': 'driver-app.html',
                         'admin': 'admin-panel.html',
                         'warehouse': 'warehouse.html',
-                        'super_admin': 'super-admin.html'
+                        'superadmin': 'super-admin.html',
+                        'accountant': 'super-admin-finance.html', // Redirects accountant to finance page
+                        'support': 'admin-menu.html'
                     };
 
                     const destination = usersDestinations[data.user.role] || 'dashboard.html';
@@ -201,28 +205,36 @@
             }
         }
 
-        function googleLogin() {
-            // Mock Google Login
-            const email = prompt("Simulating Google Login...\nEnter an email address to login:", "client@app.com");
+        async function googleLogin() {
+            // Mock Google Login - Auto login as the seeded client for testing
+            // We will fetch the user by email to get their real ID
+            const email = "client@app.com";
 
-            if (email) {
-                // Determine destination based on email (reusing the 'users' map logic conceptually or just defaulting)
-                // For simplicity, we'll check against our known users map or default to dashboard
-                const users = {
-                    'client@app.com': 'dashboard.html',
-                    'driver@app.com': 'driver-app.html',
-                    'admin@app.com': 'admin-panel.html',
-                    'stock@app.com': 'warehouse.html',
-                    'root@app.com': 'super-admin.html'
-                };
+            try {
+                // Simulating a backend lookup for "Google" user
+                // In a real app, you'd send a token. Here we just query by email via a special debug/login-like endpoint
+                // or just reuse the login logic if we knew the password.
+                // Let's reuse the login API with the known password '123' for the seeder account
 
-                const destination = users[email] || 'dashboard.html';
+                const response = await fetch('http://localhost:3000/api/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: email, password: '123' })
+                });
 
-                localStorage.setItem('isLoggedIn', 'true');
-                localStorage.setItem('userEmail', email);
-                localStorage.setItem('userRole', email.split('@')[0]);
+                const data = await response.json();
+                if (data.success) {
+                    localStorage.setItem('isLoggedIn', 'true');
+                    localStorage.setItem('userId', data.user.user_id);
+                    localStorage.setItem('userEmail', data.user.email);
+                    localStorage.setItem('userRole', data.user.role);
+                    window.location.href = 'dashboard.html';
+                } else {
+                    alert('Failed to login with Google Mock (Client not found?)');
+                }
 
-                window.location.href = destination;
+            } catch (err) {
+                console.error('Google Login Error:', err);
             }
         }
     </script>

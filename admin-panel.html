@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -11,29 +12,59 @@
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { font-family: 'Tajawal', sans-serif; -webkit-tap-highlight-color: transparent; }
-        ::-webkit-scrollbar { width: 0px; background: transparent; }
-        .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+        body {
+            font-family: 'Tajawal', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        ::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+        }
+
+        .pb-safe {
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+
+        @keyframes slide-down {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .animate-slide-down {
+            animation: slide-down 0.2s ease-out forwards;
+        }
     </style>
 </head>
+
 <body class="bg-gray-100 text-gray-800 h-screen flex flex-col overflow-hidden selection:bg-slate-300">
 
     <div class="fixed top-0 left-0 w-full h-48 bg-slate-700 rounded-b-[2.5rem] z-0 shadow-lg"></div>
 
     <div class="relative z-10 flex-1 overflow-y-auto pb-28 no-scrollbar">
-        
+
         <header class="px-6 pt-10 pb-6 text-white flex justify-between items-start">
             <div class="flex items-center gap-3">
-                <img src="https://ui-avatars.com/api/?name=Ops+Manager&background=94a3b8&color=fff" class="w-12 h-12 rounded-full border-2 border-slate-400 shadow-md">
+                <img src="https://ui-avatars.com/api/?name=Ops+Manager&background=94a3b8&color=fff"
+                    class="w-12 h-12 rounded-full border-2 border-slate-400 shadow-md">
                 <div>
                     <p class="text-slate-300 text-xs font-bold mb-0.5">إدارة العمليات 🛠️</p>
                     <h1 class="text-lg font-bold">المشرف خالد</h1>
                 </div>
             </div>
-            <div class="bg-white/10 p-2 rounded-xl backdrop-blur-md border border-white/10 hover:bg-red-500 transition cursor-pointer">
-                <i class="fa-solid fa-bell text-white"></i>
-                <span class="absolute top-2 left-2 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-slate-700"></span>
-            </div>
+            <button onclick="toggleNotifications()"
+                class="relative bg-white/10 p-2 rounded-xl backdrop-blur-md border border-white/10 hover:bg-slate-700 transition cursor-pointer active:scale-95 text-white">
+                <i class="fa-solid fa-bell"></i>
+                <span id="notifBadge"
+                    class="absolute top-2 left-2 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-slate-700 hidden"></span>
+            </button>
         </header>
 
         <main class="px-4 space-y-5 -mt-2">
@@ -41,39 +72,41 @@
             <div class="grid grid-cols-3 gap-3 text-center">
                 <div class="bg-white p-3 rounded-2xl shadow-sm border border-slate-100">
                     <p class="text-[10px] text-slate-400 font-bold">بانتظار الشحن</p>
-                    <p class="text-xl font-black text-slate-800">42</p>
+                    <p id="statsPending" class="text-xl font-black text-slate-800">...</p>
                 </div>
                 <div class="bg-white p-3 rounded-2xl shadow-sm border border-slate-100">
                     <p class="text-[10px] text-slate-400 font-bold">مع السائقين</p>
-                    <p class="text-xl font-black text-blue-600">15</p>
+                    <p id="statsDrivers" class="text-xl font-black text-blue-600">...</p>
                 </div>
                 <div class="bg-white p-3 rounded-2xl shadow-sm border border-slate-100">
                     <p class="text-[10px] text-slate-400 font-bold">مشاكل</p>
-                    <p class="text-xl font-black text-red-500">3</p>
+                    <p id="statsIssues" class="text-xl font-black text-red-500">...</p>
                 </div>
             </div>
 
             <div class="bg-slate-800 p-5 rounded-3xl shadow-xl border border-slate-600 relative overflow-hidden">
                 <div class="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full blur-2xl -mr-10 -mt-10"></div>
-                
-                <h3 class="font-bold text-white mb-4 flex items-center gap-2 text-sm">
-                    <i class="fa-solid fa-network-wired text-blue-400"></i> توزيع الشحنات
+
+                <h3 class="font-bold text-white mb-4 flex justify-between items-center text-sm">
+                    <span class="flex items-center gap-2"><i class="fa-solid fa-network-wired text-blue-400"></i> توزيع
+                        الشحنات</span>
+                    <button onclick="broadcastShipments()"
+                        class="bg-blue-500 hover:bg-blue-400 text-white px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-2 shadow-lg shadow-blue-500/50 active:scale-95">
+                        <i class="fa-solid fa-tower-broadcast animate-pulse"></i> توزيع آلي
+                    </button>
                 </h3>
-                
-                <div class="flex items-center justify-between bg-slate-700/50 p-3 rounded-xl border border-slate-600 mb-3">
-                    <div>
-                        <p class="text-xs text-slate-300 font-bold">منطقة طرابلس المركز</p>
-                        <p class="text-[10px] text-slate-500">12 شحنة غير موزعة</p>
+
+                <!-- Added Pending List -->
+                <div id="pendingShipmentsDistributionList"
+                    class="space-y-2 mb-4 max-h-40 overflow-y-auto pr-1 scrollbar-thin">
+                    <div class="text-center py-4 text-slate-500 text-xs opacity-60">
+                        <i class="fa-solid fa-spinner fa-spin mb-1"></i> تحميل...
                     </div>
-                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg text-xs font-bold hover:bg-blue-500 transition">تعيين سائق</button>
                 </div>
 
-                <div class="flex items-center justify-between bg-slate-700/50 p-3 rounded-xl border border-slate-600">
-                    <div>
-                        <p class="text-xs text-slate-300 font-bold">منطقة بن عاشور</p>
-                        <p class="text-[10px] text-slate-500">5 شحنات غير موزعة</p>
-                    </div>
-                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg text-xs font-bold hover:bg-blue-500 transition">تعيين سائق</button>
+                <div class="text-center py-2 text-slate-400 text-[10px] opacity-60 border-t border-white/5 pt-3">
+                    <i class="fa-solid fa-robot mb-1"></i>
+                    <p>المناطق والمخازن تُدار الآن آلياً</p>
                 </div>
             </div>
 
@@ -82,11 +115,15 @@
                     <h3 class="font-bold text-gray-700 text-sm">مراقبة حية</h3>
                     <a href="admin-shipments.html" class="text-xs text-blue-600 font-bold">عرض الكل</a>
                 </div>
-                
+
                 <div class="space-y-3">
-                    <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex items-center justify-between">
+                    <div
+                        class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex items-center justify-between">
                         <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-xl bg-green-50 text-green-600 flex items-center justify-center"><i class="fa-solid fa-check"></i></div>
+                            <div
+                                class="w-10 h-10 rounded-xl bg-green-50 text-green-600 flex items-center justify-center">
+                                <i class="fa-solid fa-check"></i>
+                            </div>
                             <div>
                                 <p class="text-xs font-bold text-gray-800">تم التسليم بنجاح</p>
                                 <p class="text-[10px] text-gray-400">كابتن أحمد • TRK-9988</p>
@@ -95,9 +132,11 @@
                         <span class="text-[10px] text-gray-400">الآن</span>
                     </div>
 
-                    <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex items-center justify-between">
+                    <div
+                        class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex items-center justify-between">
                         <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-xl bg-red-50 text-red-600 flex items-center justify-center"><i class="fa-solid fa-xmark"></i></div>
+                            <div class="w-10 h-10 rounded-xl bg-red-50 text-red-600 flex items-center justify-center"><i
+                                    class="fa-solid fa-xmark"></i></div>
                             <div>
                                 <p class="text-xs font-bold text-gray-800">فشل التسليم (لم يرد)</p>
                                 <p class="text-[10px] text-gray-400">كابتن علي • DHL-5541</p>
@@ -111,32 +150,259 @@
         </main>
     </div>
 
-    <nav class="fixed bottom-6 left-4 right-4 bg-slate-800/95 backdrop-blur-xl border border-white/10 shadow-2xl rounded-2xl flex justify-around items-center py-3 z-50">
-        
+    <nav
+        class="fixed bottom-6 left-4 right-4 bg-slate-800/95 backdrop-blur-xl border border-white/10 shadow-2xl rounded-2xl flex justify-around items-center py-3 z-50">
+
         <a href="#" class="flex flex-col items-center gap-1 text-white transition group relative">
             <i class="fa-solid fa-gauge-high text-xl"></i>
             <span class="absolute -bottom-2 w-1 h-1 bg-white rounded-full"></span>
         </a>
 
-        <a href="admin-shipments.html" class="flex flex-col items-center gap-1 text-slate-400 hover:text-white transition group">
+        <a href="admin-shipments.html"
+            class="flex flex-col items-center gap-1 text-slate-400 hover:text-white transition group">
             <i class="fa-solid fa-boxes-stacked text-xl group-active:scale-90 transition"></i>
         </a>
 
         <div class="relative -top-8">
-            <button class="bg-blue-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg shadow-blue-500/40 border-4 border-gray-100 transform active:scale-90 transition">
+            <button
+                class="bg-blue-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg shadow-blue-500/40 border-4 border-gray-100 transform active:scale-90 transition">
                 <i class="fa-solid fa-plus text-2xl"></i>
             </button>
         </div>
 
-        <a href="admin-drivers.html" class="flex flex-col items-center gap-1 text-slate-400 hover:text-white transition group">
+        <a href="admin-drivers.html"
+            class="flex flex-col items-center gap-1 text-slate-400 hover:text-white transition group">
             <i class="fa-solid fa-motorcycle text-xl group-active:scale-90 transition"></i>
         </a>
 
-        <a href="admin-menu.html" class="flex flex-col items-center gap-1 text-slate-400 hover:text-white transition group">
+        <a href="admin-menu.html"
+            class="flex flex-col items-center gap-1 text-slate-400 hover:text-white transition group">
             <i class="fa-solid fa-bars text-xl group-active:scale-90 transition"></i>
         </a>
 
     </nav>
 
+
+    <!-- Notifications Modal -->
+    <div id="notifModal"
+        class="fixed inset-0 bg-black/60 z-[70] hidden flex flex-col justify-start pt-20 backdrop-blur-sm px-4"
+        onclick="if(event.target === this) toggleNotifications()">
+        <div class="bg-white w-full rounded-2xl shadow-2xl overflow-hidden animate-slide-down">
+            <div class="p-4 border-b border-gray-100 flex justify-between items-center bg-gray-50">
+                <h3 class="font-bold text-gray-800 flex items-center gap-2">
+                    <i class="fa-solid fa-bell text-orange-500"></i> الإشعارات
+                </h3>
+                <button onclick="toggleNotifications()"
+                    class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 hover:bg-gray-300 transition"><i
+                        class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <div id="notifList" class="max-h-[60vh] overflow-y-auto p-2 space-y-2">
+                <div class="text-center py-10 opacity-60">
+                    <i class="fa-solid fa-spinner fa-spin text-2xl mb-2"></i>
+                    <p class="text-slate-500 text-sm">جاري التحميل...</p>
+                </div>
+            </div>
+
+            <div class="bg-gray-50 p-2 text-center">
+                <button onclick="toggleNotifications()"
+                    class="text-xs text-blue-500 font-bold hover:underline">إغلاق</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Check for notifications every minute
+        setInterval(fetchNotifications, 60000);
+        document.addEventListener('DOMContentLoaded', fetchNotifications);
+
+        async function fetchNotifications() {
+            try {
+                const res = await fetch('http://localhost:3000/api/admin/notifications');
+                const data = await res.json();
+
+                if (data.success) {
+                    const { drivers, shipments, transactions } = data.notifications;
+                    const total = drivers.length + shipments.length + transactions.length;
+
+                    // Update Badge
+                    const badge = document.getElementById('notifBadge');
+                    if (total > 0) {
+                        badge.classList.remove('hidden');
+                    } else {
+                        badge.classList.add('hidden');
+                    }
+
+                    // Render List
+                    renderNotifications(drivers, shipments, transactions);
+                }
+            } catch (e) {
+                console.error('Notif Error', e);
+            }
+        }
+
+        function renderNotifications(drivers, shipments, transactions) {
+            const container = document.getElementById('notifList');
+            let html = '';
+
+            if (drivers.length + shipments.length + transactions.length === 0) {
+                container.innerHTML = '<div class="text-center py-8 opacity-50"><i class="fa-regular fa-bell-slash text-3xl mb-2 text-gray-400"></i><p class="text-xs text-gray-500">لا توجد إشعارات جديدة</p></div>';
+                return;
+            }
+
+            // Pending Drivers
+            drivers.forEach(d => {
+                html += `
+                <a href="admin-requests.html" class="block bg-blue-50 p-3 rounded-xl border border-blue-100 hover:bg-blue-100 transition">
+                    <div class="flex gap-3">
+                        <div class="w-8 h-8 rounded-full bg-blue-200 text-blue-600 flex items-center justify-center shrink-0"><i class="fa-solid fa-user-plus text-xs"></i></div>
+                        <div>
+                            <p class="text-xs font-bold text-gray-800">طلب تسجيل سائق جديد</p>
+                            <p class="text-[10px] text-gray-500">${d.full_name}</p>
+                            <span class="text-[9px] text-gray-400">${new Date(d.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                        </div>
+                    </div>
+                </a>`;
+            });
+
+            // New Shipments
+            shipments.forEach(s => {
+                html += `
+                <a href="admin-shipments.html" class="block bg-purple-50 p-3 rounded-xl border border-purple-100 hover:bg-purple-100 transition">
+                    <div class="flex gap-3">
+                        <div class="w-8 h-8 rounded-full bg-purple-200 text-purple-600 flex items-center justify-center shrink-0"><i class="fa-solid fa-box text-xs"></i></div>
+                        <div>
+                            <p class="text-xs font-bold text-gray-800">شحنة جديدة #${s.shipment_id}</p>
+                            <p class="text-[10px] text-gray-500">Status: ${s.status}</p>
+                            <span class="text-[9px] text-gray-400">${new Date(s.creation_date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                        </div>
+                    </div>
+                </a>`;
+            });
+
+            // Transactions
+            transactions.forEach(t => {
+                html += `
+                <a href="#" class="block bg-green-50 p-3 rounded-xl border border-green-100 hover:bg-green-100 transition">
+                    <div class="flex gap-3">
+                        <div class="w-8 h-8 rounded-full bg-green-200 text-green-600 flex items-center justify-center shrink-0"><i class="fa-solid fa-money-bill text-xs"></i></div>
+                        <div>
+                            <p class="text-xs font-bold text-gray-800">معاملة مالية $${t.amount}</p>
+                            <span class="text-[9px] text-gray-400">${new Date(t.transaction_date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                        </div>
+                    </div>
+                </a>`;
+            });
+
+            container.innerHTML = html;
+        }
+
+        function toggleNotifications() {
+            const modal = document.getElementById('notifModal');
+            if (modal.classList.contains('hidden')) {
+                modal.classList.remove('hidden');
+                fetchNotifications(); // Refresh on open
+            } else {
+                modal.classList.add('hidden');
+            }
+        }
+
+        // Fetch Dashboard Stats
+        async function fetchDashboardStats() {
+            try {
+                const res = await fetch('http://localhost:3000/api/admin/dashboard-stats');
+                const data = await res.json();
+
+                if (data.success) {
+                    // Animate Numbers
+                    animateValue(document.getElementById('statsPending'), 0, data.stats.pending, 1000);
+                    animateValue(document.getElementById('statsDrivers'), 0, data.stats.withDrivers, 1000);
+                    animateValue(document.getElementById('statsIssues'), 0, data.stats.issues, 1000);
+                }
+
+                // Also fetch pending list for distribution box
+                fetchPendingForDistribution();
+
+            } catch (e) {
+                console.error('Stats Error', e);
+            }
+        }
+
+        async function fetchPendingForDistribution() {
+            try {
+                // We'll reuse all-shipments and filter client-side for now, or use a specific endpoint if exists.
+                // Optimally: GET /api/admin/shipments?status=Pending
+                const res = await fetch('http://localhost:3000/api/admin/all-shipments');
+                const data = await res.json();
+                const container = document.getElementById('pendingShipmentsDistributionList');
+
+                if (data.success) {
+                    const pending = data.shipments.filter(s => s.status === 'Pending' && s.shipping_method === 'Land');
+
+                    if (pending.length === 0) {
+                        container.innerHTML = '<div class="text-center text-slate-500 text-xs py-4">لا توجد شحنات معلقة</div>';
+                        return;
+                    }
+
+                    let html = '';
+                    pending.forEach(s => {
+                        html += `
+                            <div class="bg-slate-700/50 p-2 rounded-lg border border-slate-600 flex justify-between items-center">
+                                <span class="text-xs text-slate-200 font-bold">#${s.shipment_id}</span>
+                                <span class="text-[10px] text-slate-400">${s.destination_city || 'طبرق'}</span>
+                            </div>
+                         `;
+                    });
+                    container.innerHTML = html;
+                }
+            } catch (e) { console.error(e); }
+        }
+
+        function animateValue(obj, start, end, duration) {
+            if (!obj) return;
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                obj.innerHTML = Math.floor(progress * (end - start) + start);
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                } else {
+                    obj.innerHTML = end; // Ensure final value is exact
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        // Load stats on start
+        document.addEventListener('DOMContentLoaded', fetchDashboardStats);
+
+        // Broadcast Shipments
+        async function broadcastShipments() {
+            if (!confirm('هل أنت متأكد من توزيع جميع الشحنات المعلقة على السائقين المتصلين؟')) return;
+
+            const btn = document.querySelector('button[onclick="broadcastShipments()"]');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> جاري التوزيع...';
+            btn.disabled = true;
+
+            try {
+                const res = await fetch('http://localhost:3000/api/admin/distribute', { method: 'POST' });
+                const data = await res.json();
+
+                alert(data.message);
+                // Refresh Stats
+                fetchDashboardStats();
+
+            } catch (err) {
+                console.error(err);
+                alert('حدث خطأ في الاتصال');
+            } finally {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
+        }
+    </script>
 </body>
+
 </html>

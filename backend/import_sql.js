@@ -17,7 +17,12 @@ connection.connect((err) => {
     console.log('✅ Connected to MySQL.');
 
     // Read SQL File
-    const sqlPath = path.join(__dirname, 'CargoAppDB.sql');
+    // Get file from command line arg or default to CargoAppDB.sql
+    const sqlFile = process.argv[2] || 'CargoAppDB.sql';
+    const sqlPath = path.isAbsolute(sqlFile) ? sqlFile : path.join(__dirname, '..', sqlFile); // Handle relative paths from root
+
+    console.log(`📂 Reading SQL file: ${sqlPath}`);
+
     fs.readFile(sqlPath, 'utf8', (err, data) => {
         if (err) {
             console.error('❌ Error reading SQL file:', err.message);

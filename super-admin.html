@@ -51,10 +51,18 @@
                         <h1 class="text-lg font-bold">المدير العام</h1>
                     </div>
                 </div>
-                <button onclick="window.location.href='login.html?logout=true'"
-                    class="bg-white/10 p-2 rounded-xl backdrop-blur-md border border-white/10 hover:bg-red-500 hover:border-red-500 transition">
-                    <i class="fa-solid fa-power-off text-white"></i>
-                </button>
+                <div class="flex gap-3">
+                    <button onclick="toggleNotifications()"
+                        class="relative bg-white/10 p-2 rounded-xl backdrop-blur-md border border-white/10 hover:bg-white/20 transition group">
+                        <i class="fa-solid fa-bell text-white group-active:scale-90 transition"></i>
+                        <span id="notifBadge"
+                            class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full border-2 border-slate-900 hidden"></span>
+                    </button>
+                    <button onclick="window.location.href='login.html?logout=true'"
+                        class="bg-white/10 p-2 rounded-xl backdrop-blur-md border border-white/10 hover:bg-red-500 hover:border-red-500 transition">
+                        <i class="fa-solid fa-power-off text-white"></i>
+                    </button>
+                </div>
             </div>
 
             <div class="grid grid-cols-3 gap-3 text-center">
@@ -77,12 +85,18 @@
 
             <div class="bg-white p-5 rounded-3xl shadow-xl border border-indigo-50 relative overflow-hidden">
                 <div class="absolute top-0 left-0 w-1.5 h-full bg-green-600"></div>
-                <h3 class="font-bold text-gray-800 mb-4 flex items-center gap-2 text-lg">
-                    <span
-                        class="w-8 h-8 bg-green-100 text-green-600 rounded-lg flex items-center justify-center text-sm"><i
-                            class="fa-solid fa-sack-dollar"></i></span>
-                    التحكم في الأسعار
-                </h3>
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="font-bold text-gray-800 flex items-center gap-2 text-lg">
+                        <span
+                            class="w-8 h-8 bg-green-100 text-green-600 rounded-lg flex items-center justify-center text-sm"><i
+                                class="fa-solid fa-sack-dollar"></i></span>
+                        التحكم في الأسعار
+                    </h3>
+                    <a href="super-admin-pricing.html"
+                        class="text-xs bg-slate-900 text-white px-3 py-1.5 rounded-lg font-bold shadow-md hover:bg-slate-700 transition">
+                        إدارة كاملة <i class="fa-solid fa-arrow-left mr-1"></i>
+                    </a>
+                </div>
 
                 <div class="space-y-4">
                     <div class="bg-gray-50 p-3 rounded-2xl border border-gray-100 flex justify-between items-center">
@@ -91,28 +105,36 @@
                             <p class="text-[10px] text-gray-400">يؤثر على جميع الفواتير</p>
                         </div>
                         <div class="flex items-center gap-2 bg-white px-2 py-1 rounded-xl border border-gray-200">
-                            <span class="font-bold text-green-600 text-lg">5.15</span>
+                            <input type="number" id="exchangeRate"
+                                class="font-bold text-green-600 text-lg w-16 text-center outline-none" value="5.15"
+                                step="0.01">
                             <span class="text-xs text-gray-400 font-bold">LYD</span>
-                            <button
-                                class="w-6 h-6 bg-slate-900 text-white rounded-full flex items-center justify-center text-xs"><i
-                                    class="fa-solid fa-pen"></i></button>
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-2 gap-3">
+                    <div class="grid grid-cols-2 gap-3" id="ratesContainer">
+                        <!-- Loaded dynamically -->
                         <div class="bg-gray-50 p-3 rounded-2xl border border-gray-100 text-center">
                             <p class="text-[10px] font-bold text-gray-500 mb-1">الصين (جوي)</p>
-                            <p class="text-xl font-black text-slate-800">$12 <span
-                                    class="text-[10px] text-gray-400 font-normal">/Kg</span></p>
+                            <div class="flex justify-center items-center gap-1">
+                                <span class="text-xl font-black text-slate-800">$</span>
+                                <input type="number" id="rate-China-Air"
+                                    class="text-xl font-black text-slate-800 w-12 text-center bg-transparent outline-none"
+                                    value="12">
+                            </div>
                         </div>
                         <div class="bg-gray-50 p-3 rounded-2xl border border-gray-100 text-center">
                             <p class="text-[10px] font-bold text-gray-500 mb-1">أمريكا (جوي)</p>
-                            <p class="text-xl font-black text-slate-800">$15 <span
-                                    class="text-[10px] text-gray-400 font-normal">/Kg</span></p>
+                            <div class="flex justify-center items-center gap-1">
+                                <span class="text-xl font-black text-slate-800">$</span>
+                                <input type="number" id="rate-USA-Air"
+                                    class="text-xl font-black text-slate-800 w-12 text-center bg-transparent outline-none"
+                                    value="15">
+                            </div>
                         </div>
                     </div>
 
-                    <button
+                    <button onclick="savePricing()"
                         class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-3.5 rounded-xl shadow-lg active:scale-95 transition flex items-center justify-center gap-2 text-sm">
                         <i class="fa-solid fa-save"></i> حفظ التغييرات
                     </button>
@@ -164,9 +186,15 @@
             <div class="bg-slate-900 text-white p-5 rounded-3xl relative overflow-hidden shadow-lg">
                 <div class="absolute right-0 bottom-0 w-32 h-32 bg-white/5 rounded-full -mr-10 -mb-10 blur-xl"></div>
 
-                <h3 class="font-bold mb-4 text-sm flex items-center gap-2">
-                    <i class="fa-solid fa-chart-pie text-purple-400"></i> تقارير الأداء
-                </h3>
+                <div class="flex justify-between items-center mb-4 relative z-10">
+                    <h3 class="font-bold text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-chart-pie text-purple-400"></i> تقارير الأداء
+                    </h3>
+                    <a href="super-admin-reports.html"
+                        class="text-[10px] bg-white/10 px-2 py-1 rounded-lg backdrop-blur-md hover:bg-white/20 transition">
+                        عرض التفاصيل <i class="fa-solid fa-arrow-left mr-1"></i>
+                    </a>
+                </div>
 
                 <div class="flex gap-3 overflow-x-auto no-scrollbar">
                     <div class="bg-white/10 px-4 py-3 rounded-xl min-w-[100px] border border-white/5">
@@ -200,10 +228,10 @@
         </a>
 
         <div class="relative -top-8">
-            <button onclick="openAddEmployeeModal()"
+            <a href="super-admin-add-country.html"
                 class="bg-green-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg shadow-green-500/40 border-4 border-gray-100 transform active:scale-90 transition">
                 <i class="fa-solid fa-plus text-2xl"></i>
-            </button>
+            </a>
         </div>
 
         <a href="super-admin-finance.html"
@@ -268,35 +296,276 @@
         </div>
     </div>
 
+    <!-- Notifications Modal -->
+    <div id="notifModal"
+        class="fixed inset-0 bg-black/60 z-[70] hidden flex flex-col justify-start pt-20 backdrop-blur-sm px-4"
+        onclick="if(event.target === this) toggleNotifications()">
+        <div class="bg-white w-full rounded-2xl shadow-2xl overflow-hidden animate-slide-down">
+            <div class="p-4 border-b border-gray-100 flex justify-between items-center bg-gray-50">
+                <h3 class="font-bold text-gray-800 flex items-center gap-2">
+                    <i class="fa-solid fa-bell text-orange-500"></i> الإشعارات
+                </h3>
+                <button onclick="toggleNotifications()"
+                    class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 hover:bg-gray-300 transition"><i
+                        class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <div id="notifList" class="max-h-[60vh] overflow-y-auto p-2 space-y-2">
+                <div class="text-center py-10 opacity-60">
+                    <i class="fa-solid fa-spinner fa-spin text-2xl mb-2"></i>
+                    <p>جاري التحميل...</p>
+                </div>
+            </div>
+
+            <div class="bg-gray-50 p-2 text-center">
+                <button onclick="toggleNotifications()"
+                    class="text-xs text-blue-500 font-bold hover:underline">إغلاق</button>
+            </div>
+        </div>
+    </div>
+
     <script>
+        let ratesMap = {}; // Maps Country+Type to RateID
+
+        async function fetchPricingData() {
+            try {
+                // Fetch Settings
+                const settingsRes = await fetch('http://localhost:3000/api/admin/settings');
+                const settingsData = await settingsRes.json();
+                if (settingsData.success) {
+                    document.getElementById('exchangeRate').value = settingsData.settings.exchange_rate;
+                }
+
+                // Fetch Rates
+                const ratesRes = await fetch('http://localhost:3000/api/admin/shipping-rates');
+                const ratesData = await ratesRes.json();
+                if (ratesData.success) {
+                    const container = document.getElementById('ratesContainer');
+                    container.innerHTML = ratesData.rates.map(r => {
+                        ratesMap[`${r.country_name}-${r.shipping_type}`] = r.rate_id;
+                        return `
+                        <div class="bg-gray-50 p-3 rounded-2xl border border-gray-100 text-center">
+                             <p class="text-[10px] font-bold text-gray-500 mb-1">${r.country_name} (${r.shipping_type === 'Air' ? 'جوي' : 'بحري'})</p>
+                             <div class="flex justify-center items-center gap-1">
+                                <span class="text-xl font-black text-slate-800">$</span>
+                                <input type="number" id="rate-${r.rate_id}" class="text-xl font-black text-slate-800 w-16 text-center bg-transparent outline-none border-b border-gray-300 focus:border-slate-800 transition" value="${r.rate_per_kg}">
+                             </div>
+                        </div>`;
+                    }).join('');
+                }
+            } catch (error) {
+                console.error('Failed to load pricing', error);
+            }
+        }
+
+        async function savePricing() {
+            const btn = document.querySelector('button[onclick="savePricing()"]');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> جاري الحفظ...';
+
+            try {
+                // Save Exchange Rate
+                const exchangeRate = document.getElementById('exchangeRate').value;
+                await fetch('http://localhost:3000/api/admin/settings', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ exchange_rate: exchangeRate })
+                });
+
+                // Save All Rates
+                const inputs = document.querySelectorAll('input[id^="rate-"]');
+                for (const input of inputs) {
+                    const id = input.id.replace('rate-', '');
+                    const rate = input.value;
+                    await fetch('http://localhost:3000/api/admin/shipping-rates', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ id, rate })
+                    });
+                }
+
+                alert('✅ تم حفظ التغييرات بنجاح!');
+            } catch (error) {
+                alert('❌ حدث خطأ أثناء الحفظ');
+                console.error(error);
+            } finally {
+                btn.innerHTML = originalText;
+            }
+        }
+
+        async function fetchEmployees() {
+            try {
+                const res = await fetch('http://localhost:3000/api/admin/employees');
+                const data = await res.json();
+
+                const container = document.getElementById('employeeList');
+                if (data.success && data.employees.length > 0) {
+                    container.innerHTML = data.employees.map(emp => `
+                        <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex justify-between items-center active:scale-[0.99] transition">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl flex items-center justify-center bg-slate-100 text-lg font-bold text-slate-500">
+                                    ${emp.full_name.charAt(0).toUpperCase()}
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-sm text-gray-800">${emp.full_name}</h4>
+                                    <p class="text-[10px] text-gray-400 font-mono">${emp.role} | ${emp.email}</p>
+                                </div>
+                            </div>
+                            <span class="w-2.5 h-2.5 bg-green-500 rounded-full shadow-sm"></span>
+                        </div>
+                    `).join('');
+                } else {
+                    container.innerHTML = '<p class="text-center text-xs text-gray-400 py-4">لا يوجد موظفين حالياً</p>';
+                }
+            } catch (e) {
+                console.error('Failed to load employees', e);
+            }
+        }
+
+        async function saveEmployee() {
+            const btn = document.querySelector('#addEmployeeModal button[type="submit"]');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> جاري الحفظ...';
+            btn.disabled = true;
+
+            const name = document.getElementById('empName').value;
+            const role = document.getElementById('empRole').value;
+            const email = document.querySelector('#addEmployeeModal input[type="email"]').value;
+            const password = document.querySelector('#addEmployeeModal input[type="text"][value="123456"]').value;
+
+            try {
+                const res = await fetch('http://localhost:3000/api/admin/add-employee', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email, password, role })
+                });
+
+                const data = await res.json();
+
+                if (data.success) {
+                    alert('✅ تمت إضافة الموظف بنجاح!');
+                    closeAddEmployeeModal();
+                    fetchEmployees(); // Refresh list
+                    // Reset inputs
+                    document.getElementById('empName').value = '';
+                    document.querySelector('#addEmployeeModal input[type="email"]').value = '';
+                } else {
+                    alert('❌ خطأ: ' + data.message);
+                }
+            } catch (e) {
+                console.error(e);
+                alert('حدث خطأ في الاتصال');
+            } finally {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
+        }
+
+        // Check for notifications every minute
+        setInterval(fetchNotifications, 60000);
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchPricingData();
+            fetchEmployees();
+            fetchNotifications();
+        });
+
+        async function fetchNotifications() {
+            try {
+                const res = await fetch('http://localhost:3000/api/admin/notifications');
+                const data = await res.json();
+
+                if (data.success) {
+                    const { drivers, shipments, transactions } = data.notifications;
+                    const total = drivers.length + shipments.length + transactions.length;
+
+                    // Update Badge
+                    const badge = document.getElementById('notifBadge');
+                    if (badge) {
+                        if (total > 0) {
+                            badge.classList.remove('hidden');
+                        } else {
+                            badge.classList.add('hidden');
+                        }
+                    }
+
+                    // Render List
+                    renderNotifications(drivers, shipments, transactions);
+                }
+            } catch (e) {
+                console.error('Notif Error', e);
+            }
+        }
+
+        function renderNotifications(drivers, shipments, transactions) {
+            const container = document.getElementById('notifList');
+            if (!container) return;
+
+            let html = '';
+
+            if (drivers.length + shipments.length + transactions.length === 0) {
+                container.innerHTML = '<div class="text-center py-8 opacity-50"><i class="fa-regular fa-bell-slash text-3xl mb-2"></i><p class="text-xs">لا توجد إشعارات جديدة</p></div>';
+                return;
+            }
+
+            // Pending Drivers
+            drivers.forEach(d => {
+                html += `
+                <a href="super-admin-employees.html?tab=drivers" class="block bg-blue-50 p-3 rounded-xl border border-blue-100 hover:bg-blue-100 transition">
+                    <div class="flex gap-3">
+                        <div class="w-8 h-8 rounded-full bg-blue-200 text-blue-600 flex items-center justify-center shrink-0"><i class="fa-solid fa-user-plus text-xs"></i></div>
+                        <div>
+                            <p class="text-xs font-bold text-gray-800">طلب تسجيل سائق جديد</p>
+                            <p class="text-[10px] text-gray-500">${d.full_name}</p>
+                            <span class="text-[9px] text-gray-400">${new Date(d.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                        </div>
+                    </div>
+                </a>`;
+            });
+
+            // New Shipments
+            shipments.forEach(s => {
+                html += `
+                <a href="#" class="block bg-purple-50 p-3 rounded-xl border border-purple-100 hover:bg-purple-100 transition">
+                    <div class="flex gap-3">
+                        <div class="w-8 h-8 rounded-full bg-purple-200 text-purple-600 flex items-center justify-center shrink-0"><i class="fa-solid fa-box text-xs"></i></div>
+                        <div>
+                            <p class="text-xs font-bold text-gray-800">شحنة جديدة #${s.shipment_id}</p>
+                            <p class="text-[10px] text-gray-500">Status: ${s.status}</p>
+                            <span class="text-[9px] text-gray-400">${new Date(s.creation_date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                        </div>
+                    </div>
+                </a>`;
+            });
+
+            // Transactions
+            transactions.forEach(t => {
+                html += `
+                <a href="super-admin-finance.html" class="block bg-green-50 p-3 rounded-xl border border-green-100 hover:bg-green-100 transition">
+                    <div class="flex gap-3">
+                        <div class="w-8 h-8 rounded-full bg-green-200 text-green-600 flex items-center justify-center shrink-0"><i class="fa-solid fa-money-bill text-xs"></i></div>
+                        <div>
+                            <p class="text-xs font-bold text-gray-800">معاملة مالية $${t.amount}</p>
+                            <span class="text-[9px] text-gray-400">${new Date(t.transaction_date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                        </div>
+                    </div>
+                </a>`;
+            });
+
+            container.innerHTML = html;
+        }
+
+        function toggleNotifications() {
+            const modal = document.getElementById('notifModal');
+            if (modal.classList.contains('hidden')) {
+                modal.classList.remove('hidden');
+                fetchNotifications(); // Refresh on open
+            } else {
+                modal.classList.add('hidden');
+            }
+        }
+
         function openAddEmployeeModal() { document.getElementById('addEmployeeModal').classList.remove('hidden'); }
         function closeAddEmployeeModal() { document.getElementById('addEmployeeModal').classList.add('hidden'); }
-
-        function saveEmployee() {
-            // محاكاة إضافة الموظف للقائمة
-            const name = document.getElementById('empName').value || "موظف جديد";
-            const role = document.getElementById('empRole').value;
-
-            const newCard = `
-            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex justify-between items-center active:scale-[0.99] transition animate-fade-in">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl flex items-center justify-center bg-slate-100">
-                        <img src="https://ui-avatars.com/api/?name=${name}&background=random" class="w-full h-full rounded-xl">
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-sm text-gray-800">${name}</h4>
-                        <p class="text-[10px] text-gray-400 font-mono">${role}</p>
-                    </div>
-                </div>
-                <span class="w-2.5 h-2.5 bg-gray-300 rounded-full shadow-sm"></span>
-            </div>`;
-
-            document.getElementById('employeeList').insertAdjacentHTML('afterbegin', newCard);
-            closeAddEmployeeModal();
-
-            // تنظيف الحقول
-            document.getElementById('empName').value = '';
-        }
     </script>
 
     <style>
@@ -310,8 +579,24 @@
             }
         }
 
+        @keyframes slide-down {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
         .animate-slide-up {
             animation: slide-up 0.3s ease-out forwards;
+        }
+
+        .animate-slide-down {
+            animation: slide-down 0.2s ease-out forwards;
         }
 
         .animate-fade-in {
@@ -334,3 +619,378 @@
 </body>
 
 </html>
+
+
+
+<script>
+    let ratesMap = {}; // Maps Country+Type to RateID
+
+    async function fetchPricingData() {
+        try {
+            // Fetch Settings
+            const settingsRes = await fetch('http://localhost:3000/api/admin/settings');
+            const settingsData = await settingsRes.json();
+            if (settingsData.success) {
+                document.getElementById('exchangeRate').value = settingsData.settings.exchange_rate;
+            }
+
+            // Fetch Rates
+            const ratesRes = await fetch('http://localhost:3000/api/admin/shipping-rates');
+            const ratesData = await ratesRes.json();
+            if (ratesData.success) {
+                const container = document.getElementById('ratesContainer');
+                container.innerHTML = ratesData.rates.map(r => {
+                    ratesMap[`${r.country_name}-${r.shipping_type}`] = r.rate_id;
+                    return `
+                        <div class="bg-gray-50 p-3 rounded-2xl border border-gray-100 text-center">
+                             <p class="text-[10px] font-bold text-gray-500 mb-1">${r.country_name} (${r.shipping_type === 'Air' ? 'جوي' : 'بحري'})</p>
+                             <div class="flex justify-center items-center gap-1">
+                                <span class="text-xl font-black text-slate-800">$</span>
+                                <input type="number" id="rate-${r.rate_id}" class="text-xl font-black text-slate-800 w-16 text-center bg-transparent outline-none border-b border-gray-300 focus:border-slate-800 transition" value="${r.rate_per_kg}">
+                             </div>
+                        </div>`;
+                }).join('');
+            }
+        } catch (error) {
+            console.error('Failed to load pricing', error);
+        }
+    }
+
+    async function savePricing() {
+        const btn = document.querySelector('button[onclick="savePricing()"]');
+        const originalText = btn.innerHTML;
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> جاري الحفظ...';
+
+        try {
+            // Save Exchange Rate
+            const exchangeRate = document.getElementById('exchangeRate').value;
+            await fetch('http://localhost:3000/api/admin/settings', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ exchange_rate: exchangeRate })
+            });
+
+            // Save All Rates
+            const inputs = document.querySelectorAll('input[id^="rate-"]');
+            for (const input of inputs) {
+                const id = input.id.replace('rate-', '');
+                const rate = input.value;
+                await fetch('http://localhost:3000/api/admin/shipping-rates', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ id, rate })
+                });
+            }
+
+            alert('✅ تم حفظ التغييرات بنجاح!');
+        } catch (error) {
+            alert('❌ حدث خطأ أثناء الحفظ');
+            console.error(error);
+        } finally {
+            btn.innerHTML = originalText;
+        }
+    }
+
+    async function fetchEmployees() {
+        try {
+            const res = await fetch('http://localhost:3000/api/admin/employees');
+            const data = await res.json();
+
+            const container = document.getElementById('employeeList');
+            if (data.success && data.employees.length > 0) {
+                container.innerHTML = data.employees.map(emp => `
+                        <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex justify-between items-center active:scale-[0.99] transition">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl flex items-center justify-center bg-slate-100 text-lg font-bold text-slate-500">
+                                    ${emp.full_name.charAt(0).toUpperCase()}
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-sm text-gray-800">${emp.full_name}</h4>
+                                    <p class="text-[10px] text-gray-400 font-mono">${emp.role} | ${emp.email}</p>
+                                </div>
+                            </div>
+                            <span class="w-2.5 h-2.5 bg-green-500 rounded-full shadow-sm"></span>
+                        </div>
+                    `).join('');
+            } else {
+                container.innerHTML = '<p class="text-center text-xs text-gray-400 py-4">لا يوجد موظفين حالياً</p>';
+            }
+        } catch (e) {
+            console.error('Failed to load employees', e);
+        }
+    }
+
+    async function saveEmployee() {
+        const btn = document.querySelector('#addEmployeeModal button[type="submit"]');
+        const originalText = btn.innerHTML;
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> جاري الحفظ...';
+        btn.disabled = true;
+
+        const name = document.getElementById('empName').value;
+        const role = document.getElementById('empRole').value;
+        const email = document.querySelector('#addEmployeeModal input[type="email"]').value;
+        const password = document.querySelector('#addEmployeeModal input[type="text"][value="123456"]').value;
+
+        try {
+            const res = await fetch('http://localhost:3000/api/admin/add-employee', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, email, password, role })
+            });
+
+            const data = await res.json();
+
+            if (data.success) {
+                alert('✅ تمت إضافة الموظف بنجاح!');
+                closeAddEmployeeModal();
+                fetchEmployees(); // Refresh list
+                // Reset inputs
+                document.getElementById('empName').value = '';
+                document.querySelector('#addEmployeeModal input[type="email"]').value = '';
+            } else {
+                alert('❌ خطأ: ' + data.message);
+            }
+        } catch (e) {
+            console.error(e);
+            alert('حدث خطأ في الاتصال');
+        } finally {
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+        }
+    }
+
+    // Load data on start
+    fetchPricingData();
+    fetchEmployees();
+
+    function openAddEmployeeModal() { document.getElementById('addEmployeeModal').classList.remove('hidden'); }
+            to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+        }
+    </style >
+
+</body >
+
+</html >
+
+<div class="grid grid-cols-2 gap-3">
+    <div>
+        <label class="block text-xs font-bold text-gray-500 mb-1">الاسم الأول</label>
+        <input type="text" id="empName"
+            class="w-full h-12 px-4 rounded-xl bg-gray-50 border-none focus:ring-2 focus:ring-slate-500 text-sm font-bold text-gray-700">
+    </div>
+    <div>
+        <label class="block text-xs font-bold text-gray-500 mb-1">الدور الوظيفي</label>
+        <select id="empRole"
+            class="w-full h-12 px-4 rounded-xl bg-gray-50 border-none focus:ring-2 focus:ring-slate-500 text-sm font-bold text-gray-700">
+            <option value="Warehouse">أمين مستودع</option>
+            <option value="Support">دعم فني</option>
+            <option value="Accountant">محاسب</option>
+        </select>
+    </div>
+</div>
+
+<div>
+    <label class="block text-xs font-bold text-gray-500 mb-1">البريد الإلكتروني (للدخول)</label>
+    <input type="email"
+        class="w-full h-12 px-4 rounded-xl bg-gray-50 border-none focus:ring-2 focus:ring-slate-500 text-sm font-bold text-gray-700 text-left"
+        dir="ltr" placeholder="user@cargo.ly">
+</div>
+
+<div>
+    <label class="block text-xs font-bold text-gray-500 mb-1">كلمة المرور المؤقتة</label>
+    <input type="text" value="123456"
+        class="w-full h-12 px-4 rounded-xl bg-gray-50 border-none focus:ring-2 focus:ring-slate-500 text-sm font-bold text-gray-700 text-left tracking-widest"
+        dir="ltr">
+</div>
+
+<div class="flex gap-3 mt-6 pt-2">
+    <button type="button" onclick="closeAddEmployeeModal()"
+        class="flex-1 py-3.5 rounded-2xl bg-gray-100 text-gray-600 font-bold text-sm active:scale-95 transition">إلغاء</button>
+    <button type="submit"
+        class="flex-[2] py-3.5 rounded-2xl bg-slate-900 text-white font-bold text-sm shadow-lg active:scale-95 transition">حفظ
+        وإضافة</button>
+</div>
+</form >
+</div >
+</div >
+
+        <script>
+            let ratesMap = { }; // Maps Country+Type to RateID
+
+            async function fetchPricingData() {
+        try {
+            // Fetch Settings
+            const settingsRes = await fetch('http://localhost:3000/api/admin/settings');
+            const settingsData = await settingsRes.json();
+            if (settingsData.success) {
+                document.getElementById('exchangeRate').value = settingsData.settings.exchange_rate;
+            }
+
+            // Fetch Rates
+            const ratesRes = await fetch('http://localhost:3000/api/admin/shipping-rates');
+            const ratesData = await ratesRes.json();
+            if (ratesData.success) {
+                const container = document.getElementById('ratesContainer');
+                container.innerHTML = ratesData.rates.map(r => {
+                ratesMap[`${r.country_name}-${r.shipping_type}`] = r.rate_id;
+            return `
+            <div class="bg-gray-50 p-3 rounded-2xl border border-gray-100 text-center">
+                <p class="text-[10px] font-bold text-gray-500 mb-1">${r.country_name} (${r.shipping_type === 'Air' ? 'جوي' : 'بحري'})</p>
+                <div class="flex justify-center items-center gap-1">
+                    <span class="text-xl font-black text-slate-800">$</span>
+                    <input type="number" id="rate-${r.rate_id}" class="text-xl font-black text-slate-800 w-16 text-center bg-transparent outline-none border-b border-gray-300 focus:border-slate-800 transition" value="${r.rate_per_kg}">
+                </div>
+            </div>`;
+                }).join('');
+            }
+        } catch (error) {
+                console.error('Failed to load pricing', error);
+        }
+    }
+
+            async function savePricing() {
+        const btn = document.querySelector('button[onclick="savePricing()"]');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> جاري الحفظ...';
+
+            try {
+            // Save Exchange Rate
+            const exchangeRate = document.getElementById('exchangeRate').value;
+            await fetch('http://localhost:3000/api/admin/settings', {
+                method: 'POST',
+            headers: {'Content-Type': 'application/json' },
+            body: JSON.stringify({exchange_rate: exchangeRate })
+            });
+
+            // Save All Rates
+            const inputs = document.querySelectorAll('input[id^="rate-"]');
+            for (const input of inputs) {
+                const id = input.id.replace('rate-', '');
+            const rate = input.value;
+            await fetch('http://localhost:3000/api/admin/shipping-rates', {
+                method: 'POST',
+            headers: {'Content-Type': 'application/json' },
+            body: JSON.stringify({id, rate})
+                });
+            }
+
+            alert('✅ تم حفظ التغييرات بنجاح!');
+        } catch (error) {
+                alert('❌ حدث خطأ أثناء الحفظ');
+            console.error(error);
+        } finally {
+                btn.innerHTML = originalText;
+        }
+    }
+
+            async function fetchEmployees() {
+        try {
+            const res = await fetch('http://localhost:3000/api/admin/employees');
+            const data = await res.json();
+
+            const container = document.getElementById('employeeList');
+            if (data.success && data.employees.length > 0) {
+                container.innerHTML = data.employees.map(emp => `
+                        <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex justify-between items-center active:scale-[0.99] transition">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl flex items-center justify-center bg-slate-100 text-lg font-bold text-slate-500">
+                                    ${emp.full_name.charAt(0).toUpperCase()}
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-sm text-gray-800">${emp.full_name}</h4>
+                                    <p class="text-[10px] text-gray-400 font-mono">${emp.role} | ${emp.email}</p>
+                                </div>
+                            </div>
+                            <span class="w-2.5 h-2.5 bg-green-500 rounded-full shadow-sm"></span>
+                        </div>
+                    `).join('');
+            } else {
+                container.innerHTML = '<p class="text-center text-xs text-gray-400 py-4">لا يوجد موظفين حالياً</p>';
+            }
+        } catch (e) {
+                console.error('Failed to load employees', e);
+        }
+    }
+
+            async function saveEmployee() {
+        const btn = document.querySelector('#addEmployeeModal button[type="submit"]');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> جاري الحفظ...';
+            btn.disabled = true;
+
+            const name = document.getElementById('empName').value;
+            const role = document.getElementById('empRole').value;
+            const email = document.querySelector('#addEmployeeModal input[type="email"]').value;
+            const password = document.querySelector('#addEmployeeModal input[type="text"][value="123456"]').value;
+
+            try {
+            const res = await fetch('http://localhost:3000/api/admin/add-employee', {
+                method: 'POST',
+            headers: {'Content-Type': 'application/json' },
+            body: JSON.stringify({name, email, password, role})
+            });
+
+            const data = await res.json();
+
+            if (data.success) {
+                alert('✅ تمت إضافة الموظف بنجاح!');
+            closeAddEmployeeModal();
+            fetchEmployees(); // Refresh list
+            // Reset inputs
+            document.getElementById('empName').value = '';
+            document.querySelector('#addEmployeeModal input[type="email"]').value = '';
+            } else {
+                alert('❌ خطأ: ' + data.message);
+            }
+        } catch (e) {
+                console.error(e);
+            alert('حدث خطأ في الاتصال');
+        } finally {
+                btn.innerHTML = originalText;
+            btn.disabled = false;
+        }
+    }
+
+            // Load data on start
+            fetchPricingData();
+            fetchEmployees();
+
+            function openAddEmployeeModal() {document.getElementById('addEmployeeModal').classList.remove('hidden'); }
+            function closeAddEmployeeModal() {document.getElementById('addEmployeeModal').classList.add('hidden'); }
+
+</script>
+
+<style>
+    @keyframes slide-up {
+        from {
+            transform: translateY(100%);
+        }
+
+        to {
+            transform: translateY(0);
+        }
+    }
+
+    .animate-slide-up {
+        animation: slide-up 0.3s ease-out forwards;
+    }
+
+    .animate-fade-in {
+        animation: fadeIn 0.5s ease-out;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>

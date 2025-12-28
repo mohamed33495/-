@@ -4,7 +4,8 @@ const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: 'mohamed2002', // User provided password
-    database: 'CargoAppDB' // Matches the SQL file content
+    database: 'CargoAppDB', // Matches the SQL file content
+    multipleStatements: true // Allow multiple queries (needed for Country Setup)
 });
 
 connection.connect((err) => {

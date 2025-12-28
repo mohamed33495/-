@@ -84,20 +84,20 @@
                 <div class="space-y-4">
                     <div>
                         <label class="block text-xs font-bold text-gray-400 mb-1">الاسم الكامل</label>
-                        <input type="text" value="Mohamed Ali"
+                        <input type="text" id="profile-name" value="Mohamed Ali" disabled
                             class="w-full px-4 py-3 rounded-xl bg-gray-50 border-none focus:ring-2 focus:ring-indigo-500 text-sm font-bold text-gray-700">
                     </div>
 
                     <div class="grid grid-cols-2 gap-3">
                         <div>
                             <label class="block text-xs font-bold text-gray-400 mb-1">رقم الهاتف</label>
-                            <input type="tel" value="091 123 4567"
+                            <input type="tel" id="profile-phone" value="091 123 4567" disabled
                                 class="w-full px-4 py-3 rounded-xl bg-gray-50 border-none focus:ring-2 focus:ring-indigo-500 text-sm font-bold text-gray-700 text-left"
                                 dir="ltr">
                         </div>
                         <div>
                             <label class="block text-xs font-bold text-gray-400 mb-1">الكود الخاص</label>
-                            <div
+                            <div id="profile-suite-id"
                                 class="w-full px-4 py-3 rounded-xl bg-indigo-50 border border-indigo-100 text-indigo-600 text-sm font-bold text-center select-all">
                                 LY-10234
                             </div>
@@ -106,7 +106,7 @@
 
                     <div>
                         <label class="block text-xs font-bold text-gray-400 mb-1">البريد الإلكتروني</label>
-                        <input type="email" value="mohamed@example.com"
+                        <input type="email" id="profile-email" value="mohamed@example.com" disabled
                             class="w-full px-4 py-3 rounded-xl bg-gray-50 border-none focus:ring-2 focus:ring-indigo-500 text-sm font-bold text-gray-700">
                     </div>
                 </div>
@@ -139,7 +139,8 @@
                         <div class="flex items-center gap-3">
                             <div
                                 class="w-8 h-8 rounded-lg bg-orange-50 text-orange-500 flex items-center justify-center">
-                                <i class="fa-solid fa-lock"></i></div>
+                                <i class="fa-solid fa-lock"></i>
+                            </div>
                             <span class="text-sm font-bold text-gray-700">تغيير كلمة المرور</span>
                         </div>
                         <i class="fa-solid fa-chevron-left text-gray-300 text-xs"></i>
@@ -160,7 +161,8 @@
                         <div class="flex items-center gap-3">
                             <div
                                 class="w-8 h-8 rounded-lg bg-purple-50 text-purple-500 flex items-center justify-center">
-                                <i class="fa-solid fa-circle-question"></i></div>
+                                <i class="fa-solid fa-circle-question"></i>
+                            </div>
                             <span class="text-sm font-bold text-gray-700">الدعم والمساعدة</span>
                         </div>
                         <i class="fa-solid fa-chevron-left text-gray-300 text-xs"></i>
@@ -204,6 +206,49 @@
 
     </nav>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const userId = localStorage.getItem('userId');
+            if (!userId) {
+                console.warn('No User ID found');
+                return;
+            }
+
+            try {
+                const response = await fetch(`http://localhost:3000/api/user-details?id=${userId}`);
+                const data = await response.json();
+
+                if (data.success) {
+                    const u = data.user;
+                    // Images
+                    const avatarImgs = document.querySelectorAll('img[src*="ui-avatars.com"]');
+                    avatarImgs.forEach(img => {
+                        const safeName = u.full_name.replace(' ', '+');
+                        img.src = `https://ui-avatars.com/api/?name=${safeName}&background=e0e7ff&color=4f46e5&size=256`;
+                    });
+
+                    // Inputs
+                    const inputs = document.querySelectorAll('input');
+                    // Simple heuristic: match by value or assume order. Better to querySelector specific ones but hardcoded structure makes it tricky.
+                    // Let's use specific querying based on label context or index if IDs missing.
+                    // Profile has: Name(0), Phone(1), Email(2). Code is div.
+
+                    // Allow for "Name" input
+                    if (inputs[0]) inputs[0].value = u.full_name;
+                    // Phone
+                    if (inputs[1]) inputs[1].value = u.phone_number || '';
+                    // Email
+                    if (inputs[2]) inputs[2].value = u.email;
+
+                    // Suite ID (in div)
+                    const codeDiv = document.querySelector('.bg-indigo-50.text-indigo-600');
+                    if (codeDiv) codeDiv.textContent = u.suite_id || 'LY-????';
+                }
+            } catch (err) {
+                console.error('Failed to fetch user details:', err);
+            }
+        });
+    </script>
 </body>
 
 </html>
